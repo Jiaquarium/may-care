@@ -34,6 +34,7 @@ public class Script_Player : MonoBehaviour
     private string facingDirection;
     private string localState = "interact";
     private Vector3[] MovingNPCLocations = new Vector3[0];
+    private Vector3[] DemonLocations = new Vector3[0];
     private Animator animator;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
     private Dictionary<string, Vector3> Directions = new Dictionary<string, Vector3>()
@@ -106,49 +107,6 @@ public class Script_Player : MonoBehaviour
         }
     }
 
-    // void HandleActionInput()
-    // {   
-    //     // talk and continue
-    //     // Action1: x, space (interact)
-    //     if (Input.GetButtonDown("Action1"))
-    //     {
-    //         // TODO REFACTOR: refactor split out checking locs?
-    //         bool isNPC = DetectNPCProximity(facingDirection, "Action1");
-    //         if (!isNPC) DetectInteractableObjectProximity(facingDirection, "Action1");
-    //     }
-    //     else if (Input.GetButtonDown("Submit"))
-    //     {
-    //         DetectNPCProximity(facingDirection, "Submit");
-    //     }
-    //     else if (Input.GetButtonDown("Action2"))
-    //     {
-    //         // eat monster
-    //     }
-    // }
-
-    // bool DetectNPCProximity(string direction, string action)
-    // {
-    //     // using facing direction, get an activation location
-    //     // use this location to check if there's an NPC that's active there
-    //     Vector3 desiredLocation = location + Directions[direction];
-
-    //     return game.HandleActionToNPC(desiredLocation, action);
-    // }
-
-    // bool DetectInteractableObjectProximity(string direction, string action)
-    // {
-    //     Vector3 desiredLocation = location + Directions[direction];
-        
-    //     return game.HandleActionToInteractableObject(desiredLocation, action);
-    // }
-
-    // bool DetectDemonProximity(string direction, string action)
-    // {
-    //     Vector3 desiredLocation = location + Directions[direction];
-
-    //     return game.HandleActionToDemon(desiredLocation, action);
-    // }
-
     public void SetIsTalking()
     {
         isTalking = true;
@@ -199,12 +157,23 @@ public class Script_Player : MonoBehaviour
         }
 
         // if NPC is moving check if NPC is occupying space          
+        // don't check nonmoving NPCs b/c we do that in tileMap and they're static
         MovingNPCLocations = game.GetMovingNPCLocations();
         if (MovingNPCLocations.Length != 0)
         {
             foreach (Vector3 loc in MovingNPCLocations)
             {
                 if (desiredX == loc.x && desiredZ == loc.z) return;    
+            }
+        }
+
+        // if Demons on map check if occupying space
+        DemonLocations = game.GetDemonLocations();
+        if (DemonLocations.Length != 0)
+        {
+            foreach (Vector3 loc in DemonLocations)
+            {
+                if (desiredX == loc.x && desiredZ == loc.z) return;
             }
         }
 

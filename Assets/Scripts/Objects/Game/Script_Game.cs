@@ -124,6 +124,7 @@ public class Script_Game : MonoBehaviour
     {
         DestroyPlayer();
         DestroyNPCs();
+        DestroyDemons();
         DestroyTileMaps();
     }
 
@@ -293,7 +294,6 @@ public class Script_Game : MonoBehaviour
             if (NPC)    Destroy(NPC.gameObject);
         }
 
-        // destroy the spaces that are now empty references
         NPCs.Clear();
         movingNPCs.Clear();
     }
@@ -337,6 +337,30 @@ public class Script_Game : MonoBehaviour
             Levels.levelsData[level].DemonsData,
             demons
         );
+    }
+
+    void DestroyDemons()
+    {
+        foreach(Script_Demon d in demons)
+        {
+            if (d)    Destroy(d.gameObject);
+        }
+
+        demons.Clear();
+    }
+
+    public Vector3[] GetDemonLocations()
+    {
+         Vector3[] DemonLocations = new Vector3[demons.Count];
+        
+        if (DemonLocations.Length == 0)    return new Vector3[0];
+
+        for (int i = 0; i < demons.Count; i++)
+        {
+            DemonLocations[i] = demons[i].transform.position;
+        }
+
+        return DemonLocations;
     }
 
     void SetupDialogueManager()

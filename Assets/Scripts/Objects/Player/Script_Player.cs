@@ -14,26 +14,28 @@ public class Script_Player : MonoBehaviour
     /*
         persistent data, end
     */
+    public AnimationCurve progressCurve;
+    private Script_PlayerAction playerActionHandler;
+    
+    
+    public float glitchDuration;
+    public float speed;
 
 
-    public Sprite currentSprite;
+    private Sprite currentSprite;
     // storing soundFX here and not in manager because only 1 player exists
-    public Vector3 startLocation;
-    public Vector3 location;
+    private Vector3 startLocation;
+    private Vector3 location;
     private Script_Game game;
     private Tilemap tileMap;
     private Tilemap exitsTileMap;
-    public float speed;
-    public bool isTalking = false;
-    public float progress;
+    private bool isTalking = false;
+    private float progress;
     private string facingDirection;
     private string localState = "interact";
     private Vector3[] MovingNPCLocations = new Vector3[0];
-
-    public AnimationCurve progressCurve;
     private Animator animator;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
-    public float glitchDuration;
     private Dictionary<string, Vector3> Directions = new Dictionary<string, Vector3>()
     {
         {"up"       , new Vector3(0f, 0f, 1f)},
@@ -56,7 +58,7 @@ public class Script_Player : MonoBehaviour
         if (game.state == "cut-scene")              return;
         if (game.state == "cut-scene_npc-moving")   return;
         
-        HandleActionInput();
+        playerActionHandler.HandleActionInput(facingDirection, location);
         
         if (!isTalking)
         {
@@ -104,41 +106,48 @@ public class Script_Player : MonoBehaviour
         }
     }
 
-    void HandleActionInput()
-    {   
-        // talk and continue
-        // Action1: x, space (interact)
-        if (Input.GetButtonDown("Action1"))
-        {
-            // TODO REFACTOR: refactor split out checking locs?
-            bool isNPC = DetectNPCProximity(facingDirection, "Action1");
-            if (!isNPC) DetectInteractableObjectProximity(facingDirection, "Action1");
-        }
-        else if (Input.GetButtonDown("Submit"))
-        {
-            DetectNPCProximity(facingDirection, "Submit");
-        }
-        else if (Input.GetButtonDown("Action2"))
-        {
-            // eat monster
-        }
-    }
+    // void HandleActionInput()
+    // {   
+    //     // talk and continue
+    //     // Action1: x, space (interact)
+    //     if (Input.GetButtonDown("Action1"))
+    //     {
+    //         // TODO REFACTOR: refactor split out checking locs?
+    //         bool isNPC = DetectNPCProximity(facingDirection, "Action1");
+    //         if (!isNPC) DetectInteractableObjectProximity(facingDirection, "Action1");
+    //     }
+    //     else if (Input.GetButtonDown("Submit"))
+    //     {
+    //         DetectNPCProximity(facingDirection, "Submit");
+    //     }
+    //     else if (Input.GetButtonDown("Action2"))
+    //     {
+    //         // eat monster
+    //     }
+    // }
 
-    void DetectNPCProximity(string direction, string action)
-    {
-        // using facing direction, get an activation location
-        // use this location to check if there's an NPC that's active there
-        Vector3 desiredLocation = location + Directions[direction];
+    // bool DetectNPCProximity(string direction, string action)
+    // {
+    //     // using facing direction, get an activation location
+    //     // use this location to check if there's an NPC that's active there
+    //     Vector3 desiredLocation = location + Directions[direction];
 
-        game.HandleActionToNPC(desiredLocation, action);
-    }
+    //     return game.HandleActionToNPC(desiredLocation, action);
+    // }
 
-    void DetectInteractableObjectProximity(string direction, string action)
-    {
-        Vector3 desiredLocation = location + Directions[direction];
+    // bool DetectInteractableObjectProximity(string direction, string action)
+    // {
+    //     Vector3 desiredLocation = location + Directions[direction];
         
-        game.HandleActionToInteractableObject(desiredLocation, action);
-    }
+    //     return game.HandleActionToInteractableObject(desiredLocation, action);
+    // }
+
+    // bool DetectDemonProximity(string direction, string action)
+    // {
+    //     Vector3 desiredLocation = location + Directions[direction];
+
+    //     return game.HandleActionToDemon(desiredLocation, action);
+    // }
 
     public void SetIsTalking()
     {
@@ -264,6 +273,10 @@ public class Script_Player : MonoBehaviour
     public void Setup(Tilemap _tileMap, Tilemap _exitsTileMap, string direction)
     {   
         game = Object.FindObjectOfType<Script_Game>();
+        
+        playerActionHandler = GetComponent<Script_PlayerAction>();
+        playerActionHandler.Setup(game, Directions);
+
         tileMap = _tileMap;
         exitsTileMap = _exitsTileMap;
         

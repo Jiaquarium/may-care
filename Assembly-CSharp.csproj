@@ -53,7 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Models\Script_DemonModel.cs" />
      <Compile Include="Assets\Models\Script_Dialogue.cs" />
+     <Compile Include="Assets\Models\Script_InteractableObjectsModel.cs" />
      <Compile Include="Assets\Models\Script_Levels.cs" />
      <Compile Include="Assets\Models\Script_LevelsModel.cs" />
      <Compile Include="Assets\Models\Script_LocationsModel.cs" />
@@ -69,13 +71,18 @@
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_DontTouchPianoScene.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_StartConvoOnTriggers.cs" />
      <Compile Include="Assets\Scripts\Objects\Camera\Script_Camera.cs" />
+     <Compile Include="Assets\Scripts\Objects\Demons\Script_Demon.cs" />
+     <Compile Include="Assets\Scripts\Objects\Game\Script_DemonCreator.cs" />
+     <Compile Include="Assets\Scripts\Objects\Game\Script_DemonHandler.cs" />
      <Compile Include="Assets\Scripts\Objects\Game\Script_Game.cs" />
+     <Compile Include="Assets\Scripts\Objects\Game\Script_InteractableObjectCreator.cs" />
      <Compile Include="Assets\Scripts\Objects\Game\Script_InteractableObjectHandler.cs" />
      <Compile Include="Assets\Scripts\Objects\InteractableObjects\Script_InteractableObject.cs" />
      <Compile Include="Assets\Scripts\Objects\InteractableObjects\Script_Switch.cs" />
      <Compile Include="Assets\Scripts\Objects\NPCs\Script_MovingNPC.cs" />
      <Compile Include="Assets\Scripts\Objects\NPCs\Script_StaticNPC.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_Player.cs" />
+     <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerAction.cs" />
  <Reference Include="Unity.2D.PixelPerfect.Editor">
  <HintPath>/Users/jamesgu/art/games/may-care/may-care/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>

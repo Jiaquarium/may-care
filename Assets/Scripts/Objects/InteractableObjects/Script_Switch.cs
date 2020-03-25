@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Script_Switch : MonoBehaviour
+public class Script_Switch : Script_InteractableObject
 {
-    private bool isOn;
+    public Sprite onSprite;
+    public Sprite offSprite;
+    public bool isOn = true;
 
-    // Start is called before the first frame update
-    void Start()
+    public void TurnOff()
     {
-        
+        isOn = false;
+        GetComponent<SpriteRenderer>().sprite = offSprite;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TurnOn()
     {
-        
+        isOn = true;
+        GetComponent<SpriteRenderer>().sprite = onSprite;
     }
 
-    void Setup()
+    public override void DefaultAction()
     {
-
+        if (isOn)   TurnOff();
+        else TurnOn();
     }
 }

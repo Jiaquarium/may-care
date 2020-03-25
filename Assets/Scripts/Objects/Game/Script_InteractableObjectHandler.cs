@@ -12,8 +12,10 @@ public class Script_InteractableObjectHandler : MonoBehaviour
     {
         for (int i = 0; i < objects.Count; i++)
         {
-            // check if it's NPC occupying the spot
-            if (desiredLocation.x == objects[i].transform.position.x)
+            if (
+                desiredLocation.x == objects[i].transform.position.x
+                && desiredLocation.z == objects[i].transform.position.z
+            )
             {
                 if (action == "Action1")
                 {

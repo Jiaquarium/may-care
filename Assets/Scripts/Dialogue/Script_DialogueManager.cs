@@ -5,18 +5,23 @@ using UnityEngine.UI;
 
 public class Script_DialogueManager : MonoBehaviour
 {
-    public Script_Game game;
-    private Script_InputManager inputManager;
     public CanvasGroup inputManagerCanvas;
+    public Script_Game game;
     public CanvasGroup canvas;
-    public Text nameText;
-    public Text dialogueText;
-    private Script_Player player;
-    private string playerName;
-    public bool isRenderingSentence = false;
     public AudioSource audioSource;
     public AudioClip dialogueStartSoundFX;
+    
+
+    public Text nameText;
+    public Text dialogueText;
+    public bool isRenderingSentence = false;
     public Queue<string> sentences;
+    public float pauseLength;
+
+
+    private Script_InputManager inputManager;
+    private Script_Player player;
+    private string playerName;
     private IEnumerator coroutine;
     private string formattedSentence;
     private bool isInputMode = false;
@@ -70,7 +75,7 @@ public class Script_DialogueManager : MonoBehaviour
         {
             if (letter.Equals('|'))
             {
-                 yield return new WaitForSeconds(0.25f);
+                 yield return new WaitForSeconds(pauseLength);
             }
             else
             {

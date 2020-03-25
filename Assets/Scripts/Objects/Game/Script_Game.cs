@@ -22,11 +22,15 @@ public class Script_Game : MonoBehaviour
     private List<Script_MovingNPC> movingNPCs = new List<Script_MovingNPC>();
     public Script_MovingNPC MovingNPCPrefab;
     private List<Script_InteractableObject> interactableObjects = new List<Script_InteractableObject>();
-    public Script_InteractableObject InteractableObjectPrefab;
+    private List<Script_Demon> demons = new List<Script_Demon>();
+    private Script_Demon DemonPrefab;
     public Script_DialogueManager dialogueManager;
     public Script_BackgroundMusicManager bgMusicManager;
     private AudioSource backgroundMusicAudioSource;
     public Script_InteractableObjectHandler interactableObjectHandler;
+    public Script_InteractableObjectCreator interactableObjectCreator;
+    public Script_DemonHandler demonHandler;
+    public Script_DemonCreator demonCreator;
     
     
     // Start is called before the first frame update
@@ -42,7 +46,7 @@ public class Script_Game : MonoBehaviour
         backgroundMusicAudioSource = bgMusicManager.GetComponent<AudioSource>();
         dialogueManager.HideDialogue();
         
-        InitiateLevel(level);
+        InitiateLevel();
 
         // TODO: Initialize State Func
         playerState = new Script_PlayerData(player);
@@ -75,20 +79,20 @@ public class Script_Game : MonoBehaviour
         CameraTargetToPlayer();
     }
 
-    void SetInitialGameState(int i)
+    void SetInitialGameState()
     {
-        print("setting initial game state: " + Levels.levelsData[i].initialState);
-        state = Levels.levelsData[i].initialState;
+        print("setting initial game state: " + Levels.levelsData[level].initialState);
+        state = Levels.levelsData[level].initialState;
     }
 
     public void HandleLevelExit()
     {
         if (exitsDisabled)  return;
 
-        DestroyLevel(level);
+        DestroyLevel();
         
         level++;
-        InitiateLevel(level);
+        InitiateLevel();
     }
 
     public void DisableExits()
@@ -101,25 +105,29 @@ public class Script_Game : MonoBehaviour
         exitsDisabled = false;
     }
 
-    void InitiateLevel(int level)
+    void InitiateLevel()
     {
-        SetInitialGameState(level);
+        SetInitialGameState();
 
         StartBgMusic();
-        CreateTileMaps(level);
-        CreatePlayer(level);
-        CreateNPCs(level);
+        
+        CreateTileMaps();
+        CreatePlayer();
+        CreateNPCs();
+        CreateInteractableObjects();
+        CreateDemons();
+
         SetupDialogueManager();
     }
 
-    void DestroyLevel(int level)
+    void DestroyLevel()
     {
         DestroyPlayer();
         DestroyNPCs();
         DestroyTileMaps();
     }
 
-    void CreateTileMaps(int level)
+    void CreateTileMaps()
     {
         grid = Levels.levelsData[level].grid;
         tileMap = Levels.levelsData[level].tileMap;
@@ -133,7 +141,7 @@ public class Script_Game : MonoBehaviour
         grid.SetActive(false);
     }
 
-    void CreatePlayer(int level)
+    void CreatePlayer()
     {
         Script_PlayerModel playerData = Levels.levelsData[level].playerData;
         
@@ -164,8 +172,13 @@ public class Script_Game : MonoBehaviour
     {
         for (int i = 0; i < NPCs.Count; i++)
         {
+            if (NPCs[i] == null)    return false;
+
             // check if it's NPC occupying the spot
-            if (desiredLocation.x == NPCs[i].transform.position.x)
+            if (
+                desiredLocation.x == NPCs[i].transform.position.x
+                && desiredLocation.z == NPCs[i].transform.position.z
+            )
             {
                 if (action == "Action1" && !player.GetIsTalking())
                 {
@@ -188,12 +201,24 @@ public class Script_Game : MonoBehaviour
     }
 
     public bool HandleActionToInteractableObject(
-        Vector3 _desiredLocation,
+        Vector3 desiredLocation,
         string action
     )
     {
         return interactableObjectHandler.HandleAction(
             interactableObjects,
+            desiredLocation,
+            action
+        );
+    }
+
+    public bool HandleActionToDemon(
+        Vector3 desiredLocation,
+        string action    
+    )
+    {
+        return demonHandler.HandleAction(
+            demons,
             desiredLocation,
             action
         );
@@ -212,7 +237,8 @@ public class Script_Game : MonoBehaviour
         }
     }
 
-    void CreateNPCs(int level)
+    // TODO: remove this int (dont need, can just use global reference?)
+    void CreateNPCs()
     {
         Script_NPCModel[] NPCsData = Levels.levelsData[level].NPCsData;
         
@@ -281,8 +307,6 @@ public class Script_Game : MonoBehaviour
     public Vector3[] GetMovingNPCLocations()
     {
         Vector3[] MovingNPCLocations = new Vector3[movingNPCs.Count];
-        print("MovingNPCsLength: " + movingNPCs.Count);
-        print("MovingNPCLocations: " + MovingNPCLocations);
         
         if (MovingNPCLocations.Length == 0)    return new Vector3[0];
 
@@ -297,6 +321,22 @@ public class Script_Game : MonoBehaviour
     public void TriggerMovingNPCMove(int i)
     {
         movingNPCs[i].Move();
+    }
+
+    public void CreateInteractableObjects()
+    {
+        interactableObjectCreator.CreateInteractableObjects(
+            Levels.levelsData[level].InteractableObjectsData,
+            interactableObjects
+        );
+    }
+
+    public void CreateDemons()
+    {
+        demonCreator.CreateDemons(
+            Levels.levelsData[level].DemonsData,
+            demons
+        );
     }
 
     void SetupDialogueManager()

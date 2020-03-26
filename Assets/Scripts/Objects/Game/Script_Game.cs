@@ -25,6 +25,7 @@ public class Script_Game : MonoBehaviour
     private List<Script_Demon> demons = new List<Script_Demon>();
     private Script_Demon DemonPrefab;
     public Script_DialogueManager dialogueManager;
+    public Script_ThoughtManager thoughtManager;
     public Script_BackgroundMusicManager bgMusicManager;
     private AudioSource backgroundMusicAudioSource;
     public Script_InteractableObjectHandler interactableObjectHandler;
@@ -45,6 +46,7 @@ public class Script_Game : MonoBehaviour
 
         backgroundMusicAudioSource = bgMusicManager.GetComponent<AudioSource>();
         dialogueManager.HideDialogue();
+        thoughtManager.HideThought();
         
         InitiateLevel();
 
@@ -118,6 +120,7 @@ public class Script_Game : MonoBehaviour
         CreateDemons();
 
         SetupDialogueManager();
+        SetupThoughtManager();
     }
 
     void DestroyLevel()
@@ -349,6 +352,11 @@ public class Script_Game : MonoBehaviour
         demons.Clear();
     }
 
+    public void EatDemon(int i)
+    {
+        demonHandler.EatDemon(i, demons);
+    }
+
     public Vector3[] GetDemonLocations()
     {
          Vector3[] DemonLocations = new Vector3[demons.Count];
@@ -366,6 +374,22 @@ public class Script_Game : MonoBehaviour
     void SetupDialogueManager()
     {
         dialogueManager.Setup();
+    }
+
+    public void StartDialogue(Script_Dialogue dialogue)
+    {
+        dialogueManager.StartDialogue(dialogue);
+    }
+
+    void SetupThoughtManager()
+    {
+        thoughtManager.Setup();
+    }
+
+    public void ShowAndCloseThought(Script_ThoughtModel thought)
+    {
+        thoughtManager.ShowThought(thought);
+        thoughtManager.CloseThought(thought);
     }
 
     void StartBgMusic()
@@ -408,10 +432,5 @@ public class Script_Game : MonoBehaviour
     public void CameraTargetToPlayer()
     {
         Camera.main.GetComponent<Script_Camera>().target = player.transform;
-    }
-
-    public void StartDialogue(Script_Dialogue dialogue)
-    {
-        dialogueManager.StartDialogue(dialogue);
-    }
+    }    
 }

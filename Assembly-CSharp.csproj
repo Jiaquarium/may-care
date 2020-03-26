@@ -62,6 +62,7 @@
      <Compile Include="Assets\Models\Script_MoveSetModel.cs" />
      <Compile Include="Assets\Models\Script_NPCModel.cs" />
      <Compile Include="Assets\Models\Script_PlayerModel.cs" />
+     <Compile Include="Assets\Models\Script_ThoughtModel.cs" />
      <Compile Include="Assets\Scripts\Audio\Script_BackgroundMusicManager.cs" />
      <Compile Include="Assets\Scripts\Data\Script_PlayerData.cs" />
      <Compile Include="Assets\Scripts\Data\Script_SaveSystem.cs" />
@@ -83,6 +84,7 @@
      <Compile Include="Assets\Scripts\Objects\NPCs\Script_StaticNPC.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_Player.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerAction.cs" />
+     <Compile Include="Assets\Scripts\Thoughts\Script_ThoughtManager.cs" />
  <Reference Include="Unity.2D.PixelPerfect.Editor">
  <HintPath>/Users/jamesgu/art/games/may-care/may-care/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>

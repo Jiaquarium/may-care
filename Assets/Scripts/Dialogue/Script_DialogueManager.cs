@@ -71,7 +71,7 @@ public class Script_DialogueManager : MonoBehaviour
         StartRenderingSentence();
 
         dialogueText.text = "";
-        foreach (char letter in formattedSentence.ToCharArray())
+        foreach(char letter in formattedSentence.ToCharArray())
         {
             if (letter.Equals('|'))
             {
@@ -174,5 +174,7 @@ public class Script_DialogueManager : MonoBehaviour
         inputManager = GetComponent<Script_InputManager>();
         inputManager.enabled = false;
         inputManagerCanvas.gameObject.SetActive(false);
+
+        HideDialogue();
     }
 }

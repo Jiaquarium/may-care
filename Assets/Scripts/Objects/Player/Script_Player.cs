@@ -59,6 +59,14 @@ public class Script_Player : MonoBehaviour
         if (game.state == "cut-scene")              return;
         if (game.state == "cut-scene_npc-moving")   return;
         
+        bool isInventoryOpen = game.GetIsInventoryOpen();
+
+        if (isInventoryOpen)
+        {
+            playerActionHandler.HandleInventoryActionsInput();
+            return;
+        }
+        
         playerActionHandler.HandleActionInput(facingDirection, location);
         
         if (!isTalking)
@@ -216,6 +224,11 @@ public class Script_Player : MonoBehaviour
     public void AddThought(Model_Thought thought)
     {
         playerThoughtManager.AddThought(thoughts, thought);
+    }
+
+    public int GetThoughtsCount()
+    {
+        return playerThoughtManager.GetThoughtCount(thoughts);
     }
 
     public void AdjustRotation()

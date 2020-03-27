@@ -10,29 +10,35 @@ public class Script_Game : MonoBehaviour
     public Script_PlayerData playerState;
     public int targetFrameRate;
     public int level = 0;
+    private bool isInventoryOpen = false;
     private bool exitsDisabled;
 
-    private GameObject grid;
-    private Tilemap tileMap;
-    private Tilemap exitsTileMap;
-    public Script_Player PlayerPrefab;
-    private Script_Player player;
-    private List<Script_StaticNPC> NPCs = new List<Script_StaticNPC>();
-    public Script_StaticNPC StaticNPCPrefab;
-    private List<Script_MovingNPC> movingNPCs = new List<Script_MovingNPC>();
-    public Script_MovingNPC MovingNPCPrefab;
-    private List<Script_InteractableObject> interactableObjects = new List<Script_InteractableObject>();
-    private List<Script_Demon> demons = new List<Script_Demon>();
-    private Script_Demon DemonPrefab;
-    public Script_DialogueManager dialogueManager;
-    public Script_ThoughtManager thoughtManager;
-    public Script_BackgroundMusicManager bgMusicManager;
-    private AudioSource backgroundMusicAudioSource;
+    
     public Script_InteractableObjectHandler interactableObjectHandler;
     public Script_InteractableObjectCreator interactableObjectCreator;
     public Script_DemonHandler demonHandler;
     public Script_DemonCreator demonCreator;
     public Script_PlayerThoughtHandler playerThoughtHandler;
+    public Script_PlayerThoughtsInventoryManager playerThoughtsInventoryManager;
+    public Script_Player PlayerPrefab;
+    public Script_StaticNPC StaticNPCPrefab;
+    public Script_MovingNPC MovingNPCPrefab;
+    public Script_DialogueManager dialogueManager;
+    public Script_ThoughtManager thoughtManager;
+    public Script_BackgroundMusicManager bgMusicManager;
+    public Script_PlayerThoughtsInventoryButton[] thoughtButtons;
+
+
+    private GameObject grid;
+    private Tilemap tileMap;
+    private Tilemap exitsTileMap;
+    private Script_Player player;
+    private List<Script_StaticNPC> NPCs = new List<Script_StaticNPC>();
+    private List<Script_MovingNPC> movingNPCs = new List<Script_MovingNPC>();
+    private List<Script_InteractableObject> interactableObjects = new List<Script_InteractableObject>();
+    private List<Script_Demon> demons = new List<Script_Demon>();
+    private Script_Demon DemonPrefab;
+    private AudioSource backgroundMusicAudioSource;
     
     
     // Start is called before the first frame update
@@ -48,6 +54,7 @@ public class Script_Game : MonoBehaviour
         backgroundMusicAudioSource = bgMusicManager.GetComponent<AudioSource>();
         dialogueManager.HideDialogue();
         thoughtManager.HideThought();
+        ClosePlayerThoughtsInventory();
         
         InitiateLevel();
 
@@ -177,6 +184,12 @@ public class Script_Game : MonoBehaviour
     {
         // call playerthoughthandler to put thought into player
         playerThoughtHandler.AddPlayerThought(thought, player);
+        
+        int thoughtCount = playerThoughtHandler.GetThoughtsCount(player);
+        
+        playerThoughtsInventoryManager.AddPlayerThought(
+            thought, thoughtButtons[thoughtCount - 1]
+        );
     }
 
     public bool HandleActionToNPC(Vector3 desiredLocation, string action)
@@ -233,6 +246,25 @@ public class Script_Game : MonoBehaviour
             desiredLocation,
             action
         );
+    }
+
+    public void OpenPlayerThoughtsInventory()
+    {
+        bool hasThoughts = playerThoughtHandler.GetThoughtsCount(player) > 0;
+        
+        isInventoryOpen = true;
+        playerThoughtsInventoryManager.OpenInventory(hasThoughts);
+    }
+
+    public void ClosePlayerThoughtsInventory()
+    {
+        isInventoryOpen = false;
+        playerThoughtsInventoryManager.CloseInventory();
+    }
+
+    public bool GetIsInventoryOpen()
+    {
+        return isInventoryOpen;
     }
 
     // for cut scenes, monologues

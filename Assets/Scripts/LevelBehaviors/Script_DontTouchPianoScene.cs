@@ -6,7 +6,7 @@ public class Script_DontTouchPianoScene : MonoBehaviour
 {
     public Script_Game game;
     public Vector3[] triggerLocations;
-    public Script_Dialogue dialogue;
+    public Model_Dialogue dialogue;
     private bool isDone = false;
     
     // Start is called before the first frame update

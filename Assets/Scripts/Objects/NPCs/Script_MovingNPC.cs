@@ -23,7 +23,7 @@ public class Script_MovingNPC : Script_StaticNPC
         {"right"    , new Vector3(1f, 0f, 0f)}
     };
 
-    public Script_MoveSetModel[] moveSets = new Script_MoveSetModel[0];
+    public Model_MoveSet[] moveSets = new Model_MoveSet[0];
 
     private Queue<string> currentMoves = new Queue<string>();
     public Queue<string[]> allMoves = new Queue<string[]>();
@@ -57,7 +57,7 @@ public class Script_MovingNPC : Script_StaticNPC
 
     void QueueUpAllMoves()
     {
-        foreach(Script_MoveSetModel moveSet in moveSets)
+        foreach(Model_MoveSet moveSet in moveSets)
         {
             allMoves.Enqueue(moveSet.moves);
         }
@@ -147,14 +147,14 @@ public class Script_MovingNPC : Script_StaticNPC
 
     public override void Setup(
         Sprite sprite,
-        Script_Dialogue dialogue,
-        Script_MoveSetModel[] _moveSets
+        Model_Dialogue dialogue,
+        Model_MoveSet[] _moveSets
     )
     {
         moveSets = _moveSets;
         
         // call Setup from base layer (StaticNPC)
-        base.Setup(sprite, dialogue, new Script_MoveSetModel[0]);
+        base.Setup(sprite, dialogue, new Model_MoveSet[0]);
 
         animator = GetComponent<Animator>();
         animator.SetBool("NPCMoving", false);

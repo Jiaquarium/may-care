@@ -7,7 +7,7 @@ public class Script_StaticNPC : MonoBehaviour
     public int StaticNPCId;
     public Script_Game game;
     private Script_DialogueManager dialogueManager;
-    public Script_Dialogue dialogue;
+    public Model_Dialogue dialogue;
     
 
     // Update is called once per frame
@@ -40,8 +40,8 @@ public class Script_StaticNPC : MonoBehaviour
 
     public virtual void Setup(
         Sprite sprite,
-        Script_Dialogue _dialogue,
-        Script_MoveSetModel[] _moveSets
+        Model_Dialogue _dialogue,
+        Model_MoveSet[] _moveSets
     )
     {
         Debug.Log("setup in StaticNPC");

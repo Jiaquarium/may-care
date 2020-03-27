@@ -5,8 +5,8 @@ using UnityEngine;
 public class Script_StartConvoOnTriggers : MonoBehaviour
 {
     public Script_Game game;
-    public Script_LocationsModel[] triggerLocations;
-    public Script_Dialogue[] dialogues;
+    public Model_Locations[] triggerLocations;
+    public Model_Dialogue[] dialogues;
     private int activeTriggerIndex = 0;
     private bool isDone = false;
 

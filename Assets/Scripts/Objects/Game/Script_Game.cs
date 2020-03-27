@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class Script_Game : MonoBehaviour
 {
-    public Script_Levels Levels;
+    public Model_Levels Levels;
     public string state;
     public Script_PlayerData playerState;
     public int targetFrameRate;
@@ -32,6 +32,7 @@ public class Script_Game : MonoBehaviour
     public Script_InteractableObjectCreator interactableObjectCreator;
     public Script_DemonHandler demonHandler;
     public Script_DemonCreator demonCreator;
+    public Script_PlayerThoughtHandler playerThoughtHandler;
     
     
     // Start is called before the first frame update
@@ -147,7 +148,7 @@ public class Script_Game : MonoBehaviour
 
     void CreatePlayer()
     {
-        Script_PlayerModel playerData = Levels.levelsData[level].playerData;
+        Model_Player playerData = Levels.levelsData[level].playerData;
         
         Vector3 spawnLocation = playerData.playerSpawnLocation;
         player = Instantiate(PlayerPrefab, spawnLocation, Quaternion.identity);
@@ -170,6 +171,12 @@ public class Script_Game : MonoBehaviour
     public Script_PlayerData GetPlayerState()
     {
         return playerState;
+    }
+
+    public void AddPlayerThought(Model_Thought thought)
+    {
+        // call playerthoughthandler to put thought into player
+        playerThoughtHandler.AddPlayerThought(thought, player);
     }
 
     public bool HandleActionToNPC(Vector3 desiredLocation, string action)
@@ -244,7 +251,7 @@ public class Script_Game : MonoBehaviour
     // TODO: remove this int (dont need, can just use global reference?)
     void CreateNPCs()
     {
-        Script_NPCModel[] NPCsData = Levels.levelsData[level].NPCsData;
+        Model_NPC[] NPCsData = Levels.levelsData[level].NPCsData;
         
         if (NPCsData.Length == 0)   return;
 
@@ -283,7 +290,7 @@ public class Script_Game : MonoBehaviour
                 NPC.Setup(
                     NPCsData[i].sprite,
                     NPCsData[i].dialogue,
-                    new Script_MoveSetModel[0] // unneeded for base
+                    new Model_MoveSet[0] // unneeded for base
                 );
             }
 
@@ -376,7 +383,7 @@ public class Script_Game : MonoBehaviour
         dialogueManager.Setup();
     }
 
-    public void StartDialogue(Script_Dialogue dialogue)
+    public void StartDialogue(Model_Dialogue dialogue)
     {
         dialogueManager.StartDialogue(dialogue);
     }
@@ -386,7 +393,7 @@ public class Script_Game : MonoBehaviour
         thoughtManager.Setup();
     }
 
-    public void ShowAndCloseThought(Script_ThoughtModel thought)
+    public void ShowAndCloseThought(Model_Thought thought)
     {
         thoughtManager.ShowThought(thought);
         thoughtManager.CloseThought(thought);

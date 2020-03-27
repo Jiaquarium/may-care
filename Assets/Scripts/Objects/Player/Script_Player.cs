@@ -8,14 +8,14 @@ public class Script_Player : MonoBehaviour
     /*
         persistent data, start
     */
-
     public string name;
-    
+    public Model_PlayerThoughts thoughts;
     /*
         persistent data, end
     */
     public AnimationCurve progressCurve;
     private Script_PlayerAction playerActionHandler;
+    private Script_PlayerThoughtManager playerThoughtManager;
     
     
     public float glitchDuration;
@@ -213,6 +213,11 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    public void AddThought(Model_Thought thought)
+    {
+        playerThoughtManager.AddThought(thoughts, thought);
+    }
+
     public void AdjustRotation()
     {
         transform.forward = Camera.main.transform.forward;
@@ -244,7 +249,9 @@ public class Script_Player : MonoBehaviour
         game = Object.FindObjectOfType<Script_Game>();
         
         playerActionHandler = GetComponent<Script_PlayerAction>();
+        playerThoughtManager = GetComponent<Script_PlayerThoughtManager>();
         playerActionHandler.Setup(game, Directions);
+        playerThoughtManager.Setup();
 
         tileMap = _tileMap;
         exitsTileMap = _exitsTileMap;

@@ -26,7 +26,7 @@ public class Script_DialogueManager : MonoBehaviour
     private string formattedSentence;
     private bool isInputMode = false;
 
-    public void StartDialogue(Script_Dialogue dialogue)
+    public void StartDialogue(Model_Dialogue dialogue)
     {
         nameText.text = dialogue.name != null ? dialogue.name + ":" : "";
         

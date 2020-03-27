@@ -10,6 +10,9 @@ public class Script_MovingNPC : Script_StaticNPC
     public float speed;
     public float progress;
     public string localState;
+    public bool shouldExit = true;
+    
+    
     private bool inProgress = false;
 
     public AnimationCurve progressCurve;
@@ -104,25 +107,28 @@ public class Script_MovingNPC : Script_StaticNPC
             
             if (currentMoves.Count == 0) {
                 localState = "interact";
-                
+                animator.SetBool("NPCMoving", false);
+
                 if (allMoves.Count == 0)
                 {
+                    game.UnPauseBgMusic();
                     game.ChangeStateInteract();
                     inProgress = false;
-                    
                     /*
                         currently moveSets must match dialogues.Length to Exit
-                    */
-                    Exit();
+                    */    
+                    if (shouldExit)
+                    {
+                        Exit();
+                    }
                     
                     return;
                 }
+                inProgress = true;
+
                 game.ChangeStateInteract();
                 QueueUpCurrentMoves();
-
-                inProgress = true;
                 
-                animator.SetBool("NPCMoving", false);
                 return;
             }
             
@@ -133,8 +139,6 @@ public class Script_MovingNPC : Script_StaticNPC
     void Exit()
     {
         game.DestroyMovingNPC(0);
-        
-        game.UnPauseBgMusic();
     }
 
     void AnimatorSetDirection(float x, float z)
@@ -143,6 +147,19 @@ public class Script_MovingNPC : Script_StaticNPC
         animator.SetFloat("LastMoveZ", z);
         animator.SetFloat("MoveX", x);
         animator.SetFloat("MoveZ", z);
+    }
+
+    public void FaceDirection(string direction)
+    {
+        if (direction == "down")        AnimatorSetDirection(0  , -1f);
+        else if (direction == "up")     AnimatorSetDirection(0  ,  1f);
+        else if (direction == "left")   AnimatorSetDirection(-1f,  0f);
+        else if (direction == "right")  AnimatorSetDirection(1f ,  0f );
+    }
+
+    public void ChangeSpeed(float _speed)
+    {
+        speed = _speed;
     }
 
     public override void Setup(

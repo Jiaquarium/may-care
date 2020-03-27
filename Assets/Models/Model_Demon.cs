@@ -1,0 +1,12 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Model_Demon
+{
+    public Vector3 demonSpawnLocation;
+    public Sprite sprite;
+    public string type;
+    public Model_Thought thought;
+}

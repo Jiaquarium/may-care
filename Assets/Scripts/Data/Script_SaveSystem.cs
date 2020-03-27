@@ -8,25 +8,27 @@ public static class Script_SaveSystem
     // string path = Application.persistentDataPath + "/player.may";
     static string path = "/Users/jamesgu/Desktop";  
     
-    public static void SavePlayer(Script_Player player)
+    public static void SavePlayer(
+        string name
+    )
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        Script_PlayerData playerData = new Script_PlayerData(player);
+        Model_PlayerState playerData = new Model_PlayerState(name);
 
         formatter.Serialize(stream, playerData);
         stream.Close();
     }
 
-    public static Script_PlayerData LoadPlayer()
+    public static Model_PlayerState LoadPlayer()
     {
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            Script_PlayerData playerData = formatter.Deserialize(stream) as Script_PlayerData;
+            Model_PlayerState playerData = formatter.Deserialize(stream) as Model_PlayerState;
 
             stream.Close();
 

@@ -359,8 +359,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1524571568}
   m_HandleRect: {fileID: 1524571567}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6637169
+  m_Value: 0.9999998
+  m_Size: 0.6637168
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -840,6 +840,7 @@ MonoBehaviour:
   speed: 0.0855
   progress: 1
   localState: 
+  shouldExit: 1
   progressCurve:
     serializedVersion: 2
     m_Curve:
@@ -949,7 +950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!225 &94601034
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -974,7 +975,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 71771836}
-  - {fileID: 504695689}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1289,7 +1289,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1754640237}
-  - {fileID: 698470495}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1370,10 +1369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745bc8fb04335470ea7d98c1fb232a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
-  thoughts:
-    uglyThoughts: []
-    niceThoughts: []
   progressCurve:
     serializedVersion: 2
     m_Curve:
@@ -3622,72 +3617,6 @@ MonoBehaviour:
   maskContainer: {fileID: 1702212248}
   image: {fileID: 777065219}
   isSelected: 0
---- !u!1 &504695688
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 504695689}
-  - component: {fileID: 504695691}
-  - component: {fileID: 504695690}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &504695689
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504695688}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 94601035}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &504695690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504695688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &504695691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504695688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,10 +3658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 112
-  m_RefResolutionX: 1080
-  m_RefResolutionY: 675
-  m_UpscaleRT: 1
+  m_AssetsPPU: 40
+  m_RefResolutionX: 512
+  m_RefResolutionY: 320
+  m_UpscaleRT: 0
   m_PixelSnapping: 1
   m_CropFrameX: 0
   m_CropFrameY: 0
@@ -3811,6 +3740,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec5187ba24f74d4ab40df7599462d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObjectHandler: {fileID: 1387350152}
+  interactableObjectCreator: {fileID: 74013165}
+  demonHandler: {fileID: 1953673396}
+  demonCreator: {fileID: 1224741582}
+  playerThoughtHandler: {fileID: 1324583982}
+  playerThoughtsInventoryManager: {fileID: 580171844}
+  PlayerPrefab: {fileID: 7085132671959065426, guid: 0d5b127b6250c40a1921b59b3298b86d,
+    type: 3}
+  StaticNPCPrefab: {fileID: 5939940988644198970, guid: de7e18f1cd5da43abb49b3b633551ada,
+    type: 3}
+  MovingNPCPrefab: {fileID: 114010771126656922, guid: 9e7712a9fef3c44b88e71a8273797bca,
+    type: 3}
+  dialogueManager: {fileID: 1607515901}
+  thoughtManager: {fileID: 1898103416}
+  bgMusicManager: {fileID: 1701140472}
+  thoughtButtons:
+  - {fileID: 592024519}
+  - {fileID: 68035294}
+  - {fileID: 1230891708}
+  - {fileID: 1379448634}
+  - {fileID: 643496426}
+  - {fileID: 474676376}
+  - {fileID: 1105788809}
+  - {fileID: 1572061517}
   Levels:
     levelsData:
     - playerData:
@@ -3856,6 +3809,7 @@ MonoBehaviour:
           - right
           - right
           - right
+        direction: 
       InteractableObjectsData: []
       DemonsData: []
       grid: {fileID: 182334731}
@@ -3902,9 +3856,10 @@ MonoBehaviour:
           - right
         - moves:
           - right
+        direction: 
       InteractableObjectsData:
       - objectSpawnLocation: {x: 20, y: 0, z: 50}
-        sprite: {fileID: 0}
+        sprite: {fileID: 21300006, guid: 99cb624e04ebb4acd96ee4d2080b9671, type: 3}
         type: switch
       DemonsData: []
       grid: {fileID: 1446088280}
@@ -3916,10 +3871,65 @@ MonoBehaviour:
     - playerData:
         playerSpawnLocation: {x: 30, y: 0, z: 46}
         direction: right
-      NPCsData: []
+      NPCsData:
+      - NPCSpawnLocation: {x: 30, y: 0, z: 45}
+        sprite: {fileID: 21300018, guid: 6b44b05ca0f3b454e8eeb126ecd3b8be, type: 3}
+        dialogue:
+          name: 
+          sentences: []
+        isMovingNPC: 1
+        moveSets:
+        - moves:
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - right
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+          - up
+        direction: right
       InteractableObjectsData: []
       DemonsData:
-      - demonSpawnLocation: {x: 37, y: 0, z: 52}
+      - demonSpawnLocation: {x: 41, y: 0, z: 52}
+        sprite: {fileID: 0}
+        type: 
+        thought:
+          thought: "you\u2019re not special, you really aren\u2019t. you really think
+            you\u2019re any different? please. don\u2019t. kid. yourself."
+      - demonSpawnLocation: {x: 34, y: 0, z: 52}
+        sprite: {fileID: 0}
+        type: 
+        thought:
+          thought: "you\u2019re not special, you really aren\u2019t. you really think
+            you\u2019re any different? please. don\u2019t. kid. yourself."
+      - demonSpawnLocation: {x: 37, y: 0, z: 60}
         sprite: {fileID: 0}
         type: 
         thought:
@@ -4007,31 +4017,10 @@ MonoBehaviour:
   playerState:
     name: 
   targetFrameRate: 60
-  level: 3
-  interactableObjectHandler: {fileID: 1387350152}
-  interactableObjectCreator: {fileID: 74013165}
-  demonHandler: {fileID: 1953673396}
-  demonCreator: {fileID: 1224741582}
-  playerThoughtHandler: {fileID: 1324583982}
-  playerThoughtsInventoryManager: {fileID: 580171844}
-  PlayerPrefab: {fileID: 7085132671959065426, guid: 0d5b127b6250c40a1921b59b3298b86d,
-    type: 3}
-  StaticNPCPrefab: {fileID: 5939940988644198970, guid: de7e18f1cd5da43abb49b3b633551ada,
-    type: 3}
-  MovingNPCPrefab: {fileID: 114010771126656922, guid: 9e7712a9fef3c44b88e71a8273797bca,
-    type: 3}
-  dialogueManager: {fileID: 1607515901}
-  thoughtManager: {fileID: 1898103416}
-  bgMusicManager: {fileID: 1701140472}
-  thoughtButtons:
-  - {fileID: 592024519}
-  - {fileID: 68035294}
-  - {fileID: 1230891708}
-  - {fileID: 1379448634}
-  - {fileID: 643496426}
-  - {fileID: 474676376}
-  - {fileID: 1105788809}
-  - {fileID: 1572061517}
+  level: 2
+  thoughts:
+    uglyThoughts: []
+    niceThoughts: []
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4472,7 +4461,7 @@ RectTransform:
   m_Children:
   - {fileID: 1702212248}
   m_Father: {fileID: 1147524002}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4539,6 +4528,72 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &678377997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678377998}
+  - component: {fileID: 678378000}
+  - component: {fileID: 678377999}
+  m_Layer: 5
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &678377998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678377997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1039438677}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &678377999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678377997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.1
+  m_ForceModuleActive: 0
+--- !u!114 &678378000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678377997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 592024514}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
 --- !u!1 &678706009
 GameObject:
   m_ObjectHideFlags: 0
@@ -5739,72 +5794,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &698470494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 698470495}
-  - component: {fileID: 698470497}
-  - component: {fileID: 698470496}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &698470495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698470494}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 250748834}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &698470496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698470494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &698470497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698470494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &710749892
 GameObject:
   m_ObjectHideFlags: 0
@@ -6406,20 +6395,47 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860306773}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: 37, y: 69, z: 0}
+    second:
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 38, y: 69, z: 0}
+    second:
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 39, y: 69, z: 0}
+    second:
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: e6878b557b17540218432b71068adee6, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 21300002, guid: 99cb624e04ebb4acd96ee4d2080b9671, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 0
+  - m_RefCount: 3
     m_Data:
       e00: 1
       e01: 0
@@ -6438,12 +6454,12 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 0
+  - m_RefCount: 3
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -9, y: -1, z: 0}
-  m_Size: {x: 40, y: 51, z: 1}
+  m_Size: {x: 49, y: 71, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 1
   m_TileOrientationMatrix:
@@ -6792,7 +6808,7 @@ Transform:
   - {fileID: 1064964773}
   - {fileID: 2111614480}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1023454117
 GameObject:
@@ -6904,6 +6920,7 @@ RectTransform:
   - {fileID: 474676372}
   - {fileID: 1105788808}
   - {fileID: 1572061516}
+  - {fileID: 678377998}
   m_Father: {fileID: 1702212248}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7366,11 +7383,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1778435945}
   - {fileID: 667219795}
   - {fileID: 1361426015}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7948,7 +7964,7 @@ RectTransform:
   m_Children:
   - {fileID: 1563849517}
   m_Father: {fileID: 1147524002}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9673,7 +9689,6 @@ GameObject:
   - component: {fileID: 1702212250}
   - component: {fileID: 1702212249}
   - component: {fileID: 1702212252}
-  - component: {fileID: 1702212253}
   m_Layer: 5
   m_Name: ContainerMaskPanel
   m_TagString: Untagged
@@ -9780,18 +9795,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1702212253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702212247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9d94fb388c64616a431554e97ca668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1719457931
 GameObject:
   m_ObjectHideFlags: 0
@@ -11371,8 +11374,9 @@ MonoBehaviour:
     - "sorry.|.|.| it\u2019s just been a while since anyone has come through here..."
     - "soo what\u2019s your name?"
     - <INPUT>
-    - "well {0} what are you doing here?|\n.|.|.|sooo you don\u2019t really know,
-      do you?"
+    - 'well {0} what are you doing here?|
+
+      .|.|.|do you really even know?'
 --- !u!1 &1754640236
 GameObject:
   m_ObjectHideFlags: 0
@@ -11621,72 +11625,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1778435944
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1778435945}
-  - component: {fileID: 1778435947}
-  - component: {fileID: 1778435946}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1778435945
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778435944}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1147524002}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1778435946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778435944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.1
-  m_ForceModuleActive: 1
---- !u!114 &1778435947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778435944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 592024514}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &1781963431
 GameObject:
   m_ObjectHideFlags: 0
@@ -11908,6 +11846,7 @@ GameObject:
   - component: {fileID: 1894247248}
   - component: {fileID: 1894247250}
   - component: {fileID: 1894247249}
+  - component: {fileID: 1894247251}
   m_Layer: 0
   m_Name: Ground_3
   m_TagString: Untagged
@@ -15367,33 +15306,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 37, y: 69, z: 0}
-    second:
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 38, y: 69, z: 0}
-    second:
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 39, y: 69, z: 0}
-    second:
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: 40, y: 69, z: 0}
     second:
       m_TileIndex: 1
@@ -15443,7 +15355,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 384
+  - m_RefCount: 381
     m_Data: {fileID: 11400000, guid: e6878b557b17540218432b71068adee6, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -15454,12 +15366,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 384
+  - m_RefCount: 381
     m_Data: {fileID: 21300002, guid: 99cb624e04ebb4acd96ee4d2080b9671, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 384
+  - m_RefCount: 381
     m_Data:
       e00: 1
       e01: 0
@@ -15478,7 +15390,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 384
+  - m_RefCount: 381
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 0.80385935, g: 0.5108632, b: 0.53852576, a: 1}
@@ -15509,6 +15421,60 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1894247251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894247247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca41b5b8de09466a94f248d5f7e9689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 519420033}
+  triggerLocations:
+  - locations:
+    - {x: 32, y: 0, z: 51}
+    - {x: 33, y: 0, z: 51}
+    - {x: 34, y: 0, z: 51}
+    - {x: 35, y: 0, z: 51}
+    - {x: 36, y: 0, z: 51}
+    - {x: 37, y: 0, z: 51}
+    - {x: 38, y: 0, z: 51}
+    - {x: 39, y: 0, z: 51}
+    - {x: 40, y: 0, z: 51}
+    - {x: 41, y: 0, z: 51}
+    - {x: 42, y: 0, z: 51}
+    - {x: 43, y: 0, z: 51}
+    - {x: 44, y: 0, z: 51}
+  - locations:
+    - {x: 36, y: 0, z: 69}
+    - {x: 36, y: 0, z: 68}
+    - {x: 37, y: 0, z: 68}
+    - {x: 38, y: 0, z: 68}
+    - {x: 39, y: 0, z: 68}
+    - {x: 40, y: 0, z: 68}
+    - {x: 40, y: 0, z: 69}
+  triggerLoc: []
+  dialogue:
+    name: Ero
+    sentences:
+    - "those are demons.| there\u2019s no point in talking to them {0}| but what you
+      can do is.|.|.|EAT THEM!!!"
+    - PRESS "C" or "LEFT SHIFT" TO EAT!!!
+  dialogues:
+  - name: Ero
+    sentences:
+    - "those are demons.| there\u2019s no point in talking to them {0}| but what you
+      can do is.|.|.|EAT THEM!!!"
+    - PRESS "C" or "LEFT SHIFT" TO EAT!!!
+  - name: Ero
+    sentences:
+    - "well that\u2019s it more me, you go on ahead without me."
+    - oh gawd wait did that sound too sentimental???
+    - ugh owell,| see you soon! <3
 --- !u!1 &1895342422
 GameObject:
   m_ObjectHideFlags: 0
@@ -15800,22 +15766,22 @@ MonoBehaviour:
     sentences:
     - "oh so you\u2019re following me now? ;)"
     - 'anyways, my name is Ero.|.|.| i know i talk a lot so if i start NPCsplaining,
-      you can press "ENTER" to skip to the end of my sentence
+      press "ENTER" to skip to the end of my sentence
 
 '
     - woof woof!
   - name: Ero
     sentences:
     - STOP!| Hehe...| well what do you like to do for fun on the weekends?
-    - agh Ero enough with the small talk...| anywho, you can also press "X" or "SPACE"
-      to interact with things...| ooo yes like this switch!!
+    - anywho, you can also press X or SPACE to interact with things...| ooo yes like
+      this SWITCH on the wall!!
     - woof woof!
   - name: Ero
     sentences:
     - "you might be wondering how i know all this?| well that\u2019s a story for another
       tyme <3"
-    - time* i mean time
-    - woof!
+    - time* i mean time goddammit
+    - woof!!
 --- !u!483693784 &1979513456
 TilemapRenderer:
   m_ObjectHideFlags: 0

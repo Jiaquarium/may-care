@@ -8,8 +8,6 @@ public class Script_Player : MonoBehaviour
     /*
         persistent data, start
     */
-    public string name;
-    public Model_PlayerThoughts thoughts;
     /*
         persistent data, end
     */
@@ -147,7 +145,6 @@ public class Script_Player : MonoBehaviour
         else if (direction == "up")     AnimatorSetDirection(0  ,  1f);
         else if (direction == "left")   AnimatorSetDirection(-1f,  0f);
         else if (direction == "right")  AnimatorSetDirection(1f ,  0f );
-        
     }
 
     void Move(Vector3 desiredDirection)
@@ -221,16 +218,6 @@ public class Script_Player : MonoBehaviour
         }
     }
 
-    public void AddThought(Model_Thought thought)
-    {
-        playerThoughtManager.AddThought(thoughts, thought);
-    }
-
-    public int GetThoughtsCount()
-    {
-        return playerThoughtManager.GetThoughtCount(thoughts);
-    }
-
     public void AdjustRotation()
     {
         transform.forward = Camera.main.transform.forward;
@@ -256,8 +243,13 @@ public class Script_Player : MonoBehaviour
     //         }
     //     }
     // }
-
-    public void Setup(Tilemap _tileMap, Tilemap _exitsTileMap, string direction)
+    
+    public void Setup(
+        Tilemap _tileMap,
+        Tilemap _exitsTileMap,
+        string direction,
+        Model_PlayerState playerState
+    )
     {   
         game = Object.FindObjectOfType<Script_Game>();
         
@@ -268,16 +260,14 @@ public class Script_Player : MonoBehaviour
 
         tileMap = _tileMap;
         exitsTileMap = _exitsTileMap;
-        
-        animator = GetComponent<Animator>();
-        // animator.enabled = false;
 
+        animator = GetComponent<Animator>();
+        
         progress = 1f;
         location = transform.position;
+        currentSprite = GetComponent<SpriteRenderer>().sprite;
 
         AdjustRotation();
-
-        currentSprite = GetComponent<SpriteRenderer>().sprite;
         FaceDirection(direction);
     }
 }

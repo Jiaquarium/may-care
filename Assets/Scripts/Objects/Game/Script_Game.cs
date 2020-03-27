@@ -5,13 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class Script_Game : MonoBehaviour
 {
-    public Model_Levels Levels;
-    public string state;
-    public Script_PlayerData playerState;
-    public int targetFrameRate;
-    public int level = 0;
-    private bool isInventoryOpen = false;
-    private bool exitsDisabled;
 
     
     public Script_InteractableObjectHandler interactableObjectHandler;
@@ -41,6 +34,18 @@ public class Script_Game : MonoBehaviour
     private AudioSource backgroundMusicAudioSource;
     
     
+    public Model_Levels Levels;
+    public string state;
+    public Model_PlayerState playerState;
+    public int targetFrameRate;
+    public int level = 0;
+    public Model_PlayerThoughts thoughts;
+    
+    
+    private bool isInventoryOpen = false;
+    private bool exitsDisabled;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +64,7 @@ public class Script_Game : MonoBehaviour
         InitiateLevel();
 
         // TODO: Initialize State Func
-        playerState = new Script_PlayerData(player);
+        // playerState = new Model_PlayerState(player);
     }
 
     // Update is called once per frame
@@ -91,7 +96,6 @@ public class Script_Game : MonoBehaviour
 
     void SetInitialGameState()
     {
-        print("setting initial game state: " + Levels.levelsData[level].initialState);
         state = Levels.levelsData[level].initialState;
     }
 
@@ -136,6 +140,7 @@ public class Script_Game : MonoBehaviour
         DestroyPlayer();
         DestroyNPCs();
         DestroyDemons();
+        DestroyInteractableObjects();
         DestroyTileMaps();
     }
 
@@ -159,7 +164,12 @@ public class Script_Game : MonoBehaviour
         
         Vector3 spawnLocation = playerData.playerSpawnLocation;
         player = Instantiate(PlayerPrefab, spawnLocation, Quaternion.identity);
-        player.Setup(tileMap, exitsTileMap, playerData.direction);
+        player.Setup(
+            tileMap,
+            exitsTileMap,
+            playerData.direction,
+            playerState
+        );
 
         // camera tracking
         Camera.main.GetComponent<Script_Camera>().target = player.transform;
@@ -175,17 +185,16 @@ public class Script_Game : MonoBehaviour
         playerState.name = state["name"];
     }
 
-    public Script_PlayerData GetPlayerState()
+    public Model_PlayerState GetPlayerState()
     {
         return playerState;
     }
 
     public void AddPlayerThought(Model_Thought thought)
     {
-        // call playerthoughthandler to put thought into player
-        playerThoughtHandler.AddPlayerThought(thought, player);
+        playerThoughtHandler.AddPlayerThought(thought, thoughts);
         
-        int thoughtCount = playerThoughtHandler.GetThoughtsCount(player);
+        int thoughtCount = playerThoughtHandler.GetThoughtsCount(thoughts);
         
         playerThoughtsInventoryManager.AddPlayerThought(
             thought, thoughtButtons[thoughtCount - 1]
@@ -250,10 +259,12 @@ public class Script_Game : MonoBehaviour
 
     public void OpenPlayerThoughtsInventory()
     {
-        bool hasThoughts = playerThoughtHandler.GetThoughtsCount(player) > 0;
+        bool hasThoughts = playerThoughtHandler.GetThoughtsCount(thoughts) > 0;
         
         isInventoryOpen = true;
-        playerThoughtsInventoryManager.OpenInventory(hasThoughts);
+        playerThoughtsInventoryManager.OpenInventory(
+            hasThoughts
+        );
     }
 
     public void ClosePlayerThoughtsInventory()
@@ -307,6 +318,8 @@ public class Script_Game : MonoBehaviour
                     NPCsData[i].dialogue,
                     NPCsData[i].moveSets
                 );
+                // setup animator for starting idle position
+                MovingNPC.FaceDirection(NPCsData[i].direction);
             }
             else
             {
@@ -340,10 +353,16 @@ public class Script_Game : MonoBehaviour
         movingNPCs.Clear();
     }
 
-    public void DestroyMovingNPC(int i)
+    public void DestroyMovingNPC(int Id)
     {
-        Destroy(movingNPCs[i].gameObject);
-        movingNPCs.RemoveAt(i);
+        for (int i = 0; i < movingNPCs.Count; i++)
+        {
+            if (movingNPCs[i].StaticNPCId == Id)
+            {
+                Destroy(movingNPCs[i].gameObject);
+                movingNPCs.RemoveAt(i);
+            }
+        }
     }
 
     public Vector3[] GetMovingNPCLocations()
@@ -365,12 +384,27 @@ public class Script_Game : MonoBehaviour
         movingNPCs[i].Move();
     }
 
+    public void SetMovingNPCExit(int i, bool shouldExit)
+    {
+        movingNPCs[i].shouldExit = shouldExit;
+    }
+
+    public void ChangeMovingNPCSpeed(int i, float speed)
+    {
+        movingNPCs[i].ChangeSpeed(speed);
+    }
+
     public void CreateInteractableObjects()
     {
         interactableObjectCreator.CreateInteractableObjects(
             Levels.levelsData[level].InteractableObjectsData,
             interactableObjects
         );
+    }
+
+    void DestroyInteractableObjects()
+    {
+        interactableObjectCreator.DestroyInteractableObjects(interactableObjects);    
     }
 
     public void CreateDemons()
@@ -391,9 +425,9 @@ public class Script_Game : MonoBehaviour
         demons.Clear();
     }
 
-    public void EatDemon(int i)
+    public void EatDemon(int Id)
     {
-        demonHandler.EatDemon(i, demons);
+        demonHandler.EatDemon(Id, demons);
     }
 
     public Vector3[] GetDemonLocations()
@@ -461,6 +495,14 @@ public class Script_Game : MonoBehaviour
     public void PlayerFaceDirection(string direction)
     {
         player.FaceDirection(direction);
+    }
+
+    public void NPCFaceDirection(int Id, string direction)
+    {
+        foreach(Script_MovingNPC NPC in movingNPCs)
+        {
+            if (NPC.MovingNPCId == Id)   NPC.FaceDirection(direction);
+        }
     }
 
     public void ChangeCameraTargetToNPC(int i)

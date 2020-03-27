@@ -65,13 +65,14 @@
      <Compile Include="Assets\Models\Model_PlayerThoughts.cs" />
      <Compile Include="Assets\Models\Model_Thought.cs" />
      <Compile Include="Assets\Scripts\Audio\Script_BackgroundMusicManager.cs" />
-     <Compile Include="Assets\Scripts\Data\Script_PlayerData.cs" />
+     <Compile Include="Assets\Scripts\Data\Model_PlayerState.cs" />
      <Compile Include="Assets\Scripts\Data\Script_SaveSystem.cs" />
      <Compile Include="Assets\Scripts\Decor\Script_RoomDecor.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_DialogueManager.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_InputManager.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_DontTouchPianoScene.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_StartConvoOnTriggers.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_TeachHowToEat.cs" />
      <Compile Include="Assets\Scripts\Objects\Camera\Script_Camera.cs" />
      <Compile Include="Assets\Scripts\Objects\Demons\Script_Demon.cs" />
      <Compile Include="Assets\Scripts\Objects\Game\Script_DemonCreator.cs" />

@@ -25,7 +25,7 @@ public class Script_DemonCreator : MonoBehaviour
 
             demons.Add(demon);
             demon.Id = i;
-            demon.Setup(demonsData[i].thought);
+            demon.Setup(demonsData[i].thought, demonsData[i].sprite);
         }
     }
 }

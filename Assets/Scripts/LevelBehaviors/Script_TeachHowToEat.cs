@@ -13,6 +13,7 @@ public class Script_TeachHowToEat : MonoBehaviour
     
     private bool isDone = false;
     private int activeTriggerIndex = 0;
+    private bool hasSwitchedMusic = false;
 
     void Start()
     {
@@ -31,6 +32,17 @@ public class Script_TeachHowToEat : MonoBehaviour
     {
         HandleAction();
         
+        // play HARD music when Ero finishes first dialogue and moveset
+        if (activeTriggerIndex == 1 && game.state == "interact" && !hasSwitchedMusic)
+        {
+            print("SWITCHING BG MUSIC!!!");
+            hasSwitchedMusic = true;
+            game.SwitchBgMusic(2);
+        }
+
+        // need to EAT all demons before can activiate 2nd trigger location
+        if (activeTriggerIndex == 1 && game.GetDemonsCount() > 0)   return;
+
         foreach(Vector3 loc in triggerLocations[activeTriggerIndex].locations)
         {
             if (
@@ -39,7 +51,8 @@ public class Script_TeachHowToEat : MonoBehaviour
                 && !isDone
             )
             {
-                game.PauseBgMusic();
+                // don't pause, stop the music bc we're switching to the HARD song
+                game.StopBgMusic();
                 game.ChangeStateCutScene();
                 
                 if (activeTriggerIndex == 0)    game.PlayerFaceDirection("down");

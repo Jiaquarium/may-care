@@ -11,7 +11,7 @@ public class Script_Demon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        AdjustRotation();    
     }
 
     public virtual void DefaultAction()
@@ -21,10 +21,17 @@ public class Script_Demon : MonoBehaviour
         game.ShowAndCloseThought(thought);
     }
 
-    public virtual void Setup(Model_Thought _thought)
+    public void AdjustRotation()
+    {
+        transform.forward = Camera.main.transform.forward;
+    }
+
+    public virtual void Setup(Model_Thought _thought, Sprite sprite)
     {
         game = FindObjectOfType<Script_Game>();
-
+        GetComponent<SpriteRenderer>().sprite = sprite;
         thought = _thought;
+
+        AdjustRotation();
     }
 }

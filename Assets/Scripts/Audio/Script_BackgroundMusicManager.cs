@@ -9,14 +9,19 @@ public class Script_BackgroundMusicManager : MonoBehaviour
 
     private int currentClipIndex = -1;
 
-    public void Play(int i)
+    public void Play(int i, bool forcePlay = false)
     {
-        if (i == currentClipIndex)  return;
+        if (i == currentClipIndex && !forcePlay)  return;
 
         GetComponent<AudioSource>().clip = AudioClips[i];
         GetComponent<AudioSource>().Play();
 
         currentClipIndex = i;
+    }
+
+    public void Stop()
+    {
+        GetComponent<AudioSource>().Stop();    
     }
 
     public void Pause()

@@ -444,6 +444,11 @@ public class Script_Game : MonoBehaviour
         return DemonLocations;
     }
 
+    public int GetDemonsCount()
+    {
+        return demons.Count;
+    }
+
     void SetupDialogueManager()
     {
         dialogueManager.Setup();
@@ -470,6 +475,16 @@ public class Script_Game : MonoBehaviour
         int i = Levels.levelsData[level].bgMusicAudioClipIndex;
         
         bgMusicManager.Play(i);
+    }
+
+    public void SwitchBgMusic(int i)
+    {
+        bgMusicManager.Play(i, forcePlay: true);
+    }
+
+    public void StopBgMusic()
+    {
+        bgMusicManager.Stop();
     }
 
     public void PauseBgMusic()

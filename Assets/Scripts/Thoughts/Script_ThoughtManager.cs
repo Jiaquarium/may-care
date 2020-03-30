@@ -9,6 +9,11 @@ public class Script_ThoughtManager : MonoBehaviour
     public AudioClip thoughtStartSoundFX;
     public AudioSource audioSource;
     public Text thoughtText;
+
+
+    public float timePerChar;
+
+
     private IEnumerator coroutine;
     private bool isShowingThought;
 
@@ -40,7 +45,7 @@ public class Script_ThoughtManager : MonoBehaviour
 
         foreach(char letter in thoughtObj.thought.ToCharArray())
         {
-            waitTime += 0.075f;
+            waitTime += timePerChar;
         }
 
         waitTime += waitTimeBuffer;

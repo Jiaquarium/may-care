@@ -10,6 +10,7 @@ public class Script_DialogueManager : MonoBehaviour
     public CanvasGroup canvas;
     public AudioSource audioSource;
     public AudioClip dialogueStartSoundFX;
+    public AudioClip typeSFX;
     
 
     public Text nameText;
@@ -17,6 +18,7 @@ public class Script_DialogueManager : MonoBehaviour
     public bool isRenderingSentence = false;
     public Queue<string> sentences;
     public float pauseLength;
+    public float charPauseLength;
 
 
     private Script_InputManager inputManager;
@@ -25,11 +27,13 @@ public class Script_DialogueManager : MonoBehaviour
     private IEnumerator coroutine;
     private string formattedSentence;
     private bool isInputMode = false;
+    private bool shouldPlayTypeSFX = true;
 
     public void StartDialogue(Model_Dialogue dialogue)
     {
         nameText.text = dialogue.name != null ? dialogue.name + ":" : "";
-        
+        shouldPlayTypeSFX = true;
+
         player.SetIsTalking();
         ShowDialogue();
         sentences.Clear();
@@ -75,12 +79,21 @@ public class Script_DialogueManager : MonoBehaviour
         {
             if (letter.Equals('|'))
             {
-                 yield return new WaitForSeconds(pauseLength);
+                shouldPlayTypeSFX = true;
+                yield return new WaitForSeconds(pauseLength);
             }
             else
             {
+                if (shouldPlayTypeSFX == true)
+                {
+                    audioSource.PlayOneShot(typeSFX, 0.75f);
+                    shouldPlayTypeSFX = false;
+                } else
+                {
+                    shouldPlayTypeSFX = true;
+                }
                 dialogueText.text += letter;
-                yield return null;
+                yield return new WaitForSeconds(charPauseLength);
             }
         }
 

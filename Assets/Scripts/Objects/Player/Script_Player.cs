@@ -11,28 +11,24 @@ public class Script_Player : MonoBehaviour
     /*
         persistent data, end
     */
-    public AnimationCurve progressCurve;
     private Script_PlayerAction playerActionHandler;
     private Script_PlayerThoughtManager playerThoughtManager;
+    private Script_PlayerMovement playerMovementHandler;
     
     
     public float glitchDuration;
-    public float speed;
+    public string facingDirection;
+    public Vector3 location;
+    public Vector3 startLocation;
+    public string localState = "interact";
 
 
     private Sprite currentSprite;
     // storing soundFX here and not in manager because only 1 player exists
-    private Vector3 startLocation;
-    private Vector3 location;
     private Script_Game game;
-    private Tilemap tileMap;
     private Tilemap exitsTileMap;
+    private Tilemap tileMap;
     private bool isTalking = false;
-    private float progress;
-    private string facingDirection;
-    private string localState = "interact";
-    private Vector3[] MovingNPCLocations = new Vector3[0];
-    private Vector3[] DemonLocations = new Vector3[0];
     private Animator animator;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
     private Dictionary<string, Vector3> Directions = new Dictionary<string, Vector3>()
@@ -42,12 +38,6 @@ public class Script_Player : MonoBehaviour
         {"left"     , new Vector3(-1f, 0f, 0f)},
         {"right"    , new Vector3(1f, 0f, 0f)}
     };
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -75,42 +65,10 @@ public class Script_Player : MonoBehaviour
                 Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f
             );
 
-            if (progress == 1f) HandleMoveInput();
+            playerMovementHandler.HandleMoveInput();
         }
      
-        if(localState == "move")	ActuallyMove();
-    }
-
-    void HandleMoveInput()
-    {
-        if(Input.GetAxis("Vertical") > 0f)
-        {
-            facingDirection = "up";
-            
-            Move(Directions[facingDirection]);
-            AnimatorSetDirection(0f, 1f);
-        }
-        else if(Input.GetAxis("Vertical") < 0f)
-        {
-            facingDirection = "down";
-            
-            Move(Directions[facingDirection]);
-            AnimatorSetDirection(0f, -1f);
-        }
-        else if(Input.GetAxis("Horizontal") > 0f)
-        {
-            facingDirection = "right";
-
-            Move(Directions[facingDirection]);
-            AnimatorSetDirection(1f, 0f);
-        }
-        else if(Input.GetAxis("Horizontal") < 0f)
-        {
-            facingDirection = "left";
-            
-            Move(Directions[facingDirection]);
-            AnimatorSetDirection(-1f, 0f);
-        }
+        // if(localState == "move")	playerMovementHandler.ActuallyMove();
     }
 
     public void SetIsTalking()
@@ -129,93 +87,43 @@ public class Script_Player : MonoBehaviour
         return isTalking;
     }
 
-    void AnimatorSetDirection(float x, float z)
+    public void AnimatorSetDirection(string dir)
     {
-        animator.SetFloat("LastMoveX", x);
-        animator.SetFloat("LastMoveZ", z);
-        animator.SetFloat("MoveX", x);
-        animator.SetFloat("MoveZ", z);
+        facingDirection = dir;
+
+        if (dir == "up")
+        {
+            animator.SetFloat("LastMoveX", 0f);
+            animator.SetFloat("LastMoveZ", 1f);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveZ", 1f);
+        }
+        else if (dir == "down")
+        {
+            animator.SetFloat("LastMoveX", 0f);
+            animator.SetFloat("LastMoveZ", -1f);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveZ", -1f);
+        }
+        else if (dir == "left")
+        {
+            animator.SetFloat("LastMoveX", -1f);
+            animator.SetFloat("LastMoveZ", 0f);
+            animator.SetFloat("MoveX", -1f);
+            animator.SetFloat("MoveZ", 0f);
+        }
+        else if (dir == "right")
+        {
+            animator.SetFloat("LastMoveX", 1f);
+            animator.SetFloat("LastMoveZ", 0f);
+            animator.SetFloat("MoveX", 1f);
+            animator.SetFloat("MoveZ", 0f);
+        }
     }
 
     public void FaceDirection(string direction)
     {
-        facingDirection = direction;
-
-        if (direction == "down")        AnimatorSetDirection(0  , -1f);
-        else if (direction == "up")     AnimatorSetDirection(0  ,  1f);
-        else if (direction == "left")   AnimatorSetDirection(-1f,  0f);
-        else if (direction == "right")  AnimatorSetDirection(1f ,  0f );
-    }
-
-    void Move(Vector3 desiredDirection)
-    {
-        int desiredX = (int)Mathf.Round((location + desiredDirection).x);
-        int desiredZ = (int)Mathf.Round((location + desiredDirection).z);
-        
-        // tiles map from (xyz) to (xz)
-        if (
-            !tileMap.HasTile(new Vector3Int(desiredX, desiredZ, 0))
-            && !exitsTileMap.HasTile(new Vector3Int(desiredX, desiredZ, 0))
-        ) 
-        {
-            return;
-        }
-
-        // if NPC is moving check if NPC is occupying space          
-        // don't check nonmoving NPCs b/c we do that in tileMap and they're static
-        MovingNPCLocations = game.GetMovingNPCLocations();
-        if (MovingNPCLocations.Length != 0)
-        {
-            foreach (Vector3 loc in MovingNPCLocations)
-            {
-                if (desiredX == loc.x && desiredZ == loc.z) return;    
-            }
-        }
-
-        // if Demons on map check if occupying space
-        DemonLocations = game.GetDemonLocations();
-        if (DemonLocations.Length != 0)
-        {
-            foreach (Vector3 loc in DemonLocations)
-            {
-                if (desiredX == loc.x && desiredZ == loc.z) return;
-            }
-        }
-
-        startLocation = location;
-        location += desiredDirection;
-        
-        // actually begin to move
-        localState = "move";
-        progress = 0f;
-    }
-
-    void ActuallyMove()
-    {
-        progress += speed;
-        transform.position = Vector3.Lerp(
-            startLocation,
-            location,
-            progressCurve.Evaluate(progress)
-        );
-
-        if (progress >= 1f)
-        {
-            localState = "interact";
-            progress = 1f;
-            transform.position = location;
-
-            if (exitsTileMap.HasTile(
-                new Vector3Int(
-                    (int)Mathf.Round(location.x),
-                    (int)Mathf.Round(location.z),
-                    0
-                )
-            ))
-            {
-                game.HandleLevelExit();
-            }
-        }
+        AnimatorSetDirection(direction);
     }
 
     public void AdjustRotation()
@@ -252,18 +160,24 @@ public class Script_Player : MonoBehaviour
     )
     {   
         game = Object.FindObjectOfType<Script_Game>();
+        tileMap = _tileMap;
+        exitsTileMap = _exitsTileMap;
         
+        playerMovementHandler = GetComponent<Script_PlayerMovement>();
         playerActionHandler = GetComponent<Script_PlayerAction>();
         playerThoughtManager = GetComponent<Script_PlayerThoughtManager>();
+        playerMovementHandler.Setup(
+            game,
+            Directions,
+            tileMap,
+            exitsTileMap
+        );
         playerActionHandler.Setup(game, Directions);
         playerThoughtManager.Setup();
 
-        tileMap = _tileMap;
-        exitsTileMap = _exitsTileMap;
 
         animator = GetComponent<Animator>();
         
-        progress = 1f;
         location = transform.position;
         currentSprite = GetComponent<SpriteRenderer>().sprite;
 

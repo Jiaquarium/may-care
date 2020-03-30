@@ -11,6 +11,9 @@ public class Script_Player : MonoBehaviour
     /*
         persistent data, end
     */
+    public Animator animator;
+
+
     private Script_PlayerAction playerActionHandler;
     private Script_PlayerThoughtManager playerThoughtManager;
     private Script_PlayerMovement playerMovementHandler;
@@ -20,7 +23,6 @@ public class Script_Player : MonoBehaviour
     public string facingDirection;
     public Vector3 location;
     public Vector3 startLocation;
-    public string localState = "interact";
 
 
     private Sprite currentSprite;
@@ -28,8 +30,7 @@ public class Script_Player : MonoBehaviour
     private Script_Game game;
     private Tilemap exitsTileMap;
     private Tilemap tileMap;
-    private bool isTalking = false;
-    private Animator animator;
+    public bool isTalking = false;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
     private Dictionary<string, Vector3> Directions = new Dictionary<string, Vector3>()
     {
@@ -44,8 +45,11 @@ public class Script_Player : MonoBehaviour
     {   
         AdjustRotation();
 
-        if (game.state == "cut-scene")              return;
-        if (game.state == "cut-scene_npc-moving")   return;
+        if (game.state != "interact")
+        {
+            playerMovementHandler.FinishMoveAnimation();
+            return;
+        }
         
         bool isInventoryOpen = game.GetIsInventoryOpen();
 
@@ -57,18 +61,7 @@ public class Script_Player : MonoBehaviour
         
         playerActionHandler.HandleActionInput(facingDirection, location);
         
-        if (!isTalking)
-        {
-            // move animation when direction button down 
-            animator.SetBool(
-                "PlayerMoving",
-                Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f
-            );
-
-            playerMovementHandler.HandleMoveInput();
-        }
-     
-        // if(localState == "move")	playerMovementHandler.ActuallyMove();
+        playerMovementHandler.HandleMoveInput(isTalking);
     }
 
     public void SetIsTalking()

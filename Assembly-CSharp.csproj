@@ -88,6 +88,7 @@
      <Compile Include="Assets\Scripts\Objects\NPCs\Script_StaticNPC.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_Player.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerAction.cs" />
+     <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerGhost.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerThoughtManager.cs" />
      <Compile Include="Assets\Scripts\Thoughts\Script_ThoughtManager.cs" />

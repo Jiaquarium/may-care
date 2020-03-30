@@ -83,11 +83,6 @@ public class Script_Game : MonoBehaviour
         state = "cut-scene_npc-moving";
     }
 
-    public void ChangeStateMove()
-    {
-        state = "move";
-    }
-
     public void ChangeStateInteract()
     {
         state = "interact";

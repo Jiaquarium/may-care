@@ -55,7 +55,10 @@ public class Script_TeachHowToEat : MonoBehaviour
                 game.StopBgMusic();
                 game.ChangeStateCutScene();
                 
-                if (activeTriggerIndex == 0)    game.PlayerFaceDirection("down");
+                if (activeTriggerIndex == 0)
+                {
+                    game.PlayerFaceDirection("down");
+                }
                 if (activeTriggerIndex == 1)
                 {
                     game.PlayerFaceDirection("right");

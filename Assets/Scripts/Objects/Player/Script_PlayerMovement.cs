@@ -6,18 +6,26 @@ using System;
 
 public class Script_PlayerMovement : MonoBehaviour
 {
-    public AnimationCurve progressCurve;
+    // public AnimationCurve progressCurve;
+    public Script_PlayerGhost PlayerGhostPrefab;
+
+    
     public float speed;
     public float repeatDelay;
     
 
     private Script_Game game;
     private Script_Player player;
+    private Script_PlayerGhost playerGhost;
     private Dictionary<string, Vector3> Directions;
     private Tilemap tileMap;
     private Tilemap exitsTileMap;
+    private SpriteRenderer spriteRenderer;
+    
+    
     private Vector3[] MovingNPCLocations = new Vector3[0];
     private Vector3[] DemonLocations = new Vector3[0];
+    private bool isMoving;
 
 
     // TODO: make private
@@ -27,17 +35,23 @@ public class Script_PlayerMovement : MonoBehaviour
     public string lastMove;
     public float timer;
 
-    public void HandleMoveInput()
+    public void HandleMoveInput(bool playerIsTalking)
     {
-        ActuallyMove();
-        
+        TrackPlayerGhost();
+
+        // finish movement when starting conversation
+        if (playerIsTalking)
+        {
+            return;
+        }
+
         timer = Mathf.Max(0f, timer - Time.deltaTime);
-
-        Vector2 dirVector = new Vector2 (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         
-        // restrict input until LERP animation is done
-        if (player.localState == "move")    return;
-
+        SetMoveAnimation();
+        
+        Vector2 dirVector = new Vector2 (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (dirVector == Vector2.zero)  return;
+        
         // determine if vector is up, down, left or right direction headed
         if (
             Mathf.Abs(dirVector.x) > Mathf.Abs(dirVector.y)
@@ -58,6 +72,17 @@ public class Script_PlayerMovement : MonoBehaviour
         {
             Move("down");
         }
+    }
+
+    void SetMoveAnimation()
+    {
+        // move animation when direction button down 
+        player.animator.SetBool(
+            "PlayerMoving",
+            Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f
+        );
+
+        playerGhost.SetMoveAnimation();
     }
 
     bool CheckRepeatMove(string dir)
@@ -89,10 +114,27 @@ public class Script_PlayerMovement : MonoBehaviour
         timer = repeatDelay;
 
         player.startLocation = player.location;
+        playerGhost.startLocation = player.location;
+
+        // location updates immediately, do we need?? 
         player.location += desiredDirection;
+        // this will lag
+        playerGhost.location += desiredDirection;
         
+        HandleMoveAnimation(dir);
+
         // actually begin to move
-        player.localState = "move";
+        // player.localState = "move";
+        // player.localState = "interact";
+        transform.position = player.location;
+        lastMove = player.facingDirection;
+    }
+
+    void HandleMoveAnimation(string dir)
+    {
+        isMoving = true;
+        playerGhost.Move(dir);
+        spriteRenderer.enabled = false;
     }
 
     bool CheckCollisions(Vector3 desiredDirection)
@@ -133,28 +175,38 @@ public class Script_PlayerMovement : MonoBehaviour
         return false;
     }
 
-    void ActuallyMove()
+    void TrackPlayerGhost()
     {
-        progress += speed;
-        transform.position = Vector3.Lerp(
-            player.startLocation,
-            player.location,
-            progressCurve.Evaluate(progress)
-        );
+        progress = playerGhost.progress;
         
-        if (progress >= 1f)
+        // begin ghost movement
+        // turn this sprite not visible
+        // turn ghost sprite visible
+
+        // progress += speed;
+        // transform.position = Vector3.Lerp(
+        //     player.startLocation,
+        //     player.location,
+        //     progressCurve.Evaluate(progress)
+        // );
+        
+        if (progress >= 1f && isMoving)
         {
             FinishMoveAnimation();
+            HandleExitTile();
         }
     }
 
-    void FinishMoveAnimation()
+    public void FinishMoveAnimation()
     {
-        player.localState = "interact";
-        progress = 1f;
-        transform.position = player.location;
-        lastMove = player.facingDirection;
+        // must be visible before playerghost invisible to avoid flicker
+        spriteRenderer.enabled = true;
+        playerGhost.SetIsNotMoving();
+        isMoving = false;
+    }
 
+    void HandleExitTile()
+    {
         if (exitsTileMap.HasTile(
             new Vector3Int(
                 (int)Mathf.Round(player.location.x),
@@ -166,6 +218,15 @@ public class Script_PlayerMovement : MonoBehaviour
             game.HandleLevelExit();
         }
     }
+
+    Script_PlayerGhost CreatePlayerGhost()
+    {
+        return Instantiate(
+            PlayerGhostPrefab,
+            player.transform.position,
+            Quaternion.identity
+        );
+    }
     
     public void Setup(
         Script_Game _game,
@@ -175,6 +236,9 @@ public class Script_PlayerMovement : MonoBehaviour
     )
     {
         player = GetComponent<Script_Player>();
+        playerGhost = CreatePlayerGhost();
+        playerGhost.Setup(player.transform.position);
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         game = _game;
         Directions = _Directions;

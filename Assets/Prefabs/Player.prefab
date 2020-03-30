@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745bc8fb04335470ea7d98c1fb232a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   glitchDuration: 0
   facingDirection: 
   location: {x: 0, y: 0, z: 0}
@@ -157,39 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca5c76698acc41a5af212bc277814bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.47441536
-      value: 0.8247679
-      inSlope: 0.9580759
-      outSlope: 0.9580759
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  PlayerGhostPrefab: {fileID: 114939578732144636, guid: 25a2cc54c02a04eba80340081207c3cc,
+    type: 3}
   speed: 0.2
   repeatDelay: 0.2
   progress: 0

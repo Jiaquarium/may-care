@@ -19,7 +19,6 @@ public class Script_PlayerGhost : MonoBehaviour
 
     private bool isMoving;
 
-    // Update is called once per frame
     void Update()
     {
         AdjustRotation();
@@ -43,7 +42,6 @@ public class Script_PlayerGhost : MonoBehaviour
     void SetIsMoving()
     {
         isMoving = true;
-        // turn visible here
         spriteRenderer.enabled = true;
     }
 
@@ -108,12 +106,13 @@ public class Script_PlayerGhost : MonoBehaviour
     }
     public void Setup(Vector3 loc)
     {
-        print("I am alive!!!");
-        progress = 1f;
-        location = loc;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        progress = 1f;
+        location = loc;
         spriteRenderer.enabled = false;
+        
         AdjustRotation();
     }
 }

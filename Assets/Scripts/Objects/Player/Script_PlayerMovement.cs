@@ -6,11 +6,9 @@ using System;
 
 public class Script_PlayerMovement : MonoBehaviour
 {
-    // public AnimationCurve progressCurve;
     public Script_PlayerGhost PlayerGhostPrefab;
 
-    
-    public float speed;
+
     public float repeatDelay;
     
 
@@ -28,7 +26,6 @@ public class Script_PlayerMovement : MonoBehaviour
     private bool isMoving;
 
 
-    // TODO: make private
     public float progress;
     
     
@@ -39,7 +36,6 @@ public class Script_PlayerMovement : MonoBehaviour
     {
         TrackPlayerGhost();
 
-        // finish movement when starting conversation
         if (playerIsTalking)
         {
             return;
@@ -49,7 +45,7 @@ public class Script_PlayerMovement : MonoBehaviour
         
         SetMoveAnimation();
         
-        Vector2 dirVector = new Vector2 (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 dirVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (dirVector == Vector2.zero)  return;
         
         // determine if vector is up, down, left or right direction headed
@@ -87,10 +83,8 @@ public class Script_PlayerMovement : MonoBehaviour
 
     bool CheckRepeatMove(string dir)
     {
-        // TODO: do we need a timer for every direction?
         if (timer == 0.0f)
         {   
-            // timer = repeatDelay;
             return true;
         }
 
@@ -113,21 +107,20 @@ public class Script_PlayerMovement : MonoBehaviour
         progress = 0f;
         timer = repeatDelay;
 
+        /*
+            move player to desired loc, and start playerGhost's animation
+            after-the-fact
+        */
         player.startLocation = player.location;
         playerGhost.startLocation = player.location;
 
-        // location updates immediately, do we need?? 
         player.location += desiredDirection;
-        // this will lag
         playerGhost.location += desiredDirection;
-        
+        // move player pointer immediately
+        transform.position = player.location;
         HandleMoveAnimation(dir);
 
-        // actually begin to move
-        // player.localState = "move";
-        // player.localState = "interact";
-        transform.position = player.location;
-        lastMove = player.facingDirection;
+        lastMove = dir;
     }
 
     void HandleMoveAnimation(string dir)
@@ -178,17 +171,6 @@ public class Script_PlayerMovement : MonoBehaviour
     void TrackPlayerGhost()
     {
         progress = playerGhost.progress;
-        
-        // begin ghost movement
-        // turn this sprite not visible
-        // turn ghost sprite visible
-
-        // progress += speed;
-        // transform.position = Vector3.Lerp(
-        //     player.startLocation,
-        //     player.location,
-        //     progressCurve.Evaluate(progress)
-        // );
         
         if (progress >= 1f && isMoving)
         {

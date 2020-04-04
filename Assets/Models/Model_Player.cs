@@ -7,4 +7,5 @@ public class Model_Player
 {
     public Vector3 playerSpawnLocation;
     public string direction = "up";
+    public bool isLightOn;
 }

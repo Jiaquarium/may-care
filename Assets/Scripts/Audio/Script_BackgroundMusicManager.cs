@@ -33,4 +33,9 @@ public class Script_BackgroundMusicManager : MonoBehaviour
     {
         GetComponent<AudioSource>().UnPause();
     }
+
+    public bool GetIsPlaying()
+    {
+        return GetComponent<AudioSource>().isPlaying;
+    }
 }

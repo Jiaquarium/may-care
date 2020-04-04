@@ -11,9 +11,6 @@ public class Script_MaskSnapScroll : MonoBehaviour
     void Start()
     {
         container = GetComponent<RectTransform>();
-
-        print("container height: " + container.rect.height);
-        print("container anchoredY: " + container.anchoredPosition.y);
     }
 
     // Update is called once per frame

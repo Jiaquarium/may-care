@@ -19,6 +19,8 @@ public class Script_DialogueManager : MonoBehaviour
     public Queue<string> sentences;
     public float pauseLength;
     public float charPauseLength;
+    public float typingVolumeScale;
+    public float dialogueStartVolumeScale;
 
 
     private Script_InputManager inputManager;
@@ -38,7 +40,7 @@ public class Script_DialogueManager : MonoBehaviour
         ShowDialogue();
         sentences.Clear();
 
-        audioSource.PlayOneShot(dialogueStartSoundFX, 1.0f);
+        audioSource.PlayOneShot(dialogueStartSoundFX, dialogueStartVolumeScale);
 
         foreach(string _sentence in dialogue.sentences)
         {
@@ -86,7 +88,7 @@ public class Script_DialogueManager : MonoBehaviour
             {
                 if (shouldPlayTypeSFX == true)
                 {
-                    audioSource.PlayOneShot(typeSFX, 0.75f);
+                    audioSource.PlayOneShot(typeSFX, typingVolumeScale);
                     shouldPlayTypeSFX = false;
                 } else
                 {

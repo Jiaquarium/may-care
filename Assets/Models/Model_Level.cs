@@ -16,4 +16,5 @@ public class Model_Level
     public Tilemap exitsTileMap;
     public int bgMusicAudioClipIndex;
     public string initialState;
+    public bool shouldPersistBgThemes;
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Model_Demon
 {
     public Vector3 demonSpawnLocation;
-    public Sprite sprite;
-    public string type;
     public Model_Thought thought;
+    public AudioClip deathCry;
+    public Script_Demon prefab;
 }

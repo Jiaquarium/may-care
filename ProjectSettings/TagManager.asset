@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - tag_exit
+  - tag_player-light
+  - tag_player-ghost-light
   layers:
   - Default
   - TransparentFX
@@ -39,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 3602437773
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: foreground_static
+    uniqueID: 3469989047
     locked: 0

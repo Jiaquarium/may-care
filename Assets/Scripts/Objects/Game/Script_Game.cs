@@ -5,17 +5,36 @@ using UnityEngine.Tilemaps;
 
 public class Script_Game : MonoBehaviour
 {
-
+    /* =======================================================================
+        RUNTIME OPTIONS
+    ======================================================================= */
+    public int targetFrameRate;
     
+    /* =======================================================================
+        STATE DATA
+    ======================================================================= */
+    public Model_Levels Levels;
+    public string state;
+    public Model_PlayerState playerState;
+    public int level = 0;
+    public Model_PlayerThoughts thoughts;
+    private bool exitsDisabled;
+    
+    /* ======================================================================= */
+
+
     public Script_InteractableObjectHandler interactableObjectHandler;
     public Script_InteractableObjectCreator interactableObjectCreator;
     public Script_DemonHandler demonHandler;
     public Script_DemonCreator demonCreator;
     public Script_PlayerThoughtHandler playerThoughtHandler;
     public Script_PlayerThoughtsInventoryManager playerThoughtsInventoryManager;
+    public Script_Exits exitsHandler;
     public Script_Player PlayerPrefab;
     public Script_StaticNPC StaticNPCPrefab;
     public Script_MovingNPC MovingNPCPrefab;
+    public Script_AudioOneShotSource AudioOneShotSourcePrefab;
+    public Script_BgThemePlayer EroBgThemePlayerPrefab;
     public Script_DialogueManager dialogueManager;
     public Script_ThoughtManager thoughtManager;
     public Script_BackgroundMusicManager bgMusicManager;
@@ -32,18 +51,12 @@ public class Script_Game : MonoBehaviour
     private List<Script_Demon> demons = new List<Script_Demon>();
     private Script_Demon DemonPrefab;
     private AudioSource backgroundMusicAudioSource;
-    
-    
-    public Model_Levels Levels;
-    public string state;
-    public Model_PlayerState playerState;
-    public int targetFrameRate;
-    public int level = 0;
-    public Model_PlayerThoughts thoughts;
+    private Script_Camera camera;
+    private List<Script_AudioOneShotSource> audioOneShotSources = new List<Script_AudioOneShotSource>();
+    private Script_BgThemePlayer eroBgThemePlayer;
     
     
     private bool isInventoryOpen = false;
-    private bool exitsDisabled;
     
     
     // Start is called before the first frame update
@@ -54,14 +67,25 @@ public class Script_Game : MonoBehaviour
         
         Screen.fullScreen = true;
         Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+        
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        /*
+            set up handlers that affect state
+        */
+        exitsHandler.Setup(this);
+
+        camera = Camera.main.GetComponent<Script_Camera>();
         backgroundMusicAudioSource = bgMusicManager.GetComponent<AudioSource>();
         dialogueManager.HideDialogue();
         thoughtManager.HideThought();
         ClosePlayerThoughtsInventory();
         
+        ChangeStateToInitiateLevel();
         InitiateLevel();
+        exitsHandler.canvas.alpha = 1.0f;
+        exitsHandler.StartFadeIn();
 
         // TODO: Initialize State Func
         // playerState = new Model_PlayerState(player);
@@ -71,6 +95,11 @@ public class Script_Game : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void ChangeStateToInitiateLevel()
+    {
+        state = "initiate-level";
     }
 
     public void ChangeStateCutScene()
@@ -87,54 +116,40 @@ public class Script_Game : MonoBehaviour
     {
         state = "interact";
         CameraTargetToPlayer();
+        CameraMoveToTarget();
     }
 
-    void SetInitialGameState()
+    public void SetInitialGameState()
     {
         state = Levels.levelsData[level].initialState;
     }
 
-    public void HandleLevelExit()
+    public void InitiateLevel()
     {
-        if (exitsDisabled)  return;
-
-        DestroyLevel();
-        
-        level++;
-        InitiateLevel();
-    }
-
-    public void DisableExits()
-    {
-        exitsDisabled = true;
-    }
-
-    public void EnableExits()
-    {
-        exitsDisabled = false;
-    }
-
-    void InitiateLevel()
-    {
-        SetInitialGameState();
+        // TODO: fade out of black
+        // SetInitialGameState();
 
         StartBgMusic();
         
         CreateTileMaps();
         CreatePlayer();
+        CameraMoveToTarget();
         CreateNPCs();
         CreateInteractableObjects();
         CreateDemons();
 
         SetupDialogueManager();
         SetupThoughtManager();
+
+        // do level behavior actions
     }
 
-    void DestroyLevel()
+    public void DestroyLevel()
     {
         DestroyPlayer();
         DestroyNPCs();
         DestroyDemons();
+        DestroyAudioOneShotSources();
         DestroyInteractableObjects();
         DestroyTileMaps();
     }
@@ -163,11 +178,12 @@ public class Script_Game : MonoBehaviour
             tileMap,
             exitsTileMap,
             playerData.direction,
-            playerState
+            playerState,
+            playerData.isLightOn
         );
 
         // camera tracking
-        Camera.main.GetComponent<Script_Camera>().target = player.transform;
+        camera.target = player.transform;
     }
 
     void DestroyPlayer()
@@ -247,6 +263,7 @@ public class Script_Game : MonoBehaviour
     {
         return demonHandler.HandleAction(
             demons,
+            player,
             desiredLocation,
             action
         );
@@ -389,11 +406,28 @@ public class Script_Game : MonoBehaviour
         movingNPCs[i].ChangeSpeed(speed);
     }
 
+    public void CurrentMovesDoneAction()
+    {
+        if (!bgMusicManager.GetIsPlaying())    UnPauseBgMusic();
+        
+        if (eroBgThemePlayer != null)
+        {
+            PauseEroTheme();
+        }
+    }
+
+    public void AllMovesDoneAction()
+    {
+        StopMovingNPCThemes();
+        UnPauseBgMusic();
+    }
+
     public void CreateInteractableObjects()
     {
         interactableObjectCreator.CreateInteractableObjects(
             Levels.levelsData[level].InteractableObjectsData,
-            interactableObjects
+            interactableObjects,
+            GetRotationToFaceCamera()
         );
     }
 
@@ -425,9 +459,17 @@ public class Script_Game : MonoBehaviour
         demonHandler.EatDemon(Id, demons);
     }
 
+    public void PlayerEatDemonHeart()
+    {
+        if (player.GetIsEating())
+        {
+            player.EatHeart();
+        }
+    }
+
     public Vector3[] GetDemonLocations()
     {
-         Vector3[] DemonLocations = new Vector3[demons.Count];
+        Vector3[] DemonLocations = new Vector3[demons.Count];
         
         if (DemonLocations.Length == 0)    return new Vector3[0];
 
@@ -442,6 +484,29 @@ public class Script_Game : MonoBehaviour
     public int GetDemonsCount()
     {
         return demons.Count;
+    }
+
+    public Script_AudioOneShotSource CreateAudioOneShotSource(Vector3 position)
+    {
+        Script_AudioOneShotSource a = Instantiate(
+            AudioOneShotSourcePrefab,
+            position,
+            Quaternion.identity
+        );
+
+        audioOneShotSources.Add(a);
+
+        return a;
+    }
+
+    void DestroyAudioOneShotSources()
+    {
+        foreach(Script_AudioOneShotSource a in audioOneShotSources)
+        {
+            if (a)    Destroy(a.gameObject);
+        }
+
+        audioOneShotSources.Clear();
     }
 
     void SetupDialogueManager()
@@ -492,6 +557,53 @@ public class Script_Game : MonoBehaviour
         bgMusicManager.UnPause();
     }
 
+    public void PlayEroTheme()
+    {
+        eroBgThemePlayer = Instantiate(
+            EroBgThemePlayerPrefab,
+            player.transform.position,
+            Quaternion.identity
+        );
+    }
+
+    public void PauseEroTheme()
+    {
+        eroBgThemePlayer.GetComponent<AudioSource>().Pause();
+    }
+
+    public void UnPauseEroTheme()
+    {
+        if (eroBgThemePlayer == null)
+        {
+            Debug.Log("No eroBgThemePlayer object exists to UnPause.");
+            return;
+        }
+        eroBgThemePlayer.GetComponent<AudioSource>().UnPause();
+    }
+
+    public void StopEroTheme()
+    {
+        eroBgThemePlayer.GetComponent<AudioSource>().Stop();
+        Destroy(eroBgThemePlayer.gameObject);
+
+        eroBgThemePlayer = null;
+    }
+
+    public bool GetEroThemeActive()
+    {
+        return  eroBgThemePlayer != null;
+    }
+
+    public void StopMovingNPCThemes()
+    {
+        if (
+            Levels.levelsData[level].shouldPersistBgThemes
+            || eroBgThemePlayer == null
+        )   return;
+            
+        StopEroTheme();
+    }
+
     public Vector3 GetPlayerLocation()
     {
         return player.GetComponent<Transform>().position;
@@ -517,11 +629,23 @@ public class Script_Game : MonoBehaviour
 
     public void ChangeCameraTargetToNPC(int i)
     {
-        Camera.main.GetComponent<Script_Camera>().target = NPCs[i].transform;
+        camera.SetTarget(NPCs[i].transform);
+        // move camera fast
+        CameraMoveToTarget();
     }
 
     public void CameraTargetToPlayer()
     {
-        Camera.main.GetComponent<Script_Camera>().target = player.transform;
-    }    
+        camera.target = player.transform;
+    }
+
+    public void CameraMoveToTarget()
+    {
+        camera.MoveToTarget();
+    }
+
+    public Vector3 GetRotationToFaceCamera()
+    {
+        return camera.GetRotationAdjustment();
+    }
 }

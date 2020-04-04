@@ -5,6 +5,8 @@ using UnityEngine;
 public class Script_DemonCreator : MonoBehaviour
 {
     public Script_Demon DemonPrefab;
+    public Script_Demon DemonDorusPrefab;
+    public Script_Demon DemonSedgewickPrefab;
 
     public void CreateDemons(
         Model_Demon[] demonsData,
@@ -18,14 +20,17 @@ public class Script_DemonCreator : MonoBehaviour
         for (int i = 0; i < demonsData.Length; i++)
         {
             demon = Instantiate(
-                DemonPrefab,
+                demonsData[i].prefab,
                 demonsData[i].demonSpawnLocation,
                 Quaternion.identity
             );
 
             demons.Add(demon);
             demon.Id = i;
-            demon.Setup(demonsData[i].thought, demonsData[i].sprite);
+            demon.Setup(
+                demonsData[i].thought,
+                demonsData[i].deathCry
+            );
         }
     }
 }

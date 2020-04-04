@@ -100,10 +100,20 @@ public class Script_PlayerGhost : MonoBehaviour
         );
     }
     
+    public void TurnLightOn()
+    {
+        Light l = Script_Utils.FindComponentInChildWithTag<Light>(
+            this.gameObject,
+            "tag_player-ghost-light"
+        );
+        l.enabled = true;
+    }
+
     public void AdjustRotation()
     {
         transform.forward = Camera.main.transform.forward;
     }
+
     public void Setup(Vector3 loc)
     {
         animator = GetComponent<Animator>();

@@ -12,7 +12,7 @@ public class Script_DontTouchPianoScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        game.DisableExits();
+        game.exitsHandler.DisableExits();
     }
 
     // Update is called once per frame
@@ -27,6 +27,7 @@ public class Script_DontTouchPianoScene : MonoBehaviour
             )
             {
                 game.PauseBgMusic();
+                game.PlayEroTheme();
                 game.ChangeStateCutScene();
                 
                 game.PlayerFaceDirection("down");
@@ -39,7 +40,7 @@ public class Script_DontTouchPianoScene : MonoBehaviour
         {
             isDone = true;
 
-            game.EnableExits();
+            game.exitsHandler.EnableExits();
             game.ChangeStateCutSceneNPCMoving();
             game.TriggerMovingNPCMove(0);
 

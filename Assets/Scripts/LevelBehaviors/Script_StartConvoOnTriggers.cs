@@ -13,7 +13,7 @@ public class Script_StartConvoOnTriggers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-                    
+        game.TriggerMovingNPCMove(0);            
     }
  
     // Update is called once per frame
@@ -30,6 +30,16 @@ public class Script_StartConvoOnTriggers : MonoBehaviour
                 && game.state == "interact"
             )
             {
+                game.PauseBgMusic();
+                
+                if (game.GetEroThemeActive())
+                {
+                    game.UnPauseEroTheme();
+                }
+                else
+                {
+                    game.PlayEroTheme();
+                }
                 game.ChangeStateCutScene();
                 
                 // game.PlayerFaceDirection("down");
@@ -48,7 +58,6 @@ public class Script_StartConvoOnTriggers : MonoBehaviour
     {
         if (
             game.state == "cut-scene"
-            && game.state != "cut-scene_npc-moving"
             && !game.GetPlayerIsTalking()
         )
         {
@@ -72,5 +81,10 @@ public class Script_StartConvoOnTriggers : MonoBehaviour
         {
             game.HandleContinuingDialogueActions("Submit");
         }
+    }
+
+    void Setup()
+    {
+        
     }
 }

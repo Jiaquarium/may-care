@@ -5,20 +5,30 @@ using UnityEngine;
 public class Script_Camera : MonoBehaviour
 {
     public Transform target;
+    
+    
     public Vector3 offset;
-    private Vector3 OffsetDefault;
-    public float speed;
-    private float timer;
+    public float defaultTrackingSpeed;
+    public float moveToTargetSpeed;
     public float timerMax;
     public float progress;
     public Vector3 endPosition;
     public Vector3 startPosition;
+    public float cameraTrackedPlayerDistance;
+    public Vector3 rotationAdjToFaceCamera;
+
+
+    private Vector3 OffsetDefault;
+    public float speed;
+    private float timer;
     private bool isTrackPlayer = true;
+    private bool shouldMoveToTarget = false;
     
     // Start is called before the first frame update
     void Start()
     {
         OffsetDefault = offset;
+        speed = defaultTrackingSpeed;
         progress = 0f;
         timer = timerMax;
         startPosition = transform.position;
@@ -31,6 +41,12 @@ public class Script_Camera : MonoBehaviour
         if(target == null || !isTrackPlayer) return;
 
         Timer();
+
+        if (shouldMoveToTarget)
+        {
+            CheckMovedToTarget();
+        }
+        
         Move();
     }
 
@@ -59,6 +75,24 @@ public class Script_Camera : MonoBehaviour
         transform.position = Vector3.Lerp(startPosition, endPosition, progress);
     }
 
+    public void MoveToTarget()
+    {
+        shouldMoveToTarget = true;
+    }
+
+    void CheckMovedToTarget()
+    {
+        FastTrackSpeed();
+        
+        float cameraDistanceFromEndingPos = Vector3.Distance(transform.position, endPosition);
+
+        if (cameraDistanceFromEndingPos <= cameraTrackedPlayerDistance)
+        {
+            speed = defaultTrackingSpeed;
+            shouldMoveToTarget = false;
+        }
+    }
+
     public void SetOffsetToDefault()
     {
         offset = OffsetDefault;
@@ -69,8 +103,28 @@ public class Script_Camera : MonoBehaviour
         isTrackPlayer = false;
     }
 
+    public void SetTarget<T>(T gameObject) where T : Transform
+    {
+        target = gameObject;
+    }
+
     public void SetTrackPlayer()
     {
         isTrackPlayer = true;
+    }
+
+    public void FastTrackSpeed()
+    {
+        speed = moveToTargetSpeed;
+    }
+
+    public void DefaultSpeed()
+    {
+        speed = defaultTrackingSpeed;
+    }
+
+    public Vector3 GetRotationAdjustment()
+    {
+        return rotationAdjToFaceCamera;
     }
 }

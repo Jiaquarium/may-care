@@ -6,6 +6,7 @@ public class Script_DemonHandler : MonoBehaviour
 {
     public bool HandleAction(
         List<Script_Demon> demons,
+        Script_Player player,
         Vector3 desiredLocation,
         string action
     )
@@ -19,6 +20,7 @@ public class Script_DemonHandler : MonoBehaviour
             {
                 if (action == "Action2")
                 {
+                    player.EatDemon();
                     demons[i].DefaultAction();
                 }
 
@@ -35,7 +37,10 @@ public class Script_DemonHandler : MonoBehaviour
         {
             if (demons[i].Id == Id)
             {
-                Destroy(demons[i].gameObject);
+                /*
+                    NOTE: the demon gameObject will wait for animation to actually
+                    be destroyed
+                */
                 demons.RemoveAt(i);
             }
         }

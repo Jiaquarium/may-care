@@ -17,6 +17,7 @@ public class Script_Player : MonoBehaviour
     private Script_PlayerAction playerActionHandler;
     private Script_PlayerThoughtManager playerThoughtManager;
     private Script_PlayerMovement playerMovementHandler;
+    private Script_PlayerDemonActions playerDemonActions;
     
     
     public float glitchDuration;
@@ -30,7 +31,8 @@ public class Script_Player : MonoBehaviour
     private Script_Game game;
     private Tilemap exitsTileMap;
     private Tilemap tileMap;
-    public bool isTalking = false;
+    private bool isTalking = false;
+    private bool isEating = false;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
     private Dictionary<string, Vector3> Directions = new Dictionary<string, Vector3>()
     {
@@ -45,9 +47,18 @@ public class Script_Player : MonoBehaviour
     {   
         AdjustRotation();
 
+        playerMovementHandler.TrackPlayerGhost();
+
         if (game.state != "interact")
         {
-            playerMovementHandler.FinishMoveAnimation();
+            // playerMovementHandler.FinishMoveAnimation();
+            animator.SetBool("PlayerMoving", false);   
+            return;
+        }
+
+        if (isEating || isTalking)
+        {
+            animator.SetBool("PlayerMoving", false);
             return;
         }
         
@@ -61,13 +72,34 @@ public class Script_Player : MonoBehaviour
         
         playerActionHandler.HandleActionInput(facingDirection, location);
         
-        playerMovementHandler.HandleMoveInput(isTalking);
+        playerMovementHandler.HandleMoveInput();
+    }
+
+    public void EatDemon()
+    {
+        playerDemonActions.EatDemon();
+    }
+
+    public void EatHeart()
+    {
+        playerDemonActions.EatHeart();
     }
 
     public void SetIsTalking()
     {
         isTalking = true;
         animator.SetBool("PlayerMoving", false);
+    }
+
+    public void SetIsEating()
+    {
+        isEating = true;
+        animator.SetBool("PlayerMoving", false);
+    }
+
+    public void SetIsNotEating()
+    {
+        isEating = false;
     }
 
     public void SetIsNotTalking()
@@ -78,6 +110,11 @@ public class Script_Player : MonoBehaviour
     public bool GetIsTalking()
     {
         return isTalking;
+    }
+
+    public bool GetIsEating()
+    {
+        return isEating;
     }
 
     public void AnimatorSetDirection(string dir)
@@ -149,27 +186,29 @@ public class Script_Player : MonoBehaviour
         Tilemap _tileMap,
         Tilemap _exitsTileMap,
         string direction,
-        Model_PlayerState playerState
+        Model_PlayerState playerState,
+        bool isLightOn
     )
     {   
         game = Object.FindObjectOfType<Script_Game>();
+        animator = GetComponent<Animator>();
         tileMap = _tileMap;
         exitsTileMap = _exitsTileMap;
         
         playerMovementHandler = GetComponent<Script_PlayerMovement>();
         playerActionHandler = GetComponent<Script_PlayerAction>();
         playerThoughtManager = GetComponent<Script_PlayerThoughtManager>();
+        playerDemonActions = GetComponent<Script_PlayerDemonActions>();
         playerMovementHandler.Setup(
             game,
             Directions,
             tileMap,
-            exitsTileMap
+            exitsTileMap,
+            isLightOn
         );
         playerActionHandler.Setup(game, Directions);
         playerThoughtManager.Setup();
-
-
-        animator = GetComponent<Animator>();
+        playerDemonActions.Setup(game);
         
         location = transform.position;
         currentSprite = GetComponent<SpriteRenderer>().sprite;

@@ -21,4 +21,6 @@ public class Script_InteractableObject : MonoBehaviour
     {
         print("Setting up IObj");
     }
+
+    public virtual void SetupLights(Light[] lights, float onIntensity, float offIntensity){}
 }

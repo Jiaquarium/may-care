@@ -7,7 +7,6 @@ public class Script_TeachHowToEat : MonoBehaviour
     public Script_Game game;
     public Model_Locations[] triggerLocations;
     public Vector3[] triggerLoc;
-    public Model_Dialogue dialogue;
     public Model_Dialogue[] dialogues;
     
     
@@ -17,9 +16,15 @@ public class Script_TeachHowToEat : MonoBehaviour
 
     void Start()
     {
-        game.DisableExits();
+        game.exitsHandler.DisableExits();
         
-        // Ero will wait at the door as you leave this map
+        /*
+            Ero will wait at the door as you leave this map
+            this triggers game.AllMovesDoneAction() early so we must
+            set shouldPersistBgThemes = true
+            playingEroTheme next time wili instantiate a new gameObject replacing
+            the undeleted gameObject
+        */
         game.SetMovingNPCExit(0, false);
         
         game.ChangeMovingNPCSpeed(0, 0.175f);
@@ -33,12 +38,12 @@ public class Script_TeachHowToEat : MonoBehaviour
         HandleAction();
         
         // play HARD music when Ero finishes first dialogue and moveset
-        if (activeTriggerIndex == 1 && game.state == "interact" && !hasSwitchedMusic)
-        {
-            print("SWITCHING BG MUSIC!!!");
-            hasSwitchedMusic = true;
-            game.SwitchBgMusic(2);
-        }
+        // if (activeTriggerIndex == 1 && game.state == "interact" && !hasSwitchedMusic)
+        // {
+            
+        //     hasSwitchedMusic = true;
+        //     game.SwitchBgMusic(2);
+        // }
 
         // need to EAT all demons before can activiate 2nd trigger location
         if (activeTriggerIndex == 1 && game.GetDemonsCount() > 0)   return;
@@ -51,8 +56,12 @@ public class Script_TeachHowToEat : MonoBehaviour
                 && !isDone
             )
             {
+                game.PauseBgMusic();
+                game.UnPauseEroTheme();
+                
                 // don't pause, stop the music bc we're switching to the HARD song
-                game.StopBgMusic();
+                // game.StopBgMusic();
+                
                 game.ChangeStateCutScene();
                 
                 if (activeTriggerIndex == 0)
@@ -86,7 +95,7 @@ public class Script_TeachHowToEat : MonoBehaviour
                 game.TriggerMovingNPCMove(0);
             } else
             {
-                game.EnableExits();
+                game.exitsHandler.EnableExits();
                 game.ChangeStateInteract();
             }
         }

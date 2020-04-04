@@ -34,15 +34,7 @@ public class Script_MovingNPC : Script_StaticNPC
     // Start is called before the first frame update
     void Start()
     {
-        // first queue up moves
-        QueueUpAllMoves();
-        QueueUpCurrentMoves();
         
-        // Move(Directions[])
-        if (game.state == "cut-scene_npc-moving")
-        {
-            Move();
-        }
     }
 
     // Update is called once per frame
@@ -109,9 +101,14 @@ public class Script_MovingNPC : Script_StaticNPC
                 localState = "interact";
                 animator.SetBool("NPCMoving", false);
 
+                print("calling game.CurrentMovesDoneAction()");
+                game.CurrentMovesDoneAction();
+
                 if (allMoves.Count == 0)
                 {
-                    game.UnPauseBgMusic();
+                    print("allmoves done, calling this game.AllMovesDoneAction()");
+                    game.AllMovesDoneAction();
+
                     game.ChangeStateInteract();
                     inProgress = false;
                     /*
@@ -178,5 +175,9 @@ public class Script_MovingNPC : Script_StaticNPC
 
         progress = 1f;
         location = transform.position;
+
+        // first queue up moves
+        QueueUpAllMoves();
+        QueueUpCurrentMoves();
     }
 }

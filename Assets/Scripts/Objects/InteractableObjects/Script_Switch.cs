@@ -8,13 +8,13 @@ public class Script_Switch : Script_InteractableObject
     public Sprite offSprite;
     public bool isOn = true;
 
-    public void TurnOff()
+    public virtual void TurnOff()
     {
         isOn = false;
         GetComponent<SpriteRenderer>().sprite = offSprite;
     }
 
-    public void TurnOn()
+    public virtual void TurnOn()
     {
         isOn = true;
         GetComponent<SpriteRenderer>().sprite = onSprite;

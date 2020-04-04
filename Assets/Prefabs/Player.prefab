@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6449399817048204687}
   - component: {fileID: 114750653391708714}
   - component: {fileID: 114309117809667698}
+  - component: {fileID: 114689363832682802}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -102,7 +103,6 @@ MonoBehaviour:
   facingDirection: 
   location: {x: 0, y: 0, z: 0}
   startLocation: {x: 0, y: 0, z: 0}
-  localState: interact
 --- !u!95 &7085132671959065425
 Animator:
   serializedVersion: 3
@@ -160,11 +160,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerGhostPrefab: {fileID: 114939578732144636, guid: 25a2cc54c02a04eba80340081207c3cc,
     type: 3}
-  speed: 0.2
   repeatDelay: 0.2
   progress: 0
   lastMove: 
   timer: 0
+--- !u!114 &114689363832682802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085132671959065421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78442519cd918443b814d1b75d07a1a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eatingTime: 0.5
+  crunchSFX: {fileID: 8300000, guid: 644774a5155ba495aaf21732839313fe, type: 3}
 --- !u!1 &7085132672281169704
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,11 +190,11 @@ GameObject:
   - component: {fileID: 7085132672281169710}
   m_Layer: 0
   m_Name: Point Light
-  m_TagString: Untagged
+  m_TagString: tag_player-light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7085132672281169705
 Transform:
   m_ObjectHideFlags: 0
@@ -190,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7085132672281169704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7085132671959065424}
@@ -203,11 +216,11 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7085132672281169704}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10

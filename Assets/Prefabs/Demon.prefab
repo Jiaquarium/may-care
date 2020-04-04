@@ -92,4 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c2b605ba6504112bb7277fd5830765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game: {fileID: 0}
+  audioSource: {fileID: 0}
+  deathCrySFX: {fileID: 0}
   Id: 0
+  thought:
+    thought: 
+  NPCDestroyTime: 1

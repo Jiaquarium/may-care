@@ -32,15 +32,12 @@ public class Script_PlayerMovement : MonoBehaviour
     public string lastMove;
     public float timer;
 
-    public void HandleMoveInput(bool playerIsTalking)
+    void OnDestroy() {
+        if (playerGhost != null)    Destroy(playerGhost.gameObject);
+    }
+
+    public void HandleMoveInput()
     {
-        TrackPlayerGhost();
-
-        if (playerIsTalking)
-        {
-            return;
-        }
-
         timer = Mathf.Max(0f, timer - Time.deltaTime);
         
         SetMoveAnimation();
@@ -168,18 +165,21 @@ public class Script_PlayerMovement : MonoBehaviour
         return false;
     }
 
-    void TrackPlayerGhost()
+    public void TrackPlayerGhost()
     {
         progress = playerGhost.progress;
         
+        // once we know we move onto an exit space
+        // begin fading the screen out
+        HandleExitTile();
+
         if (progress >= 1f && isMoving)
         {
             FinishMoveAnimation();
-            HandleExitTile();
         }
     }
 
-    public void FinishMoveAnimation()
+    void FinishMoveAnimation()
     {
         // must be visible before playerghost invisible to avoid flicker
         spriteRenderer.enabled = true;
@@ -197,28 +197,33 @@ public class Script_PlayerMovement : MonoBehaviour
             )
         ))
         {
-            game.HandleLevelExit();
+            game.exitsHandler.HandleExit();
         }
     }
 
-    Script_PlayerGhost CreatePlayerGhost()
+    Script_PlayerGhost CreatePlayerGhost(bool withLight)
     {
-        return Instantiate(
+        Script_PlayerGhost pg = Instantiate(
             PlayerGhostPrefab,
             player.transform.position,
             Quaternion.identity
         );
+        
+        if (withLight)  pg.TurnLightOn();
+
+        return pg;
     }
     
     public void Setup(
         Script_Game _game,
         Dictionary<string, Vector3> _Directions,
         Tilemap _tilemap,
-        Tilemap _exitsTileMap
+        Tilemap _exitsTileMap,
+        bool isLightOn
     )
     {
         player = GetComponent<Script_Player>();
-        playerGhost = CreatePlayerGhost();
+        playerGhost = CreatePlayerGhost(isLightOn);
         playerGhost.Setup(player.transform.position);
         spriteRenderer = GetComponent<SpriteRenderer>();
 

@@ -18,6 +18,7 @@ public class Script_PlayerMovement : MonoBehaviour
     private Dictionary<string, Vector3> Directions;
     private Tilemap tileMap;
     private Tilemap exitsTileMap;
+    private Tilemap entrancesTileMap;
     private SpriteRenderer spriteRenderer;
     
     
@@ -132,11 +133,14 @@ public class Script_PlayerMovement : MonoBehaviour
         int desiredX = (int)Mathf.Round((player.location + desiredDirection).x);
         int desiredZ = (int)Mathf.Round((player.location + desiredDirection).z);
         
+        Vector3Int tileLocation = new Vector3Int(desiredX, desiredZ, 0);
+
         // tiles map from (xyz) to (xz)
         if (
-            !tileMap.HasTile(new Vector3Int(desiredX, desiredZ, 0))
-            && !exitsTileMap.HasTile(new Vector3Int(desiredX, desiredZ, 0))
-        ) 
+            !tileMap.HasTile(tileLocation)
+            && (exitsTileMap == null || !exitsTileMap.HasTile(tileLocation))
+            && (entrancesTileMap == null || !entrancesTileMap.HasTile(tileLocation))
+        )
         {
             return true;
         }
@@ -189,16 +193,41 @@ public class Script_PlayerMovement : MonoBehaviour
 
     void HandleExitTile()
     {
-        if (exitsTileMap.HasTile(
-            new Vector3Int(
-                (int)Mathf.Round(player.location.x),
-                (int)Mathf.Round(player.location.z),
-                0
-            )
-        ))
+        Vector3Int tileLocation = new Vector3Int(
+            (int)Mathf.Round(player.location.x),
+            (int)Mathf.Round(player.location.z),
+            0
+        );
+
+        if (exitsTileMap != null && exitsTileMap.HasTile(tileLocation))
         {
-            game.exitsHandler.HandleExit();
+            Script_TileMapExitEntrance exitInfo = exitsTileMap.GetComponent<Script_TileMapExitEntrance>();
+            game.exitsHandler.Exit(
+                exitInfo.level,
+                exitInfo.playerNextSpawnPosition,
+                exitInfo.playerFacingDirection,
+                true
+            );
+            return;
         }
+
+        if (entrancesTileMap != null && entrancesTileMap.HasTile(tileLocation))
+        {
+            Script_TileMapExitEntrance entranceInfo = entrancesTileMap.GetComponent<Script_TileMapExitEntrance>();
+            game.exitsHandler.Exit(
+                entranceInfo.level,
+                entranceInfo.playerNextSpawnPosition,
+                entranceInfo.playerFacingDirection,
+                false
+            );
+            return;
+        }
+    }
+
+    void HandleEntranceTile()
+    {
+        // check for entrance tile
+        // game.exitsHandler.HandleEntrance()
     }
 
     Script_PlayerGhost CreatePlayerGhost(bool withLight)
@@ -219,6 +248,7 @@ public class Script_PlayerMovement : MonoBehaviour
         Dictionary<string, Vector3> _Directions,
         Tilemap _tilemap,
         Tilemap _exitsTileMap,
+        Tilemap _entrancesTileMap,
         bool isLightOn
     )
     {
@@ -231,6 +261,7 @@ public class Script_PlayerMovement : MonoBehaviour
         Directions = _Directions;
         tileMap = _tilemap;
         exitsTileMap = _exitsTileMap;
+        entrancesTileMap = _entrancesTileMap;
 
         timer = repeatDelay;
         progress = 1f;

@@ -30,6 +30,7 @@ public class Script_Player : MonoBehaviour
     // storing soundFX here and not in manager because only 1 player exists
     private Script_Game game;
     private Tilemap exitsTileMap;
+    private Tilemap entrancesTileMap;
     private Tilemap tileMap;
     private bool isTalking = false;
     private bool isEating = false;
@@ -56,12 +57,12 @@ public class Script_Player : MonoBehaviour
             return;
         }
 
-        if (isEating || isTalking)
+        if (isEating)
         {
             animator.SetBool("PlayerMoving", false);
             return;
         }
-        
+
         bool isInventoryOpen = game.GetIsInventoryOpen();
 
         if (isInventoryOpen)
@@ -69,8 +70,14 @@ public class Script_Player : MonoBehaviour
             playerActionHandler.HandleInventoryActionsInput();
             return;
         }
-        
+
         playerActionHandler.HandleActionInput(facingDirection, location);
+        
+        if (isTalking)
+        {
+            animator.SetBool("PlayerMoving", false);
+            return;
+        }        
         
         playerMovementHandler.HandleMoveInput();
     }
@@ -185,6 +192,7 @@ public class Script_Player : MonoBehaviour
     public void Setup(
         Tilemap _tileMap,
         Tilemap _exitsTileMap,
+        Tilemap _entrancesTileMap,
         string direction,
         Model_PlayerState playerState,
         bool isLightOn
@@ -194,6 +202,7 @@ public class Script_Player : MonoBehaviour
         animator = GetComponent<Animator>();
         tileMap = _tileMap;
         exitsTileMap = _exitsTileMap;
+        entrancesTileMap = _entrancesTileMap;
         
         playerMovementHandler = GetComponent<Script_PlayerMovement>();
         playerActionHandler = GetComponent<Script_PlayerAction>();
@@ -204,6 +213,7 @@ public class Script_Player : MonoBehaviour
             Directions,
             tileMap,
             exitsTileMap,
+            entrancesTileMap,
             isLightOn
         );
         playerActionHandler.Setup(game, Directions);

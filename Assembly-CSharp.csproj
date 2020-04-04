@@ -62,12 +62,12 @@
      <Compile Include="Assets\Models\Model_MoveSet.cs" />
      <Compile Include="Assets\Models\Model_NPC.cs" />
      <Compile Include="Assets\Models\Model_Player.cs" />
+     <Compile Include="Assets\Models\Model_PlayerState.cs" />
      <Compile Include="Assets\Models\Model_PlayerThoughts.cs" />
      <Compile Include="Assets\Models\Model_Thought.cs" />
      <Compile Include="Assets\Scripts\Audio\Script_AudioOneShotSource.cs" />
      <Compile Include="Assets\Scripts\Audio\Script_BackgroundMusicManager.cs" />
      <Compile Include="Assets\Scripts\Audio\Script_BgThemePlayer.cs" />
-     <Compile Include="Assets\Scripts\Data\Model_PlayerState.cs" />
      <Compile Include="Assets\Scripts\Data\Script_SaveSystem.cs" />
      <Compile Include="Assets\Scripts\Decor\Script_RoomDecor.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_DialogueManager.cs" />
@@ -98,6 +98,7 @@
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerStalkers.cs" />
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerThoughtManager.cs" />
      <Compile Include="Assets\Scripts\Thoughts\Script_ThoughtManager.cs" />
+     <Compile Include="Assets\Scripts\TileMaps\Script_TileMapExitEntrance.cs" />
      <Compile Include="Assets\Scripts\UI\Script_MaskSnapScroll.cs" />
      <Compile Include="Assets\Scripts\UI\Script_PlayerThoughtsInventoryButton.cs" />
      <Compile Include="Assets\Scripts\Utils\Script_Utils.cs" />

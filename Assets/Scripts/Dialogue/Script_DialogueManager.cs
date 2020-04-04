@@ -137,7 +137,7 @@ public class Script_DialogueManager : MonoBehaviour
         inputManager.enabled = true;
     }
 
-    public void EndInputMode(Dictionary<string, string> state)
+    public void EndInputMode(Model_PlayerState state)
     {
         isInputMode = false;
 

@@ -19,6 +19,7 @@ public class Script_Exits : MonoBehaviour
     private bool isFadeOut;
     private bool isFadeIn;
     private bool isHandlingExit;
+    private int levelToGo;
     
     void Update()
     {
@@ -26,31 +27,32 @@ public class Script_Exits : MonoBehaviour
         if (isFadeIn)   FadeIn();    
     }
 
-    public void HandleExit()
+    public void Exit(
+        int level,
+        Vector3 playerNextSpawnPosition,
+        string playerFacingDirection,
+        bool isExit
+    )
     {
-        if (exitsDisabled || isHandlingExit)  return;
-
-        if (!isHandlingExit) isHandlingExit = true;
-
-        audioSource.PlayOneShot(exitSFX, 0.15f);
-
-        // fade screen to black?
-
-        // triggers fade out, initiatelevel called once fadeOutCompletes
-        isFadeOut = true;
-        game.ChangeStateToInitiateLevel();
-        // game.InitiateLevel();
+        print("Exit() called with: " + level + ", " + isExit);
+        if (isHandlingExit)             return;
+        // still allow player to go back where they came from
+        if (isExit && exitsDisabled)    return;
         
-        // coroutine = WaitToInitiateLevel();
-        // StartCoroutine(coroutine);
+        if (!isHandlingExit)    isHandlingExit = true;
+
+        int x = (int)playerNextSpawnPosition.x;
+        int z = (int)playerNextSpawnPosition.z;
+
+        game.ChangeStateToInitiateLevel();
+        game.SetPlayerState(
+            new Model_PlayerState(null, x, z, playerFacingDirection)
+        );
+        
+        isFadeOut = true;
+        levelToGo = level;
+        audioSource.PlayOneShot(exitSFX, 0.15f);
     }
-
-    // IEnumerator WaitToInitiateLevel()
-    // {
-    //     yield return new WaitForSeconds(InitiateLevelWaitTime);
-
-    //     game.InitiateLevel();
-    // }
 
     public void DisableExits()
     {
@@ -84,9 +86,8 @@ public class Script_Exits : MonoBehaviour
             game.DestroyLevel();
             
             isHandlingExit = false;
+            game.level = levelToGo;
             
-            // load next level
-            game.level++;
             game.InitiateLevel();
             
             isFadeIn = true;

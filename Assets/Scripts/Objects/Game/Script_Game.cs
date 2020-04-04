@@ -44,6 +44,7 @@ public class Script_Game : MonoBehaviour
     private GameObject grid;
     private Tilemap tileMap;
     private Tilemap exitsTileMap;
+    private Tilemap entrancesTileMap;
     private Script_Player player;
     private List<Script_StaticNPC> NPCs = new List<Script_StaticNPC>();
     private List<Script_MovingNPC> movingNPCs = new List<Script_MovingNPC>();
@@ -68,7 +69,8 @@ public class Script_Game : MonoBehaviour
         Screen.fullScreen = true;
         Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
         
-        Cursor.lockState = CursorLockMode.Locked;
+        // TODO: UNCOMMENT THIS
+        // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         /*
@@ -83,7 +85,21 @@ public class Script_Game : MonoBehaviour
         ClosePlayerThoughtsInventory();
         
         ChangeStateToInitiateLevel();
-        InitiateLevel();
+        
+        if (level == 0)    InitiateLevel();
+        else
+        {
+            // TODO: remove this if stmt, will handle this by updating player state
+            Script_TileMapExitEntrance lastLevelExitData = Levels
+                .levelsData[level - 1]
+                .exitsTileMap.GetComponent<Script_TileMapExitEntrance>();
+            int x = (int)lastLevelExitData.playerNextSpawnPosition.x;
+            int z = (int)lastLevelExitData.playerNextSpawnPosition.z;
+            string dir = lastLevelExitData.playerFacingDirection;
+            SetPlayerState(new Model_PlayerState(null, x, z, dir));
+            InitiateLevel();
+        }
+
         exitsHandler.canvas.alpha = 1.0f;
         exitsHandler.StartFadeIn();
 
@@ -159,6 +175,7 @@ public class Script_Game : MonoBehaviour
         grid = Levels.levelsData[level].grid;
         tileMap = Levels.levelsData[level].tileMap;
         exitsTileMap = Levels.levelsData[level].exitsTileMap;
+        entrancesTileMap = Levels.levelsData[level].entrancesTileMap;
 
         grid.SetActive(true);
     }
@@ -170,14 +187,21 @@ public class Script_Game : MonoBehaviour
 
     void CreatePlayer()
     {
-        Model_Player playerData = Levels.levelsData[level].playerData;
-        
-        Vector3 spawnLocation = playerData.playerSpawnLocation;
+        // TODO don't need this, put all player data into PlayerState 
+        Model_Level levelData = Levels.levelsData[level];
+        Model_Player playerData = levelData.playerData;
+
+        Vector3 spawnLocation = new Vector3(
+            playerState.spawnX ?? 0f,
+            0f,
+            playerState.spawnZ ?? 0f
+        );
         player = Instantiate(PlayerPrefab, spawnLocation, Quaternion.identity);
         player.Setup(
             tileMap,
             exitsTileMap,
-            playerData.direction,
+            entrancesTileMap,
+            playerState.faceDirection,
             playerState,
             playerData.isLightOn
         );
@@ -191,9 +215,14 @@ public class Script_Game : MonoBehaviour
         Destroy(player.gameObject);
     }
 
-    public void SetPlayerState(Dictionary<string, string> state)
+    public void SetPlayerState(Model_PlayerState state)
     {
-        playerState.name = state["name"];
+        playerState.name = state.name ?? playerState.name;
+        playerState.spawnX = state.spawnX ?? playerState.spawnX;
+        playerState.spawnZ = state.spawnZ ?? playerState.spawnZ;
+        playerState.faceDirection = state.faceDirection ?? playerState.faceDirection;
+
+        print("spawnX: " + playerState.spawnX + ", spawnZ: " + playerState.spawnZ);
     }
 
     public Model_PlayerState GetPlayerState()

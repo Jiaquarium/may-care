@@ -14,6 +14,7 @@ public class Script_PlayerThoughtsInventoryManager : MonoBehaviour
         bool hasThoughts
     )
     {
+        print("OpenInventory in ScriptPlayerThoughtsInvManager: " + thoughtsCanvasGroup);
         thoughtsCanvasGroup.alpha = 1f;
         thoughtsCanvasGroup.blocksRaycasts = true;
         

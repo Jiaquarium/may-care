@@ -27,12 +27,14 @@ public class Script_PlayerAction : MonoBehaviour
         }
         else if (Input.GetButtonDown("Inventory"))
         {
+            print("attempting to open inventory");
             OpenInventory();        
         }
     }
 
     public void HandleInventoryActionsInput()
     {
+        print("trying to close inventory");
         if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Cancel"))
         {
             CloseInventory();

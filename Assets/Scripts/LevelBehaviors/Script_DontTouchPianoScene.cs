@@ -55,4 +55,10 @@ public class Script_DontTouchPianoScene : MonoBehaviour
         if (Input.GetButtonDown("Submit") && game.state == "cut-scene" && !isDone)
             game.HandleContinuingDialogueActions("Submit");
     }
+
+    void OnDisable()
+    {
+        print("enabling Exits");
+        game.exitsHandler.EnableExits();        
+    }
 }

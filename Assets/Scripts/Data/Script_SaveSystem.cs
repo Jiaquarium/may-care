@@ -9,15 +9,14 @@ public static class Script_SaveSystem
     static string path = "/Users/jamesgu/Desktop";  
     
     public static void SavePlayer(
-        string name
+        Model_PlayerState playerState
     )
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        Model_PlayerState playerData = new Model_PlayerState(name);
 
-        formatter.Serialize(stream, playerData);
+        formatter.Serialize(stream, playerState);
         stream.Close();
     }
 

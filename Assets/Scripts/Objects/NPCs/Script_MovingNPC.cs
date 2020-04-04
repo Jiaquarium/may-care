@@ -107,7 +107,7 @@ public class Script_MovingNPC : Script_StaticNPC
                 if (allMoves.Count == 0)
                 {
                     print("allmoves done, calling this game.AllMovesDoneAction()");
-                    game.AllMovesDoneAction();
+                    game.AllMovesDoneAction(MovingNPCId);
 
                     game.ChangeStateInteract();
                     inProgress = false;

@@ -37,14 +37,6 @@ public class Script_TeachHowToEat : MonoBehaviour
     {
         HandleAction();
         
-        // play HARD music when Ero finishes first dialogue and moveset
-        // if (activeTriggerIndex == 1 && game.state == "interact" && !hasSwitchedMusic)
-        // {
-            
-        //     hasSwitchedMusic = true;
-        //     game.SwitchBgMusic(2);
-        // }
-
         // need to EAT all demons before can activiate 2nd trigger location
         if (activeTriggerIndex == 1 && game.GetDemonsCount() > 0)   return;
 

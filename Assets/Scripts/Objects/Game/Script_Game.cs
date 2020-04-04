@@ -437,18 +437,23 @@ public class Script_Game : MonoBehaviour
 
     public void CurrentMovesDoneAction()
     {
-        if (!bgMusicManager.GetIsPlaying())    UnPauseBgMusic();
+        // if (!bgMusicManager.GetIsPlaying())    UnPauseBgMusic();
         
-        if (eroBgThemePlayer != null)
-        {
-            PauseEroTheme();
-        }
+        // if (eroBgThemePlayer != null)
+        // {
+        //     PauseEroTheme();
+        // }
     }
 
-    public void AllMovesDoneAction()
+    public void AllMovesDoneAction(int i)
     {
-        StopMovingNPCThemes();
-        UnPauseBgMusic();
+        // if ero is not exiting, then continue his theme
+        if (movingNPCs[i].shouldExit)
+        {
+            StopMovingNPCThemes();
+            UnPauseBgMusic();
+        }
+        // otherwise, continue playing movingNPC theme music until player exits
     }
 
     public void CreateInteractableObjects()
@@ -625,11 +630,18 @@ public class Script_Game : MonoBehaviour
 
     public void StopMovingNPCThemes()
     {
+        print("ero bg theme player is: " + eroBgThemePlayer);
+
         if (
             Levels.levelsData[level].shouldPersistBgThemes
             || eroBgThemePlayer == null
-        )   return;
-            
+        )
+        {
+            PauseEroTheme();
+            return;
+        }
+        
+        print("StopMovingNPCThemes() stopping erobg theme");
         StopEroTheme();
     }
 

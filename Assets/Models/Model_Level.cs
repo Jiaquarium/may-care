@@ -15,6 +15,7 @@ public class Model_Level
     public Tilemap tileMapNull;
     public Tilemap exitsTileMap;
     public Tilemap entrancesTileMap;
+    public Script_LevelBehavior behavior;
     public int bgMusicAudioClipIndex;
     public string initialState;
     public bool shouldPersistBgThemes;

@@ -91,7 +91,6 @@ public class Script_PlayerAction : MonoBehaviour
         Dictionary<string, Vector3> _Directions
     )
     {
-        print("setting up Script_PlayerAction");
         game = _game;
         Directions = _Directions;
     }

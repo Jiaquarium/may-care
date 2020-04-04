@@ -55,6 +55,7 @@ public class Script_Game : MonoBehaviour
     private Script_Camera camera;
     private List<Script_AudioOneShotSource> audioOneShotSources = new List<Script_AudioOneShotSource>();
     private Script_BgThemePlayer eroBgThemePlayer;
+    private Script_LevelBehavior levelBehavior;
     
     
     private bool isInventoryOpen = false;
@@ -142,8 +143,6 @@ public class Script_Game : MonoBehaviour
 
     public void InitiateLevel()
     {
-        // TODO: fade out of black
-        // SetInitialGameState();
 
         StartBgMusic();
         
@@ -157,7 +156,15 @@ public class Script_Game : MonoBehaviour
         SetupDialogueManager();
         SetupThoughtManager();
 
-        // do level behavior actions
+        // must occur last to have references set
+        InitLevelBehavior();
+    }
+
+    void InitLevelBehavior()
+    {
+        levelBehavior = Levels.levelsData[level].behavior;
+        if (levelBehavior == null)  return;
+        levelBehavior.Setup();
     }
 
     public void DestroyLevel()

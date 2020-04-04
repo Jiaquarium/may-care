@@ -1263,6 +1263,7 @@ Transform:
   - {fileID: 1046606376}
   - {fileID: 290158620}
   - {fileID: 128878043}
+  - {fileID: 835464654}
   m_Father: {fileID: 841564378}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1587,6 +1588,7 @@ Transform:
   - {fileID: 1155133838}
   - {fileID: 1050902355}
   - {fileID: 1825988298}
+  - {fileID: 1313349102}
   m_Father: {fileID: 841564378}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19455,6 +19457,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 301505849}
       exitsTileMap: {fileID: 8033262}
       entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19498,6 +19501,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 1472099737}
       exitsTileMap: {fileID: 365206390}
       entrancesTileMap: {fileID: 1155133840}
+      behavior: {fileID: 1313349103}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19557,6 +19561,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 337259771}
       exitsTileMap: {fileID: 1983896708}
       entrancesTileMap: {fileID: 1859191199}
+      behavior: {fileID: 1235429060}
       bgMusicAudioClipIndex: 0
       initialState: cut-scene_npc-moving
       shouldPersistBgThemes: 1
@@ -19636,21 +19641,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 1776636950}
       exitsTileMap: {fileID: 860306776}
       entrancesTileMap: {fileID: 1046606378}
-      bgMusicAudioClipIndex: 0
-      initialState: interact
-      shouldPersistBgThemes: 1
-    - playerData:
-        playerSpawnLocation: {x: 0, y: 0, z: 0}
-        direction: 
-        isLightOn: 0
-      NPCsData: []
-      InteractableObjectsData: []
-      DemonsData: []
-      grid: {fileID: 182334731}
-      tileMap: {fileID: 1746144142}
-      tileMapNull: {fileID: 1472099737}
-      exitsTileMap: {fileID: 8033262}
-      entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 835464655}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19666,6 +19657,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 1472099737}
       exitsTileMap: {fileID: 8033262}
       entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19681,6 +19673,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 1472099737}
       exitsTileMap: {fileID: 8033262}
       entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19696,6 +19689,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 1472099737}
       exitsTileMap: {fileID: 8033262}
       entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19711,6 +19705,7 @@ MonoBehaviour:
       tileMapNull: {fileID: 1472099737}
       exitsTileMap: {fileID: 8033262}
       entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19726,6 +19721,23 @@ MonoBehaviour:
       tileMapNull: {fileID: 1472099737}
       exitsTileMap: {fileID: 8033262}
       entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
+      bgMusicAudioClipIndex: 0
+      initialState: interact
+      shouldPersistBgThemes: 0
+    - playerData:
+        playerSpawnLocation: {x: 0, y: 0, z: 0}
+        direction: 
+        isLightOn: 0
+      NPCsData: []
+      InteractableObjectsData: []
+      DemonsData: []
+      grid: {fileID: 182334731}
+      tileMap: {fileID: 1746144142}
+      tileMapNull: {fileID: 1472099737}
+      exitsTileMap: {fileID: 8033262}
+      entrancesTileMap: {fileID: 0}
+      behavior: {fileID: 0}
       bgMusicAudioClipIndex: 0
       initialState: interact
       shouldPersistBgThemes: 0
@@ -19733,7 +19745,7 @@ MonoBehaviour:
   playerState:
     name: 
     faceDirection: 
-  level: 0
+  level: 2
   thoughts:
     uglyThoughts: []
     niceThoughts: []
@@ -22700,6 +22712,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828946014}
   m_CullTransparentMesh: 0
+--- !u!1 &835464653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 835464654}
+  - component: {fileID: 835464655}
+  m_Layer: 0
+  m_Name: behavior
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &835464654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835464653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 126984861}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &835464655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835464653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78362a31447384f068c08a06f25413d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 519420033}
+  triggerLocations:
+  - locations:
+    - {x: 32, y: 0, z: 51}
+    - {x: 33, y: 0, z: 51}
+    - {x: 34, y: 0, z: 51}
+    - {x: 35, y: 0, z: 51}
+    - {x: 36, y: 0, z: 51}
+    - {x: 37, y: 0, z: 51}
+    - {x: 38, y: 0, z: 51}
+    - {x: 39, y: 0, z: 51}
+    - {x: 40, y: 0, z: 51}
+    - {x: 41, y: 0, z: 51}
+    - {x: 42, y: 0, z: 51}
+    - {x: 43, y: 0, z: 51}
+    - {x: 44, y: 0, z: 51}
+  - locations:
+    - {x: 37, y: 0, z: 69}
+    - {x: 38, y: 0, z: 69}
+    - {x: 39, y: 0, z: 69}
+  dialogues:
+  - name: Ero
+    sentences:
+    - "those are demons.| there\u2019s no point in talking to them {0},|| but what
+      you can do is..."
+    - EAT THEM!!!
+    - PRESS LEFT SHIFT TO EAT!!!
+  - name: Ero
+    sentences:
+    - "well it\u2019s been fun, {0}. |that\u2019s it for me, you go on ahead without
+      me."
+    - wait did i just sound too sentimental??? ugh owell,| see you soon! <3
+    - oh and try not to think too much. ;]
+  NPCMoveSpeed: 0.175
 --- !u!1 &841564376
 GameObject:
   m_ObjectHideFlags: 0
@@ -23998,7 +24087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1046606376
 Transform:
   m_ObjectHideFlags: 0
@@ -24823,7 +24912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1155133838
 Transform:
   m_ObjectHideFlags: 0
@@ -25406,6 +25495,90 @@ MonoBehaviour:
   maskContainer: {fileID: 1702212248}
   image: {fileID: 1990461794}
   isSelected: 0
+--- !u!1 &1235429058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1235429059}
+  - component: {fileID: 1235429060}
+  m_Layer: 0
+  m_Name: behavior
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1235429059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235429058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1446088281}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1235429060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235429058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d617b437a9b5442a5a90d52b34a2e125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 519420033}
+  triggerLocations:
+  - locations:
+    - {x: 12, y: 0, z: 44}
+    - {x: 12, y: 0, z: 45}
+    - {x: 12, y: 0, z: 46}
+    - {x: 12, y: 0, z: 47}
+    - {x: 12, y: 0, z: 48}
+    - {x: 12, y: 0, z: 49}
+  - locations:
+    - {x: 20, y: 0, z: 44}
+    - {x: 20, y: 0, z: 45}
+    - {x: 20, y: 0, z: 46}
+    - {x: 20, y: 0, z: 47}
+    - {x: 20, y: 0, z: 48}
+    - {x: 20, y: 0, z: 49}
+  - locations:
+    - {x: 27, y: 0, z: 44}
+    - {x: 27, y: 0, z: 45}
+    - {x: 27, y: 0, z: 46}
+    - {x: 27, y: 0, z: 47}
+    - {x: 27, y: 0, z: 48}
+    - {x: 27, y: 0, z: 49}
+  dialogues:
+  - name: ???
+    sentences:
+    - "oh so you\u2019re following me now? ;)"
+    - anyways {0}, my name is Ero.|.|.| i know i talk a lot so if i start NPCsplaining,
+      press ENTER to skip to the end of my sentence.
+    - woof woof!
+  - name: Ero
+    sentences:
+    - STOP!| hehe, you can also press SPACE to interact with things...| ooo yes like
+      this SWITCH on the wall!!
+    - woof woof!
+  - name: Ero
+    sentences:
+    - "you might be wondering| how i know all this?| well that\u2019s a story for
+      another thyme. <3"
+    - time* i mean time goddammit.
+    - woof!!
 --- !u!1 &1235646583
 GameObject:
   m_ObjectHideFlags: 0
@@ -25852,6 +26025,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297507878}
   m_CullTransparentMesh: 0
+--- !u!1 &1313349101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1313349102}
+  - component: {fileID: 1313349103}
+  m_Layer: 0
+  m_Name: behavior
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1313349102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313349101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 182334732}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1313349103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313349101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8989fc16e388b4e1281c9c201377ccc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 519420033}
+  triggerLocations:
+  - {x: -2, y: 0, z: 43}
+  - {x: -2, y: 0, z: 44}
+  - {x: -2, y: 0, z: 45}
+  dialogue:
+    name: ???
+    sentences:
+    - "don\u2019t touch that!! grrrrrr\u2026"
+    - "sorry.|.|.| it\u2019s just been a while since anyone has come through here\u2026"
+    - "soo what\u2019s your name?"
+    - <INPUT>
+    - "well {0} what are you doing here?|\n.|.|.|do you know why you\u2019re here?"
 --- !u!1 &1317505047
 GameObject:
   m_ObjectHideFlags: 0
@@ -26789,6 +27018,7 @@ Transform:
   - {fileID: 1859191197}
   - {fileID: 1725952235}
   - {fileID: 299526326}
+  - {fileID: 1235429059}
   m_Father: {fileID: 841564378}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30194,7 +30424,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746144139}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4e94f08df5ce4299ba032afd454dbed, type: 3}
   m_Name: 
@@ -30766,7 +30996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1859191197
 Transform:
   m_ObjectHideFlags: 0
@@ -34645,7 +34875,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894247247}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca41b5b8de09466a94f248d5f7e9689, type: 3}
   m_Name: 
@@ -35034,7 +35264,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979513453}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca7d922b5fb944e3842a95b252cf9b6, type: 3}
   m_Name: 

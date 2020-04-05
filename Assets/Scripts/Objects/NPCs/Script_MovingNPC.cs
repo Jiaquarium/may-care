@@ -18,13 +18,7 @@ public class Script_MovingNPC : Script_StaticNPC
     public AnimationCurve progressCurve;
     private Animator animator;
     
-    private Dictionary<string, Vector3> Directions = new Dictionary<string, Vector3>()
-    {
-        {"up"       , new Vector3(0f, 0f, 1f)},
-        {"down"     , new Vector3(0f, 0f, -1f)},
-        {"left"     , new Vector3(-1f, 0f, 0f)},
-        {"right"    , new Vector3(1f, 0f, 0f)}
-    };
+    public Dictionary<string, Vector3> Directions;
 
     public Model_MoveSet[] moveSets = new Model_MoveSet[0];
 
@@ -165,6 +159,7 @@ public class Script_MovingNPC : Script_StaticNPC
         Model_MoveSet[] _moveSets
     )
     {
+        Directions = Script_Utils.GetDirectionToVectorDict();
         moveSets = _moveSets;
         
         // call Setup from base layer (StaticNPC)
@@ -177,7 +172,10 @@ public class Script_MovingNPC : Script_StaticNPC
         location = transform.position;
 
         // first queue up moves
-        QueueUpAllMoves();
-        QueueUpCurrentMoves();
+        if (moveSets.Length != 0)
+        {
+            QueueUpAllMoves();
+            QueueUpCurrentMoves();
+        }
     }
 }

@@ -23,8 +23,18 @@ public class Script_LevelBehavior : MonoBehaviour
     protected virtual void HandleTriggerLocations() {}
     protected virtual void HandleAction() {}
 
+    // called from Script_Exits() to change state after fade in
+    public virtual void InitGameState()
+    {
+        game.ChangeStateInteract();
+    }
+
     public virtual void Setup()
     {
         print("setting up levelBehavior");
+        game.EnableExits();
+        // game.CreateNPCs();
+        // game.CreateInteractableObjects();
+        // game.CreateDemons();
     }
 }

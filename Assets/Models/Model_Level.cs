@@ -17,6 +17,6 @@ public class Model_Level
     public Tilemap entrancesTileMap;
     public Script_LevelBehavior behavior;
     public int bgMusicAudioClipIndex;
-    public string initialState;
+    public string initialState; // TODO: REMOVE, moved into behaviors
     public bool shouldPersistBgThemes;
 }

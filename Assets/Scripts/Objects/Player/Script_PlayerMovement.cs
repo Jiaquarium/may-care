@@ -173,10 +173,6 @@ public class Script_PlayerMovement : MonoBehaviour
     {
         progress = playerGhost.progress;
         
-        // once we know we move onto an exit space
-        // begin fading the screen out
-        HandleExitTile();
-
         if (progress >= 1f && isMoving)
         {
             FinishMoveAnimation();
@@ -191,7 +187,7 @@ public class Script_PlayerMovement : MonoBehaviour
         isMoving = false;
     }
 
-    void HandleExitTile()
+    public void HandleExitTile()
     {
         Vector3Int tileLocation = new Vector3Int(
             (int)Mathf.Round(player.location.x),
@@ -202,7 +198,7 @@ public class Script_PlayerMovement : MonoBehaviour
         if (exitsTileMap != null && exitsTileMap.HasTile(tileLocation))
         {
             Script_TileMapExitEntrance exitInfo = exitsTileMap.GetComponent<Script_TileMapExitEntrance>();
-            game.exitsHandler.Exit(
+            game.Exit(
                 exitInfo.level,
                 exitInfo.playerNextSpawnPosition,
                 exitInfo.playerFacingDirection,
@@ -214,7 +210,7 @@ public class Script_PlayerMovement : MonoBehaviour
         if (entrancesTileMap != null && entrancesTileMap.HasTile(tileLocation))
         {
             Script_TileMapExitEntrance entranceInfo = entrancesTileMap.GetComponent<Script_TileMapExitEntrance>();
-            game.exitsHandler.Exit(
+            game.Exit(
                 entranceInfo.level,
                 entranceInfo.playerNextSpawnPosition,
                 entranceInfo.playerFacingDirection,
@@ -222,12 +218,6 @@ public class Script_PlayerMovement : MonoBehaviour
             );
             return;
         }
-    }
-
-    void HandleEntranceTile()
-    {
-        // check for entrance tile
-        // game.exitsHandler.HandleEntrance()
     }
 
     Script_PlayerGhost CreatePlayerGhost(bool withLight)

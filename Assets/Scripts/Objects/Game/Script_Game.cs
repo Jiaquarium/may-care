@@ -85,7 +85,7 @@ public class Script_Game : MonoBehaviour
         thoughtManager.HideThought();
         ClosePlayerThoughtsInventory();
         
-        ChangeStateToInitiateLevel();
+        // ChangeStateToInitiateLevel();
         
         if (level == 0)    InitiateLevel();
         else
@@ -138,20 +138,17 @@ public class Script_Game : MonoBehaviour
 
     public void SetInitialGameState()
     {
-        state = Levels.levelsData[level].initialState;
+        if (levelBehavior != null)    levelBehavior.InitGameState();
+        else ChangeStateInteract();
     }
 
     public void InitiateLevel()
     {
-
         StartBgMusic();
         
         CreateTileMaps();
         CreatePlayer();
         CameraMoveToTarget();
-        CreateNPCs();
-        CreateInteractableObjects();
-        CreateDemons();
 
         SetupDialogueManager();
         SetupThoughtManager();
@@ -165,6 +162,7 @@ public class Script_Game : MonoBehaviour
         levelBehavior = Levels.levelsData[level].behavior;
         if (levelBehavior == null)  return;
         levelBehavior.Setup();
+        print("DONE INIT LB");
     }
 
     public void DestroyLevel()
@@ -339,8 +337,7 @@ public class Script_Game : MonoBehaviour
         }
     }
 
-    // TODO: remove this int (dont need, can just use global reference?)
-    void CreateNPCs()
+    public void CreateNPCs()
     {
         Model_NPC[] NPCsData = Levels.levelsData[level].NPCsData;
         
@@ -388,6 +385,58 @@ public class Script_Game : MonoBehaviour
             }
 
         }
+    }
+
+    public void CreateMovingNPC(
+        int i,
+        string direction,
+        int moveSetIndex = 0,
+        bool isActivated = false
+    )
+    {
+        Model_NPC NPCData = Levels.levelsData[level].NPCsData[i];
+        Vector3 NPCSpawnLocation = NPCData.NPCSpawnLocation;
+        Model_MoveSet[] allMoveSets = NPCData.moveSets;
+        Model_MoveSet[] truncatedMoveSet = new Model_MoveSet[
+            Mathf.Max(allMoveSets.Length - moveSetIndex - 1, 0)
+        ];
+        List<Model_MoveSet> movedMoveSets = new List<Model_MoveSet>();
+
+        // NPC has moved its first moveSet
+        if (isActivated)
+        {
+            for (int j = 0, k = moveSetIndex + 1; j < truncatedMoveSet.Length; j++, k++)
+            {
+                truncatedMoveSet[j] = allMoveSets[k];
+            }
+
+            // add moveSets we want to skip over
+            for (int j = 0; j < moveSetIndex + 1; j++)  movedMoveSets.Add(allMoveSets[j]);
+
+            foreach(Model_MoveSet ms in movedMoveSets)
+            {
+                print(ms);
+                NPCSpawnLocation += Script_Utils.MovesToVector(ms);
+            }
+        }
+
+        Script_MovingNPC MNPC = Instantiate(
+            MovingNPCPrefab,
+            NPCSpawnLocation,
+            Quaternion.identity
+        );
+
+        NPCs.Add(MNPC);
+        movingNPCs.Add(MNPC);
+
+        MNPC.StaticNPCId = NPCs.Count - 1;
+        MNPC.MovingNPCId = movingNPCs.Count - 1;
+        MNPC.Setup(
+            NPCData.sprite,
+            NPCData.dialogue,
+            isActivated ? truncatedMoveSet : allMoveSets
+        );
+        MNPC.FaceDirection(direction ?? NPCData.direction);
     }
 
     void DestroyNPCs()
@@ -695,5 +744,30 @@ public class Script_Game : MonoBehaviour
     public Vector3 GetRotationToFaceCamera()
     {
         return camera.GetRotationAdjustment();
+    }
+
+    public void EnableExits()
+    {
+        exitsHandler.EnableExits();
+    }
+
+    public void DisableExits()
+    {
+        exitsHandler.DisableExits();
+    }
+
+    public void Exit(
+        int level,
+        Vector3 playerNextSpawnPosition,
+        string playerFacingDirection,
+        bool isExit
+    )
+    {
+        exitsHandler.Exit(
+            level,
+            playerNextSpawnPosition,
+            playerFacingDirection,
+            isExit
+        );
     }
 }

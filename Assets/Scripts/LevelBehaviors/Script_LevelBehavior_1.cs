@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class Script_LevelBehavior_1 : Script_LevelBehavior
 {
+    /* =======================================================================
+        STATE DATA
+    ======================================================================= */
+    public bool isDone = false;
+    public bool isExitsDisabled = true;
+    /* ======================================================================= */
+    
+    
     public Vector3[] triggerLocations;
     public Model_Dialogue dialogue;
     
-    
-    private bool isDone = false;
-    
-    protected override void OnDisable() {
-        game.exitsHandler.EnableExits();
-    }
 
     protected override void HandleTriggerLocations() {
+        if (isDone)   return;
+
         for (int i = 0; i < triggerLocations.Length; i++)
         {
             if (
                 game.GetPlayerLocation() == triggerLocations[i]
                 && game.state == "interact"
-                && !isDone
             )
             {
                 game.PauseBgMusic();
@@ -40,7 +43,8 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
         {
             isDone = true;
 
-            game.exitsHandler.EnableExits();
+            isExitsDisabled = false;
+            game.EnableExits();
             game.ChangeStateCutSceneNPCMoving();
             game.TriggerMovingNPCMove(0);
 
@@ -58,9 +62,13 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
 
     public override void Setup()
     {
-        base.Setup();
-        print("setting up levelBehavior1");
+        if (isExitsDisabled)    game.DisableExits();
+        else game.EnableExits();
 
-        game.exitsHandler.DisableExits();
+        // base.Setup();
+        if (!isDone)
+        {
+            game.CreateNPCs();
+        }
     }
 }

@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Script_LevelBehavior_2 : Script_LevelBehavior
 {
+    /* =======================================================================
+        STATE DATA
+    ======================================================================= */
+    public bool isDone = false;
+    public bool isActivated = false;
+    public int activeTriggerIndex = 0;
+    public string EroFaceDirection;
+    /* ======================================================================= */
+    
     public Model_Locations[] triggerLocations;
     public Model_Dialogue[] dialogues;
-    private int activeTriggerIndex = 0;
-    private bool isDone = false;
     
+    
+    protected override void OnDisable() {
+        if (!isDone)
+        {    
+            print("changing state to interact");
+            game.ChangeStateInteract();
+        }
+    }
+
     protected override void HandleTriggerLocations()
     {
-        if (isDone) return;
-
+        if (isDone || game.GetPlayerIsTalking()) return;
+        
         foreach (Vector3 loc in triggerLocations[activeTriggerIndex].locations)
         {
             if (
@@ -39,7 +55,7 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
                     trigger locations must be 1 < dialogue
                 */
                 if (activeTriggerIndex == triggerLocations.Length - 1) isDone = true;
-                else activeTriggerIndex++;
+                activeTriggerIndex++;
             }
         }
     }
@@ -51,15 +67,9 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
             && !game.GetPlayerIsTalking()
         )
         {
-            // trigger ActuallyMove() in MovingNPC to exit
-            if (isDone)
-            {
-                game.ChangeStateCutSceneNPCMoving();
-            }
-            else
-            {
-                game.ChangeStateCutSceneNPCMoving();
-            }
+            game.ChangeStateCutSceneNPCMoving();
+            // need this bc once leave room, no longer inProgress
+            game.TriggerMovingNPCMove(0);
         }
 
         if (Input.GetButtonDown("Action1") && game.state == "cut-scene")
@@ -73,8 +83,38 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
         }
     }
 
+    // called from Script_Exits()
+    public override void InitGameState() {
+        print("INITTING GAME STATE FROM LB2 NOT LB");
+        // to happen after fadein 
+        if (isActivated)
+        {
+            game.ChangeStateInteract();
+        }
+        isActivated = true;
+    }
+    
     public override void Setup()
     {
-        game.TriggerMovingNPCMove(0);
+        game.CreateInteractableObjects();
+        game.EnableExits();
+
+        if (!isDone)
+        {
+            if (isActivated)
+            {
+                game.CreateMovingNPC(0, "right", activeTriggerIndex, true);
+            }
+            else
+            {
+                game.CreateMovingNPC(
+                    0,
+                    null,
+                    activeTriggerIndex
+                );
+                game.ChangeStateCutSceneNPCMoving();
+                game.TriggerMovingNPCMove(0);
+            }
+        }
     }
 }

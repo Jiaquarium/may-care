@@ -57,6 +57,10 @@ public class Script_Player : MonoBehaviour
             return;
         }
 
+        // once we know we move onto an exit space
+        // begin fading the screen out
+        playerMovementHandler.HandleExitTile();
+
         if (isEating)
         {
             animator.SetBool("PlayerMoving", false);

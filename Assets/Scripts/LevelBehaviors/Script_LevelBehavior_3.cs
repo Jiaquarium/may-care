@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class Script_LevelBehavior_3 : Script_LevelBehavior
 {
+        /* =======================================================================
+        STATE DATA
+    ======================================================================= */
+    private bool isDone = false;
+    public bool isActivated = false;
+    public bool isExitsDisabled = true;
+    public int activeTriggerIndex = 0;
+    /* ======================================================================= */
+    
+    
     public Model_Locations[] triggerLocations;
     public Model_Dialogue[] dialogues;
     public float NPCMoveSpeed;
     
     
-    private bool isDone = false;
-    private int activeTriggerIndex = 0;
-    private bool hasSwitchedMusic = false;
-    
-    
     protected override void HandleTriggerLocations()
     {
+        if (activeTriggerIndex == 1 && game.state == "interact")
+        {
+            game.NPCFaceDirection(0, "down");
+        }
+        if (isDone)                                                 return;
         // need to EAT all demons before can activiate 2nd trigger location
         if (activeTriggerIndex == 1 && game.GetDemonsCount() > 0)   return;
 
@@ -48,7 +58,7 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
                 game.StartDialogue(dialogues[activeTriggerIndex]);
 
                 if (activeTriggerIndex == triggerLocations.Length - 1) isDone = true;
-                else activeTriggerIndex++;
+                activeTriggerIndex++;
             }
         }
     }
@@ -66,7 +76,8 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
                 game.TriggerMovingNPCMove(0);
             } else
             {
-                game.exitsHandler.EnableExits();
+                isExitsDisabled = false;
+                game.EnableExits();
                 game.ChangeStateInteract();
             }
         }
@@ -84,17 +95,33 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
 
     public override void Setup()
     {
-        game.exitsHandler.DisableExits();
+        if (isExitsDisabled)    game.DisableExits();
+        else                    game.EnableExits();
         
-        /*
-            Ero will wait at the door as you leave this map
-            this triggers game.AllMovesDoneAction() early so we must
-            set shouldPersistBgThemes = true
-            playingEroTheme next time wili instantiate a new gameObject replacing
-            the undeleted gameObject
-        */
-        game.SetMovingNPCExit(0, false);
-        
-        game.ChangeMovingNPCSpeed(0, NPCMoveSpeed);
+        if (!isDone)
+        {
+            if (isActivated)
+            {
+                // activeTriggerIndex - 1 because here we have 2 trigger locations but only 1 moveSet
+                string dir = activeTriggerIndex == 1 ? "down" : null;
+                game.CreateMovingNPC(0, dir, activeTriggerIndex - 1, true);
+            }
+            else
+            {
+                game.CreateMovingNPC(0, null, activeTriggerIndex - 1, false);
+                isActivated = true;
+            }
+            game.CreateDemons();
+            /*
+                Ero will wait at the door as you leave this map
+                this triggers game.AllMovesDoneAction() early so we must
+                set shouldPersistBgThemes = true
+                playingEroTheme next time wili instantiate a new gameObject replacing
+                the undeleted gameObject
+            */
+            game.SetMovingNPCExit(0, false);
+            
+            game.ChangeMovingNPCSpeed(0, NPCMoveSpeed);
+        }
     }
 }

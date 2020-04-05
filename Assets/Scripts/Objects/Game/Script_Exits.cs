@@ -85,7 +85,7 @@ public class Script_Exits : MonoBehaviour
             
             game.DestroyLevel();
             
-            isHandlingExit = false;
+            // isHandlingExit = false;
             game.level = levelToGo;
             
             game.InitiateLevel();
@@ -100,8 +100,12 @@ public class Script_Exits : MonoBehaviour
 
         if (canvas.alpha <= 0f)
         {
+            isHandlingExit = false;
             canvas.alpha = 0f;
             isFadeIn = false;
+
+            // TODO: disable movement only until after fade in
+            // can put default function in levelbehavior
 
             // after faded in, player can then move
             // change from initiate-level state

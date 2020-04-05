@@ -72,13 +72,10 @@
      <Compile Include="Assets\Scripts\Decor\Script_RoomDecor.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_DialogueManager.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_InputManager.cs" />
-     <Compile Include="Assets\Scripts\LevelBehaviors\Script_DontTouchPianoScene.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_1.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_2.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_3.cs" />
-     <Compile Include="Assets\Scripts\LevelBehaviors\Script_StartConvoOnTriggers.cs" />
-     <Compile Include="Assets\Scripts\LevelBehaviors\Script_TeachHowToEat.cs" />
      <Compile Include="Assets\Scripts\Objects\Camera\Script_Camera.cs" />
      <Compile Include="Assets\Scripts\Objects\Demons\Script_Demon.cs" />
      <Compile Include="Assets\Scripts\Objects\Game\Script_DemonCreator.cs" />

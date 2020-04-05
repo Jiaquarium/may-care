@@ -9,6 +9,7 @@ public class Script_DemonCreator : MonoBehaviour
     public Script_Demon DemonSedgewickPrefab;
 
     public void CreateDemons(
+        bool[] spawnState,
         Model_Demon[] demonsData,
         List<Script_Demon> demons
     )
@@ -19,6 +20,8 @@ public class Script_DemonCreator : MonoBehaviour
 
         for (int i = 0; i < demonsData.Length; i++)
         {
+            if (spawnState != null && spawnState[i] == false) continue;
+
             demon = Instantiate(
                 demonsData[i].prefab,
                 demonsData[i].demonSpawnLocation,

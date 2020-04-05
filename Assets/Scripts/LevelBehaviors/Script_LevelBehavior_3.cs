@@ -7,10 +7,11 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
         /* =======================================================================
         STATE DATA
     ======================================================================= */
-    private bool isDone = false;
+    public bool isDone = false;
     public bool isActivated = false;
     public bool isExitsDisabled = true;
     public int activeTriggerIndex = 0;
+    public bool[] demonSpawns;
     /* ======================================================================= */
     
     
@@ -93,6 +94,10 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
         }
     }
 
+    public override void EatDemon(int Id) {
+        demonSpawns[Id] = false;
+    }
+
     public override void Setup()
     {
         if (isExitsDisabled)    game.DisableExits();
@@ -105,13 +110,21 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
                 // activeTriggerIndex - 1 because here we have 2 trigger locations but only 1 moveSet
                 string dir = activeTriggerIndex == 1 ? "down" : null;
                 game.CreateMovingNPC(0, dir, activeTriggerIndex - 1, true);
+                game.CreateDemons(demonSpawns);
             }
             else
             {
                 game.CreateMovingNPC(0, null, activeTriggerIndex - 1, false);
                 isActivated = true;
+                game.CreateDemons(null);
+                demonSpawns = new bool[game.GetDemonsCount()];
+                
+                for (int i = 0; i < demonSpawns.Length; i++)
+                {
+                    demonSpawns[i] = true;
+                }
             }
-            game.CreateDemons();
+            
             /*
                 Ero will wait at the door as you leave this map
                 this triggers game.AllMovesDoneAction() early so we must

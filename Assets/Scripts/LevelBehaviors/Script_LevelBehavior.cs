@@ -22,6 +22,7 @@ public class Script_LevelBehavior : MonoBehaviour
     protected virtual void OnDisable() {}
     protected virtual void HandleTriggerLocations() {}
     protected virtual void HandleAction() {}
+    public virtual void EatDemon(int Id) {}
 
     // called from Script_Exits() to change state after fade in
     public virtual void InitGameState()

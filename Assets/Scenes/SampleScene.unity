@@ -19539,7 +19539,7 @@ MonoBehaviour:
   playerState:
     name: 
     faceDirection: 
-  level: 0
+  level: 3
   thoughts:
     uglyThoughts: []
     niceThoughts: []
@@ -22594,9 +22594,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 519420033}
+  isDone: 0
   isActivated: 0
   isExitsDisabled: 1
   activeTriggerIndex: 0
+  demonSpawns: 
   triggerLocations:
   - locations:
     - {x: 32, y: 0, z: 51}

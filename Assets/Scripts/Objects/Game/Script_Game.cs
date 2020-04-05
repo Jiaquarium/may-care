@@ -526,9 +526,10 @@ public class Script_Game : MonoBehaviour
         interactableObjectCreator.DestroyInteractableObjects(interactableObjects);    
     }
 
-    public void CreateDemons()
+    public void CreateDemons(bool[] spawnState)
     {
         demonCreator.CreateDemons(
+            spawnState,
             Levels.levelsData[level].DemonsData,
             demons
         );
@@ -547,6 +548,7 @@ public class Script_Game : MonoBehaviour
     public void EatDemon(int Id)
     {
         demonHandler.EatDemon(Id, demons);
+        levelBehavior.EatDemon(Id);
     }
 
     public void PlayerEatDemonHeart()

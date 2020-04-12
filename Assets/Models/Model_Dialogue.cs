@@ -6,7 +6,5 @@ using UnityEngine;
 public class Model_Dialogue
 {
     public string name;
-    // (min amount of lines to use, max)
-    [TextArea(3, 10)]
-    public string[] sentences;
+    public Model_DialogueSection[] sections;
 }

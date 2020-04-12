@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1222473497997935073}
   - component: {fileID: 517183493135933933}
   m_Layer: 0
-  m_Name: EroBgMusicSource
+  m_Name: EroBgThemePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

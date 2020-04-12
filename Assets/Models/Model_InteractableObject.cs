@@ -11,4 +11,6 @@ public class Model_InteractableObject
     public Light[] lights;
     public float lightOnIntensity;
     public float lightOffIntensity;
+    public Model_Dialogue dialogue;
+    public bool isOn;
 }

@@ -8,12 +8,17 @@ public class Script_LightSwitch : Script_Switch
     
     public float onIntensity;
     public float offIntensity;
+    public float volumeScale;
+    public AudioSource audioSource;
+    public AudioClip onOffSFX;
 
     public override void TurnOn()
     {
         print("turning on light from Script_LightSwitch");
         base.TurnOn();
         
+        audioSource.PlayOneShot(onOffSFX, volumeScale);
+
         foreach (Light l in lights)
         {
             l.intensity = onIntensity;
@@ -24,6 +29,8 @@ public class Script_LightSwitch : Script_Switch
     {
         print("turning off light from Script_LightSwitch");
         base.TurnOff();
+
+        audioSource.PlayOneShot(onOffSFX, volumeScale);
         
         foreach (Light l in lights)
         {
@@ -31,14 +38,28 @@ public class Script_LightSwitch : Script_Switch
         }
     }
 
+    public override void SetupSwitch(bool _isOn)
+    {
+        base.SetupSwitch(_isOn);
+    }
+
     public override void SetupLights(
         Light[] _lights,
         float _onIntensity,
-        float _offIntensity
+        float _offIntensity,
+        bool isOn
     )
     {
         lights = _lights;
         onIntensity = _onIntensity;
         offIntensity = _offIntensity;
+        SetupSwitch(isOn);
+
+        GetComponent<SpriteRenderer>().sprite = isOn ? onSprite : offSprite;
+        
+        foreach (Light l in lights)
+        {
+            l.intensity = isOn ? onIntensity : offIntensity;
+        }
     }
 }

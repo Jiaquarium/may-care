@@ -17,9 +17,15 @@ public class Script_InteractableObjectHandler : MonoBehaviour
                 && desiredLocation.z == objects[i].transform.position.z
             )
             {
+                // space
                 if (action == "Action1")
                 {
-                    objects[i].DefaultAction();
+                    objects[i].ActionDefault();
+                }
+                // enter
+                else if (action == "Submit")
+                {
+                    objects[i].ActionB();
                 }
 
                 return true;
@@ -27,5 +33,19 @@ public class Script_InteractableObjectHandler : MonoBehaviour
         }
 
         return false;
+    }
+
+    public Vector3[] GetLocations(List<Script_InteractableObject> objs)
+    {
+        if (objs.Count == 0)    return new Vector3[0];
+        
+        Vector3[] objLocations = new Vector3[objs.Count];
+
+        for (int i = 0; i < objs.Count; i++)
+        {
+            objLocations[i] = objs[i].transform.position;
+        }
+
+        return objLocations;
     }
 }

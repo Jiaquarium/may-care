@@ -113,6 +113,11 @@ public class Script_Exits : MonoBehaviour
         }
     }
 
+    public bool GetIsExitsDisabled()
+    {
+        return exitsDisabled;
+    }
+
     public void Setup(Script_Game _game)
     {
         game = _game;

@@ -41,4 +41,17 @@ public static class Script_Utils
         Debug.Log("v adding to NPCSpawnLocation: " + v);
         return v;
     }
+
+    public static void MakeFontsCrispy(Font[] fonts)
+    {
+        foreach (Font f in fonts)
+        {
+            if (f)
+            {
+                Debug.Log("making font crispy: " + f);
+                f.material.mainTexture.filterMode = FilterMode.Point;
+                f.material.mainTexture.anisoLevel = 0;
+            }
+        }
+    }
 }

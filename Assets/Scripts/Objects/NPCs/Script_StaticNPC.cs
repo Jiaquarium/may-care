@@ -18,12 +18,12 @@ public class Script_StaticNPC : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        dialogueManager.StartDialogue(dialogue);
+        dialogueManager.StartDialogue(dialogue, null);
     }
 
     public void ContinueDialogue()
     {
-        dialogueManager.DisplayNextSentence();
+        dialogueManager.DisplayNextDialoguePortion();
     }
 
     public void SkipTypingSentence()

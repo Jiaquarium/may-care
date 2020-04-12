@@ -14,12 +14,13 @@ public class Script_PlayerAction : MonoBehaviour
         if (Input.GetButtonDown("Action1"))
         {
             // TODO REFACTOR: refactor split out checking locs?
-            bool isNPC = DetectNPCProximity(facingDirection, "Action1", location);
-            if (!isNPC) DetectInteractableObjectProximity(facingDirection, "Action1", location);
+            bool isNPC =    DetectNPCProximity(facingDirection, "Action1", location);
+            if (!isNPC)     DetectInteractableObjectProximity(facingDirection, "Action1", location);
         }
         else if (Input.GetButtonDown("Submit"))
         {
-            DetectNPCProximity(facingDirection, "Submit", location);
+            bool isNPC =    DetectNPCProximity(facingDirection, "Submit", location);
+            if (!isNPC)     DetectInteractableObjectProximity(facingDirection, "Submit", location);
         }
         else if (Input.GetButtonDown("Action2"))
         {

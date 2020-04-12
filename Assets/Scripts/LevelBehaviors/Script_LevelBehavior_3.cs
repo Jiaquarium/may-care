@@ -39,7 +39,13 @@ public class Script_LevelBehavior_3 : Script_LevelBehavior
             )
             {
                 game.PauseBgMusic();
-                game.UnPauseEroTheme();
+                // game.UnPauseEroTheme();
+                
+                // don't repeat play on second trigger location
+                if (activeTriggerIndex == 0)
+                {
+                    game.PlayEroTheme();
+                }
                 
                 // don't pause, stop the music bc we're switching to the HARD song
                 // game.StopBgMusic();

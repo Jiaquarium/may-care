@@ -29,9 +29,6 @@ public class Script_Player : MonoBehaviour
     private Sprite currentSprite;
     // storing soundFX here and not in manager because only 1 player exists
     private Script_Game game;
-    private Tilemap exitsTileMap;
-    private Tilemap entrancesTileMap;
-    private Tilemap tileMap;
     private bool isTalking = false;
     private bool isEating = false;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
@@ -194,9 +191,6 @@ public class Script_Player : MonoBehaviour
     // }
     
     public void Setup(
-        Tilemap _tileMap,
-        Tilemap _exitsTileMap,
-        Tilemap _entrancesTileMap,
         string direction,
         Model_PlayerState playerState,
         bool isLightOn
@@ -204,9 +198,6 @@ public class Script_Player : MonoBehaviour
     {   
         game = Object.FindObjectOfType<Script_Game>();
         animator = GetComponent<Animator>();
-        tileMap = _tileMap;
-        exitsTileMap = _exitsTileMap;
-        entrancesTileMap = _entrancesTileMap;
         
         playerMovementHandler = GetComponent<Script_PlayerMovement>();
         playerActionHandler = GetComponent<Script_PlayerAction>();
@@ -215,9 +206,6 @@ public class Script_Player : MonoBehaviour
         playerMovementHandler.Setup(
             game,
             Directions,
-            tileMap,
-            exitsTileMap,
-            entrancesTileMap,
             isLightOn
         );
         playerActionHandler.Setup(game, Directions);

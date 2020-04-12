@@ -16,14 +16,12 @@ public class Script_PlayerMovement : MonoBehaviour
     private Script_Player player;
     private Script_PlayerGhost playerGhost;
     private Dictionary<string, Vector3> Directions;
-    private Tilemap tileMap;
-    private Tilemap exitsTileMap;
-    private Tilemap entrancesTileMap;
     private SpriteRenderer spriteRenderer;
     
     
     private Vector3[] MovingNPCLocations = new Vector3[0];
     private Vector3[] DemonLocations = new Vector3[0];
+    private Vector3[] InteractableObjectLocations = new Vector3[0];
     private bool isMoving;
 
 
@@ -134,14 +132,28 @@ public class Script_PlayerMovement : MonoBehaviour
         int desiredZ = (int)Mathf.Round((player.location + desiredDirection).z);
         
         Vector3Int tileLocation = new Vector3Int(desiredX, desiredZ, 0);
+        
+        Tilemap tileMap = game.GetTileMap();
+        Tilemap entrancesTileMap = game.GetEntrancesTileMap();
+        Tilemap exitsTileMap = game.GetExitsTileMap();
 
         // tiles map from (xyz) to (xz)
-        if (
-            !tileMap.HasTile(tileLocation)
-            && (exitsTileMap == null || !exitsTileMap.HasTile(tileLocation))
-            && (entrancesTileMap == null || !entrancesTileMap.HasTile(tileLocation))
-        )
+        if (!tileMap.HasTile(tileLocation))
         {
+            // check to see if desiredTile is in exit/entrance tilemaps
+            if (
+                (
+                    exitsTileMap == null
+                    || !exitsTileMap.HasTile(tileLocation)
+                    // if exits are disabled, ignore if found in exits tilemap
+                    || game.GetIsExitsDisabled()
+                )
+                &&
+                (
+                    entrancesTileMap == null
+                    || !entrancesTileMap.HasTile(tileLocation)
+                )
+            )
             return true;
         }
 
@@ -161,6 +173,15 @@ public class Script_PlayerMovement : MonoBehaviour
         if (DemonLocations.Length != 0)
         {
             foreach (Vector3 loc in DemonLocations)
+            {
+                if (desiredX == loc.x && desiredZ == loc.z) return true;
+            }
+        }
+
+        InteractableObjectLocations = game.GetInteractableObjectLocations();
+        if (InteractableObjectLocations.Length != 0)
+        {
+            foreach (Vector3 loc in InteractableObjectLocations)
             {
                 if (desiredX == loc.x && desiredZ == loc.z) return true;
             }
@@ -189,6 +210,9 @@ public class Script_PlayerMovement : MonoBehaviour
 
     public void HandleExitTile()
     {
+        Tilemap entrancesTileMap = game.GetEntrancesTileMap();
+        Tilemap exitsTileMap = game.GetExitsTileMap();
+        
         Vector3Int tileLocation = new Vector3Int(
             (int)Mathf.Round(player.location.x),
             (int)Mathf.Round(player.location.z),
@@ -236,9 +260,6 @@ public class Script_PlayerMovement : MonoBehaviour
     public void Setup(
         Script_Game _game,
         Dictionary<string, Vector3> _Directions,
-        Tilemap _tilemap,
-        Tilemap _exitsTileMap,
-        Tilemap _entrancesTileMap,
         bool isLightOn
     )
     {
@@ -249,9 +270,6 @@ public class Script_PlayerMovement : MonoBehaviour
 
         game = _game;
         Directions = _Directions;
-        tileMap = _tilemap;
-        exitsTileMap = _exitsTileMap;
-        entrancesTileMap = _entrancesTileMap;
 
         timer = repeatDelay;
         progress = 1f;

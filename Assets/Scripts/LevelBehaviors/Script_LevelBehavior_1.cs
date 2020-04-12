@@ -65,6 +65,8 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
         if (isExitsDisabled)    game.DisableExits();
         else game.EnableExits();
 
+        game.CreateInteractableObjects(null);
+
         // base.Setup();
         if (!isDone)
         {

@@ -18,7 +18,6 @@ public class Script_Game : MonoBehaviour
     public Model_PlayerState playerState;
     public int level = 0;
     public Model_PlayerThoughts thoughts;
-    private bool exitsDisabled;
     
     /* ======================================================================= */
 
@@ -39,6 +38,7 @@ public class Script_Game : MonoBehaviour
     public Script_ThoughtManager thoughtManager;
     public Script_BackgroundMusicManager bgMusicManager;
     public Script_PlayerThoughtsInventoryButton[] thoughtButtons;
+    public Font[] fonts;
 
 
     private GameObject grid;
@@ -49,6 +49,7 @@ public class Script_Game : MonoBehaviour
     private List<Script_StaticNPC> NPCs = new List<Script_StaticNPC>();
     private List<Script_MovingNPC> movingNPCs = new List<Script_MovingNPC>();
     private List<Script_InteractableObject> interactableObjects = new List<Script_InteractableObject>();
+    private List<Script_Switch> switches = new List<Script_Switch>();
     private List<Script_Demon> demons = new List<Script_Demon>();
     private Script_Demon DemonPrefab;
     private AudioSource backgroundMusicAudioSource;
@@ -64,6 +65,8 @@ public class Script_Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Script_Utils.MakeFontsCrispy(fonts);
+        
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = targetFrameRate;
         
@@ -162,7 +165,6 @@ public class Script_Game : MonoBehaviour
         levelBehavior = Levels.levelsData[level].behavior;
         if (levelBehavior == null)  return;
         levelBehavior.Setup();
-        print("DONE INIT LB");
     }
 
     public void DestroyLevel()
@@ -173,6 +175,8 @@ public class Script_Game : MonoBehaviour
         DestroyAudioOneShotSources();
         DestroyInteractableObjects();
         DestroyTileMaps();
+        
+        StopMovingNPCThemes();
     }
 
     void CreateTileMaps()
@@ -190,6 +194,26 @@ public class Script_Game : MonoBehaviour
         grid.SetActive(false);
     }
 
+    public void SetNewTileMapGround(Tilemap _tileMap)
+    {   
+        tileMap = _tileMap;   
+    }
+
+    public Tilemap GetTileMap()
+    {
+        return tileMap;
+    }
+
+    public Tilemap GetEntrancesTileMap()
+    {
+        return entrancesTileMap;
+    }
+
+    public Tilemap GetExitsTileMap()
+    {
+        return exitsTileMap;
+    }
+
     void CreatePlayer()
     {
         // TODO don't need this, put all player data into PlayerState 
@@ -203,9 +227,6 @@ public class Script_Game : MonoBehaviour
         );
         player = Instantiate(PlayerPrefab, spawnLocation, Quaternion.identity);
         player.Setup(
-            tileMap,
-            exitsTileMap,
-            entrancesTileMap,
             playerState.faceDirection,
             playerState,
             playerData.isLightOn
@@ -283,6 +304,7 @@ public class Script_Game : MonoBehaviour
         string action
     )
     {
+        print("action: " + action);
         return interactableObjectHandler.HandleAction(
             interactableObjects,
             desiredLocation,
@@ -329,7 +351,7 @@ public class Script_Game : MonoBehaviour
     {
         if (action == "Action1" && player.GetIsTalking())
         {
-            dialogueManager.DisplayNextSentence();
+            dialogueManager.DisplayNextDialoguePortion();
         }
         else if (action == "Submit" && player.GetIsTalking())
         {
@@ -512,18 +534,53 @@ public class Script_Game : MonoBehaviour
         // otherwise, continue playing movingNPC theme music until player exits
     }
 
-    public void CreateInteractableObjects()
+    public void CreateInteractableObjects(bool[] switchesState)
     {
         interactableObjectCreator.CreateInteractableObjects(
             Levels.levelsData[level].InteractableObjectsData,
             interactableObjects,
-            GetRotationToFaceCamera()
+            switches,
+            GetRotationToFaceCamera(),
+            dialogueManager,
+            player,
+            switchesState
         );
     }
 
     void DestroyInteractableObjects()
     {
-        interactableObjectCreator.DestroyInteractableObjects(interactableObjects);    
+        interactableObjectCreator.DestroyInteractableObjects(
+            interactableObjects, 
+            switches
+        );    
+    }
+
+    public Vector3[] GetInteractableObjectLocations()
+    {
+        return interactableObjectHandler.GetLocations(interactableObjects);
+    }
+
+    public int GetSwitchesCount()
+    {
+        return switches.Count;
+    }
+
+    public void SetSwitchesState(bool[] switchesState)
+    {
+        for (int i = 0; i < switches.Count; i++)
+        {
+            switches[i].isOn = switchesState[i];
+        }
+    }
+
+    public void SetSwitchState(int Id, bool isOn)
+    {
+        levelBehavior.SetSwitchState(Id, isOn);
+    }
+
+    public Script_Switch GetSwitch(int Id)
+    {
+        return switches[Id];
     }
 
     public void CreateDemons(bool[] spawnState)
@@ -608,7 +665,7 @@ public class Script_Game : MonoBehaviour
 
     public void StartDialogue(Model_Dialogue dialogue)
     {
-        dialogueManager.StartDialogue(dialogue);
+        dialogueManager.StartDialogue(dialogue, null);
     }
 
     void SetupThoughtManager()
@@ -624,6 +681,9 @@ public class Script_Game : MonoBehaviour
 
     void StartBgMusic()
     {
+        // TODO: make this a general theme player, not just for Ero
+        if (eroBgThemePlayer != null && GetNPCThemeMusicIsPlaying())   return;
+        
         int i = Levels.levelsData[level].bgMusicAudioClipIndex;
         
         bgMusicManager.Play(i);
@@ -673,7 +733,7 @@ public class Script_Game : MonoBehaviour
         eroBgThemePlayer.GetComponent<AudioSource>().UnPause();
     }
 
-    public void StopEroTheme()
+    public void StopBgTheme()
     {
         eroBgThemePlayer.GetComponent<AudioSource>().Stop();
         Destroy(eroBgThemePlayer.gameObject);
@@ -686,21 +746,21 @@ public class Script_Game : MonoBehaviour
         return  eroBgThemePlayer != null;
     }
 
+    public bool GetNPCThemeMusicIsPlaying()
+    {
+        return eroBgThemePlayer.GetComponent<AudioSource>().isPlaying;
+    }
+
     public void StopMovingNPCThemes()
     {
+        // TODO: call action in LevelBehavior that will handle
         print("ero bg theme player is: " + eroBgThemePlayer);
 
-        if (
-            Levels.levelsData[level].shouldPersistBgThemes
-            || eroBgThemePlayer == null
-        )
-        {
-            PauseEroTheme();
-            return;
-        }
+        if (eroBgThemePlayer == null)   return;
+
+        if (Levels.levelsData[level].shouldPersistBgThemes)    PauseEroTheme();
         
-        print("StopMovingNPCThemes() stopping erobg theme");
-        StopEroTheme();
+        StopBgTheme();
     }
 
     public Vector3 GetPlayerLocation()
@@ -756,6 +816,11 @@ public class Script_Game : MonoBehaviour
     public void DisableExits()
     {
         exitsHandler.DisableExits();
+    }
+
+    public bool GetIsExitsDisabled()
+    {
+        return exitsHandler.GetIsExitsDisabled();
     }
 
     public void Exit(

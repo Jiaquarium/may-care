@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Models\Model_Demon.cs" />
      <Compile Include="Assets\Models\Model_Dialogue.cs" />
+     <Compile Include="Assets\Models\Model_DialogueSection.cs" />
      <Compile Include="Assets\Models\Model_InteractableObject.cs" />
      <Compile Include="Assets\Models\Model_Level.cs" />
      <Compile Include="Assets\Models\Model_Levels.cs" />
@@ -72,10 +73,18 @@
      <Compile Include="Assets\Scripts\Decor\Script_RoomDecor.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_DialogueManager.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Script_InputManager.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LBSwitchHandler.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_1.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_10.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_2.cs" />
      <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_3.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_4.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_5.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_6.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_7.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_8.cs" />
+     <Compile Include="Assets\Scripts\LevelBehaviors\Script_LevelBehavior_9.cs" />
      <Compile Include="Assets\Scripts\Objects\Camera\Script_Camera.cs" />
      <Compile Include="Assets\Scripts\Objects\Demons\Script_Demon.cs" />
      <Compile Include="Assets\Scripts\Objects\Game\Script_DemonCreator.cs" />
@@ -87,6 +96,7 @@
      <Compile Include="Assets\Scripts\Objects\Game\Script_PlayerThoughtHandler.cs" />
      <Compile Include="Assets\Scripts\Objects\Game\Script_PlayerThoughtsInventoryManager.cs" />
      <Compile Include="Assets\Scripts\Objects\InteractableObjects\Script_InteractableObject.cs" />
+     <Compile Include="Assets\Scripts\Objects\InteractableObjects\Script_InteractableObjectText.cs" />
      <Compile Include="Assets\Scripts\Objects\InteractableObjects\Script_LightSwitch.cs" />
      <Compile Include="Assets\Scripts\Objects\InteractableObjects\Script_Switch.cs" />
      <Compile Include="Assets\Scripts\Objects\NPCs\Script_MovingNPC.cs" />
@@ -100,6 +110,7 @@
      <Compile Include="Assets\Scripts\Objects\Player\Script_PlayerThoughtManager.cs" />
      <Compile Include="Assets\Scripts\Thoughts\Script_ThoughtManager.cs" />
      <Compile Include="Assets\Scripts\TileMaps\Script_TileMapExitEntrance.cs" />
+     <Compile Include="Assets\Scripts\UI\Script_DialogueImageBackground.cs" />
      <Compile Include="Assets\Scripts\UI\Script_MaskSnapScroll.cs" />
      <Compile Include="Assets\Scripts\UI\Script_PlayerThoughtsInventoryButton.cs" />
      <Compile Include="Assets\Scripts\Utils\Script_Utils.cs" />

@@ -11,11 +11,14 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
     public bool isActivated = false;
     public int activeTriggerIndex = 0;
     public string EroFaceDirection;
+    public bool[] switchesStates;
     /* ======================================================================= */
     
     public Model_Locations[] triggerLocations;
     public Model_Dialogue[] dialogues;
     
+
+    private Script_LBSwitchHandler switchHandler;
     
     protected override void OnDisable() {
         if (!isDone)
@@ -83,9 +86,13 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
         }
     }
 
+    public override void SetSwitchState(int Id, bool isOn)
+    {
+        switchHandler.SetSwitchState(switchesStates, Id, isOn);
+    }
+
     // called from Script_Exits()
     public override void InitGameState() {
-        print("INITTING GAME STATE FROM LB2 NOT LB");
         // to happen after fadein 
         if (isActivated)
         {
@@ -96,7 +103,11 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
     
     public override void Setup()
     {
-        game.CreateInteractableObjects();
+        switchHandler = GetComponent<Script_LBSwitchHandler>();
+        switchHandler.Setup(game);
+        switchesStates = switchHandler
+            .CreateIObjsWithSwitchesState(switchesStates, isActivated);
+
         game.EnableExits();
 
         if (!isDone)

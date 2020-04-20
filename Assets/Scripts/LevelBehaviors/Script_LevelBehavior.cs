@@ -18,12 +18,27 @@ public class Script_LevelBehavior : MonoBehaviour
         HandleTriggerLocations();
         HandleAction();
         HandlePuzzle();
+        HandleOnEntrance();
     }
 
-    protected virtual void OnDisable() {}
     protected virtual void HandleTriggerLocations() {}
     protected virtual void HandleAction() {}
     protected virtual void HandlePuzzle() {}
+    protected virtual void HandleOnEntrance() {}
+    protected virtual void HandleDialogueAction()
+    {
+        if (Input.GetButtonDown("Action1") && game.state == "cut-scene")
+        {
+            game.HandleContinuingDialogueActions("Action1");
+        }
+
+        if (Input.GetButtonDown("Submit") && game.state == "cut-scene")
+        {
+            game.HandleContinuingDialogueActions("Submit");
+        }
+    }
+
+    protected virtual void OnDisable() {}
     public virtual void EatDemon(int Id) {}
     public virtual void SetSwitchState(int Id, bool isOn) {}
 

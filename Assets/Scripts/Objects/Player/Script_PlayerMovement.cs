@@ -7,6 +7,7 @@ using System;
 public class Script_PlayerMovement : MonoBehaviour
 {
     public Script_PlayerGhost PlayerGhostPrefab;
+    public Script_PlayerReflection PlayerReflectionPrefab;
 
 
     public float repeatDelay;
@@ -15,6 +16,7 @@ public class Script_PlayerMovement : MonoBehaviour
     private Script_Game game;
     private Script_Player player;
     private Script_PlayerGhost playerGhost;
+    private Script_PlayerReflection playerReflection;
     private Dictionary<string, Vector3> Directions;
     private SpriteRenderer spriteRenderer;
     
@@ -97,6 +99,7 @@ public class Script_PlayerMovement : MonoBehaviour
         Vector3 desiredDirection = Directions[dir];
         
         player.AnimatorSetDirection(dir);
+        playerGhost.AnimatorSetDirection(dir);
         
         if (CheckCollisions(desiredDirection))  return;
         
@@ -256,16 +259,52 @@ public class Script_PlayerMovement : MonoBehaviour
 
         return pg;
     }
+
+    Script_PlayerReflection CreatePlayerReflection()
+    {
+        Script_PlayerReflection pr = Instantiate(
+            PlayerReflectionPrefab,
+            player.transform.position, // will update within Script_PlayerReflection
+            Quaternion.identity
+        );
+
+        return pr;
+    }
+
+    public void RemoveReflection()
+    {
+        if (playerReflection != null)
+        {
+            Destroy(playerReflection.gameObject);
+        }
+    }
     
     public void Setup(
         Script_Game _game,
         Dictionary<string, Vector3> _Directions,
-        bool isLightOn
+        bool isLightOn,
+        bool isReflectionOn,
+        Vector3 reflectionAxis
     )
     {
         player = GetComponent<Script_Player>();
+        
+        // setup ghost for smooth movement (allows cancellation of mid-animation)
         playerGhost = CreatePlayerGhost(isLightOn);
         playerGhost.Setup(player.transform.position);
+        
+        // setup reflection if exists
+        if (isReflectionOn)
+        {
+            playerReflection = CreatePlayerReflection();
+            playerReflection.Setup(
+                playerGhost,
+                player,
+                reflectionAxis
+            );
+        }
+        
+        
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         game = _game;

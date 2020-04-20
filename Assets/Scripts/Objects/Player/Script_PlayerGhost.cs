@@ -15,20 +15,21 @@ public class Script_PlayerGhost : MonoBehaviour
     public Vector3 startLocation;
     public Vector3 location;
     public float progress;
+    public string facingDirection;
 
 
-    private bool isMoving;
+    public bool isMoving;
 
     void Update()
     {
-        AdjustRotation();
+        // AdjustRotation();
 
         if (isMoving)   ActuallyMove();   
     }
 
     public void Move(string dir)
     {
-        AnimatorSetDirection(dir);
+        // AnimatorSetDirection(dir);
         SetIsMoving();
         progress = 0f;
     }
@@ -60,8 +61,10 @@ public class Script_PlayerGhost : MonoBehaviour
         }
     }
 
-    void AnimatorSetDirection(string dir)
+    public void AnimatorSetDirection(string dir)
     {
+        facingDirection = dir;
+        
         if (dir == "up")
         {
             animator.SetFloat("LastMoveX", 0f);

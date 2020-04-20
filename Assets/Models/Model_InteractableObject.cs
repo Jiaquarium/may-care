@@ -6,7 +6,8 @@ using UnityEngine;
 public class Model_InteractableObject
 {
     public Vector3 objectSpawnLocation;
-    public Sprite sprite;
+    public Sprite onSprite;
+    public Sprite offSprite;
     public string type;
     public Light[] lights;
     public float lightOnIntensity;

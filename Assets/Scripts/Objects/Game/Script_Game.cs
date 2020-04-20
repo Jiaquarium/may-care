@@ -26,6 +26,7 @@ public class Script_Game : MonoBehaviour
     public Script_InteractableObjectCreator interactableObjectCreator;
     public Script_DemonHandler demonHandler;
     public Script_DemonCreator demonCreator;
+    public Script_CutSceneNPCCreator cutSceneNPCCreator;
     public Script_PlayerThoughtHandler playerThoughtHandler;
     public Script_PlayerThoughtsInventoryManager playerThoughtsInventoryManager;
     public Script_Exits exitsHandler;
@@ -48,6 +49,7 @@ public class Script_Game : MonoBehaviour
     private Script_Player player;
     private List<Script_StaticNPC> NPCs = new List<Script_StaticNPC>();
     private List<Script_MovingNPC> movingNPCs = new List<Script_MovingNPC>();
+    private List<Script_CutSceneNPC> cutSceneNPCs = new List<Script_CutSceneNPC>();
     private List<Script_InteractableObject> interactableObjects = new List<Script_InteractableObject>();
     private List<Script_Switch> switches = new List<Script_Switch>();
     private List<Script_Demon> demons = new List<Script_Demon>();
@@ -74,12 +76,14 @@ public class Script_Game : MonoBehaviour
         Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
         
         // TODO: UNCOMMENT THIS
+        PlayerPrefs.DeleteAll();
         // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         /*
             set up handlers that affect state
         */
+        ChangeStateToInitiateLevel();
         exitsHandler.Setup(this);
 
         camera = Camera.main.GetComponent<Script_Camera>();
@@ -229,7 +233,9 @@ public class Script_Game : MonoBehaviour
         player.Setup(
             playerState.faceDirection,
             playerState,
-            playerData.isLightOn
+            playerData.isLightOn,
+            playerData.isReflectionOn,
+            playerData.reflectionVector
         );
 
         // camera tracking
@@ -359,6 +365,11 @@ public class Script_Game : MonoBehaviour
         }
     }
 
+    public void RemovePlayerReflection()
+    {
+        player.RemoveReflection();
+    }
+
     public void CreateNPCs()
     {
         Model_NPC[] NPCsData = Levels.levelsData[level].NPCsData;
@@ -387,6 +398,15 @@ public class Script_Game : MonoBehaviour
                 );
                 // setup animator for starting idle position
                 MovingNPC.FaceDirection(NPCsData[i].direction);
+            }
+            else if (NPCsData[i].isCutSceneNPC)
+            {
+                cutSceneNPCCreator.CreateCutSceneNPC(
+                    NPCsData[i],
+                    NPCs,
+                    cutSceneNPCs,
+                    i
+                );
             }
             else
             {
@@ -470,6 +490,7 @@ public class Script_Game : MonoBehaviour
 
         NPCs.Clear();
         movingNPCs.Clear();
+        cutSceneNPCs.Clear();
     }
 
     public void DestroyMovingNPC(int Id)
@@ -558,6 +579,11 @@ public class Script_Game : MonoBehaviour
     public Vector3[] GetInteractableObjectLocations()
     {
         return interactableObjectHandler.GetLocations(interactableObjects);
+    }
+
+    public List<Script_InteractableObject> GetInteractableObjects()
+    {
+        return interactableObjects;
     }
 
     public int GetSwitchesCount()
@@ -790,6 +816,12 @@ public class Script_Game : MonoBehaviour
     {
         camera.SetTarget(NPCs[i].transform);
         // move camera fast
+        CameraMoveToTarget();
+    }
+
+    public void ChangeCameraTargetToGameObject(GameObject obj)
+    {
+        camera.SetTarget(obj.transform);
         CameraMoveToTarget();
     }
 

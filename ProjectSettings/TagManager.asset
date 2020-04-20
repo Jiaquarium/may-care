@@ -7,6 +7,7 @@ TagManager:
   - tag_exit
   - tag_player-light
   - tag_player-ghost-light
+  - tag_dialogue-choice-text
   layers:
   - Default
   - TransparentFX

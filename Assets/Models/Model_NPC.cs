@@ -13,6 +13,7 @@ public class Model_NPC
         MovingNPCs
     */
     public bool isMovingNPC = false;
+    public bool isCutSceneNPC;
     public Model_MoveSet[] moveSets;
     // needed to tell movingNPC animator where to start idle
     public string direction;

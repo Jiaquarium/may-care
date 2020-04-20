@@ -32,6 +32,8 @@ public class Script_DialogueManager : MonoBehaviour
     public Canvas DefaultReadTextCanvas;
     public Text[] DefaultReadTextCanvasTexts;
 
+    
+
     public bool isRenderingDialogueSection = false;
     public bool isRenderingLine = false;
     public int lineCount = 0;
@@ -41,11 +43,13 @@ public class Script_DialogueManager : MonoBehaviour
     public float charPauseLength;
     public float typingVolumeScale;
     public float dialogueStartVolumeScale;
+    public Model_DialogueNode currentNode;
 
     
     private Text nameText;
     private Text dialogueText;
     private Script_InputManager inputManager;
+    private Script_ChoiceManager choiceManager;
     private Script_Player player;
     private string playerName;
     private IEnumerator coroutine;
@@ -54,8 +58,46 @@ public class Script_DialogueManager : MonoBehaviour
     private bool isInputMode = false;
     private bool shouldPlayTypeSFX = true;
     private bool isSilentTyping = false;
+    private bool isDialogueTreeActive = false;
 
+    public void StartDialogueNode(Model_DialogueNode node)
+    {
+        // look at node.dialogue
+        isDialogueTreeActive = true;
+        currentNode = node;
+        // startdialogue with node.dialogue
+        StartDialogue(currentNode.dialogue, null);
+    }
 
+    bool NextDialogueNode()
+    {
+        // check if node has children
+        if (currentNode.children.Length > 1)
+        {
+            print("go to choices");
+            // show choices canvas
+            isInputMode = true;
+            choiceManager.StartChoiceMode(currentNode);
+
+            return true;
+        }
+
+        // check next if null then stop
+        // if node has one branch
+        else if (currentNode.children.Length == 1)
+        {
+            print("go to next node");
+            // currentnode is next
+            currentNode = currentNode.children[0];
+            // start dialogue with new node
+            StartDialogue(currentNode.dialogue, null);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void StartDialogue(Model_Dialogue dialogue, string type)
     {
@@ -368,6 +410,15 @@ public class Script_DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (isDialogueTreeActive)
+        {
+            if (NextDialogueNode())
+            {
+                // go to next node or choices and don't end dialogue just yet
+                return;
+            }
+        }
+        
         HideDialogue();
         player.SetIsNotTalking();
     }
@@ -420,6 +471,9 @@ public class Script_DialogueManager : MonoBehaviour
         inputManager = GetComponent<Script_InputManager>();
         inputManager.enabled = false;
         inputManagerCanvas.gameObject.SetActive(false);
+
+        choiceManager = GetComponent<Script_ChoiceManager>();
+        choiceManager.Setup();
 
         HideDialogue();
     }

@@ -15,6 +15,7 @@ public class Script_InteractableObjectHandler : MonoBehaviour
             if (
                 desiredLocation.x == objects[i].transform.position.x
                 && desiredLocation.z == objects[i].transform.position.z
+                && objects[i].isActive
             )
             {
                 // space

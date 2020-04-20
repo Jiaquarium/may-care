@@ -109,7 +109,8 @@ public class Script_Exits : MonoBehaviour
 
             // after faded in, player can then move
             // change from initiate-level state
-            game.SetInitialGameState();
+            print("changing game state to interact from exits");
+            game.ChangeStateInteract();
         }
     }
 

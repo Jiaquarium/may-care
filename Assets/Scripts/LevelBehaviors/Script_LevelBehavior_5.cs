@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Script_LevelBehavior_5 : Script_LevelBehavior
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Setup()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        game.CreateInteractableObjects(null);
     }
 }

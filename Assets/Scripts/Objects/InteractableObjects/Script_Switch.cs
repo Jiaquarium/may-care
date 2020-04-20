@@ -35,8 +35,17 @@ public class Script_Switch : Script_InteractableObject
         else TurnOn();
     }
 
-    public override void SetupSwitch(bool _isOn)
+    public override void SetupSwitch(
+        bool _isOn,
+        Sprite _onSprite,
+        Sprite _offSprite
+    )
     {
         isOn = _isOn;
+        
+        if (_onSprite != null)    onSprite = _onSprite;
+        if (_offSprite != null)   offSprite = _offSprite;
+
+        GetComponent<SpriteRenderer>().sprite = isOn ? onSprite : offSprite;
     }
 }

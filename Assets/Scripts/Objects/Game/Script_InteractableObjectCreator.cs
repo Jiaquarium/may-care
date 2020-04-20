@@ -10,6 +10,8 @@ public class Script_InteractableObjectCreator : MonoBehaviour
     public Script_InteractableObjectText InteractableObjectTextPrefab;
     
     private Light[] lights;
+    private Sprite OnSprite;
+    private Sprite OffSprite;
 
 
     public float defaultOnIntensity;
@@ -55,6 +57,8 @@ public class Script_InteractableObjectCreator : MonoBehaviour
                 );
                 
                 lights = interactableObjectsData[i].lights;
+                OnSprite = interactableObjectsData[i].onSprite;
+                OffSprite = interactableObjectsData[i].offSprite;
 
                 // if didn't customize, then use default
                 float onIntensity = interactableObjectsData[i].lightOnIntensity;
@@ -75,7 +79,9 @@ public class Script_InteractableObjectCreator : MonoBehaviour
                     offIntensity,
                     switchesState == null
                         ? interactableObjectsData[i].isOn
-                        : switchesState[switches.Count - 1]
+                        : switchesState[switches.Count - 1],
+                    OnSprite,
+                    OffSprite
                 );
                 iObj.Setup();
             }
@@ -96,7 +102,9 @@ public class Script_InteractableObjectCreator : MonoBehaviour
                 iObj.SetupSwitch(
                     switchesState == null        
                         ? interactableObjectsData[i].isOn
-                        : switchesState[switches.Count - 1]
+                        : switchesState[switches.Count - 1],
+                    OnSprite,
+                    OffSprite
                 );
                 iObj.Setup();
             } else

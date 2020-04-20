@@ -42,6 +42,38 @@ public static class Script_Utils
         return v;
     }
 
+    public static void AnimatorSetDirection(Animator animator, string dir)
+    {
+        if (dir == "up")
+        {
+            animator.SetFloat("LastMoveX", 0f);
+            animator.SetFloat("LastMoveZ", 1f);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveZ", 1f);
+        }
+        else if (dir == "down")
+        {
+            animator.SetFloat("LastMoveX", 0f);
+            animator.SetFloat("LastMoveZ", -1f);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveZ", -1f);
+        }
+        else if (dir == "left")
+        {
+            animator.SetFloat("LastMoveX", -1f);
+            animator.SetFloat("LastMoveZ", 0f);
+            animator.SetFloat("MoveX", -1f);
+            animator.SetFloat("MoveZ", 0f);
+        }
+        else if (dir == "right")
+        {
+            animator.SetFloat("LastMoveX", 1f);
+            animator.SetFloat("LastMoveZ", 0f);
+            animator.SetFloat("MoveX", 1f);
+            animator.SetFloat("MoveZ", 0f);
+        }
+    }
+
     public static void MakeFontsCrispy(Font[] fonts)
     {
         foreach (Font f in fonts)

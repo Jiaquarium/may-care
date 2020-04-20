@@ -38,25 +38,29 @@ public class Script_LightSwitch : Script_Switch
         }
     }
 
-    public override void SetupSwitch(bool _isOn)
+    public override void SetupSwitch(
+        bool _isOn,
+        Sprite onSprite,
+        Sprite offSprite
+    )
     {
-        base.SetupSwitch(_isOn);
+        base.SetupSwitch(_isOn, onSprite, offSprite);
     }
 
     public override void SetupLights(
         Light[] _lights,
         float _onIntensity,
         float _offIntensity,
-        bool isOn
+        bool isOn,
+        Sprite onSprite,
+        Sprite offSprite
     )
     {
         lights = _lights;
         onIntensity = _onIntensity;
         offIntensity = _offIntensity;
-        SetupSwitch(isOn);
+        SetupSwitch(isOn, onSprite, offSprite);
 
-        GetComponent<SpriteRenderer>().sprite = isOn ? onSprite : offSprite;
-        
         foreach (Light l in lights)
         {
             l.intensity = isOn ? onIntensity : offIntensity;

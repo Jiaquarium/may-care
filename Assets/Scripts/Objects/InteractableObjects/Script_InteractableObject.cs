@@ -6,6 +6,7 @@ public class Script_InteractableObject : MonoBehaviour
 {
     public int Id;
     public Script_Game game;
+    public bool isActive = true;
     
     // Update is called once per frame
     public virtual void Update() {}
@@ -17,17 +18,22 @@ public class Script_InteractableObject : MonoBehaviour
     public virtual void ActionC() {}
     
     public virtual void Setup() {
-        print("Setting up IObj");
         game = FindObjectOfType<Script_Game>();
     }
     
-    public virtual void SetupSwitch(bool isOn) {}
+    public virtual void SetupSwitch(
+        bool isOn,
+        Sprite onSprite,
+        Sprite offSprite
+    ) {}
     
     public virtual void SetupLights(
         Light[] lights,
         float onIntensity,
         float offIntensity,
-        bool isOn
+        bool isOn,
+        Sprite onSprite,
+        Sprite offSprite
     ){}
     
     public virtual void SetupText(

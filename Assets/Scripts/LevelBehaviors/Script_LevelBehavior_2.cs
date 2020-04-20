@@ -75,15 +75,7 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
             game.TriggerMovingNPCMove(0);
         }
 
-        if (Input.GetButtonDown("Action1") && game.state == "cut-scene")
-        {
-            game.HandleContinuingDialogueActions("Action1");
-        }
-
-        if (Input.GetButtonDown("Submit") && game.state == "cut-scene")
-        {
-            game.HandleContinuingDialogueActions("Submit");
-        }
+        base.HandleDialogueAction();
     }
 
     public override void SetSwitchState(int Id, bool isOn)

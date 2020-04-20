@@ -29,6 +29,7 @@ public class Script_Player : MonoBehaviour
     private Sprite currentSprite;
     // storing soundFX here and not in manager because only 1 player exists
     private Script_Game game;
+    private Script_PlayerReflection reflection;
     private bool isTalking = false;
     private bool isEating = false;
     private const string PlayerGlitch = "Base Layer.Player_Glitch";
@@ -81,6 +82,11 @@ public class Script_Player : MonoBehaviour
         }        
         
         playerMovementHandler.HandleMoveInput();
+    }
+
+    public void RemoveReflection()
+    {
+        playerMovementHandler.RemoveReflection();
     }
 
     public void EatDemon()
@@ -168,32 +174,13 @@ public class Script_Player : MonoBehaviour
     {
         transform.forward = Camera.main.transform.forward;
     }
-
-    // public IEnumerator glitch()
-    // {
-    //     if (animator != null) {
-    //         animator.enabled = true;
-    //         animator.Play(PlayerGlitch);
-            
-    //         yield return new WaitForSeconds(glitchDuration);
-
-    //         animator.enabled = false;
-    //         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
-    //         if (
-    //             sprite != playerUpSprite
-    //             && sprite != playerDownSprite
-    //             && sprite != playerLeftSprite
-    //             && sprite != playerRightSprite
-    //         ) {
-    //             GetComponent<SpriteRenderer>().sprite = currentSprite;
-    //         }
-    //     }
-    // }
     
     public void Setup(
         string direction,
         Model_PlayerState playerState,
-        bool isLightOn
+        bool isLightOn,
+        bool isReflectionOn,
+        Vector3 reflectionAxis
     )
     {   
         game = Object.FindObjectOfType<Script_Game>();
@@ -206,7 +193,9 @@ public class Script_Player : MonoBehaviour
         playerMovementHandler.Setup(
             game,
             Directions,
-            isLightOn
+            isLightOn,
+            isReflectionOn,
+            reflectionAxis
         );
         playerActionHandler.Setup(game, Directions);
         playerThoughtManager.Setup();

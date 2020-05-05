@@ -8,8 +8,8 @@ public class Script_PlayerReflection : MonoBehaviour
     
     
     private Animator animator;
-    private Script_PlayerGhost playerGhost;
-    private Script_Player player;
+    public Script_PlayerGhost playerGhost;
+    public Script_Player player;
 
 
     public Vector3 reflectionAxis;
@@ -114,10 +114,12 @@ public class Script_PlayerReflection : MonoBehaviour
         Vector3 _reflectionAxis
     )
     {
+        print("SETUP IN PLAYERREFLECTION, _playerGhost: " + _playerGhost);
+        print("SETUP IN PLAYERREFLECTION, _player: " + _player);
         animator = GetComponent<Animator>();
         
         // get axis to reflect on based on playerLoc
-        
+
         playerGhost = _playerGhost;
         player = _player;
         reflectionAxis = _reflectionAxis;

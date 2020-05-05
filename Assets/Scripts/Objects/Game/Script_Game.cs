@@ -21,7 +21,8 @@ public class Script_Game : MonoBehaviour
     
     /* ======================================================================= */
 
-
+    public Script_DDRManager DDRManager;
+    public Script_DDRHandler DDRHandler;
     public Script_InteractableObjectHandler interactableObjectHandler;
     public Script_InteractableObjectCreator interactableObjectCreator;
     public Script_DemonHandler demonHandler;
@@ -33,6 +34,7 @@ public class Script_Game : MonoBehaviour
     public Script_Player PlayerPrefab;
     public Script_StaticNPC StaticNPCPrefab;
     public Script_MovingNPC MovingNPCPrefab;
+    public Script_MovingNPC MovingNPCIdsPrefab;
     public Script_AudioOneShotSource AudioOneShotSourcePrefab;
     public Script_BgThemePlayer EroBgThemePlayerPrefab;
     public Script_DialogueManager dialogueManager;
@@ -40,6 +42,7 @@ public class Script_Game : MonoBehaviour
     public Script_BackgroundMusicManager bgMusicManager;
     public Script_PlayerThoughtsInventoryButton[] thoughtButtons;
     public Font[] fonts;
+    public Script_Camera camera;
 
 
     private GameObject grid;
@@ -55,9 +58,8 @@ public class Script_Game : MonoBehaviour
     private List<Script_Demon> demons = new List<Script_Demon>();
     private Script_Demon DemonPrefab;
     private AudioSource backgroundMusicAudioSource;
-    private Script_Camera camera;
     private List<Script_AudioOneShotSource> audioOneShotSources = new List<Script_AudioOneShotSource>();
-    private Script_BgThemePlayer eroBgThemePlayer;
+    private Script_BgThemePlayer npcBgThemePlayer;
     private Script_LevelBehavior levelBehavior;
     
     
@@ -91,6 +93,7 @@ public class Script_Game : MonoBehaviour
         dialogueManager.HideDialogue();
         thoughtManager.HideThought();
         ClosePlayerThoughtsInventory();
+        DDRManager.Deactivate();
         
         // ChangeStateToInitiateLevel();
         
@@ -102,9 +105,10 @@ public class Script_Game : MonoBehaviour
                 .levelsData[level - 1]
                 .exitsTileMap.GetComponent<Script_TileMapExitEntrance>();
             int x = (int)lastLevelExitData.playerNextSpawnPosition.x;
+            int y = (int)lastLevelExitData.playerNextSpawnPosition.y;
             int z = (int)lastLevelExitData.playerNextSpawnPosition.z;
             string dir = lastLevelExitData.playerFacingDirection;
-            SetPlayerState(new Model_PlayerState(null, x, z, dir));
+            SetPlayerState(new Model_PlayerState(null, x, y, z, dir));
             InitiateLevel();
         }
 
@@ -113,12 +117,6 @@ public class Script_Game : MonoBehaviour
 
         // TODO: Initialize State Func
         // playerState = new Model_PlayerState(player);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     public void ChangeStateToInitiateLevel()
@@ -140,13 +138,11 @@ public class Script_Game : MonoBehaviour
     {
         state = "interact";
         CameraTargetToPlayer();
-        CameraMoveToTarget();
     }
 
-    public void SetInitialGameState()
+    public void ChangeStateDDR()
     {
-        if (levelBehavior != null)    levelBehavior.InitGameState();
-        else ChangeStateInteract();
+        state = "ddr";
     }
 
     public void InitiateLevel()
@@ -226,16 +222,14 @@ public class Script_Game : MonoBehaviour
 
         Vector3 spawnLocation = new Vector3(
             playerState.spawnX ?? 0f,
-            0f,
+            playerState.spawnY ?? 0f,
             playerState.spawnZ ?? 0f
         );
         player = Instantiate(PlayerPrefab, spawnLocation, Quaternion.identity);
         player.Setup(
             playerState.faceDirection,
             playerState,
-            playerData.isLightOn,
-            playerData.isReflectionOn,
-            playerData.reflectionVector
+            playerData.isLightOn
         );
 
         // camera tracking
@@ -251,6 +245,7 @@ public class Script_Game : MonoBehaviour
     {
         playerState.name = state.name ?? playerState.name;
         playerState.spawnX = state.spawnX ?? playerState.spawnX;
+        playerState.spawnY = state.spawnY ?? playerState.spawnY;
         playerState.spawnZ = state.spawnZ ?? playerState.spawnZ;
         playerState.faceDirection = state.faceDirection ?? playerState.faceDirection;
 
@@ -285,15 +280,15 @@ public class Script_Game : MonoBehaviour
                 && desiredLocation.z == NPCs[i].transform.position.z
             )
             {
-                if (action == "Action1" && !player.GetIsTalking())
+                if (action == Script_KeyCodes.Action1 && !player.GetIsTalking())
                 {
                     NPCs[i].TriggerDialogue();
                 }
-                else if (action == "Action1" && player.GetIsTalking())
+                else if (action == Script_KeyCodes.Action1 && player.GetIsTalking())
                 {
                     NPCs[i].ContinueDialogue();
                 }
-                else if (action == "Submit" && player.GetIsTalking())
+                else if (action == Script_KeyCodes.Skip && player.GetIsTalking())
                 {
                     NPCs[i].SkipTypingSentence();
                 }
@@ -355,16 +350,21 @@ public class Script_Game : MonoBehaviour
     // for cut scenes, monologues
     public void HandleContinuingDialogueActions(string action)
     {
-        if (action == "Action1" && player.GetIsTalking())
+        if (action == Script_KeyCodes.Action1 && player.GetIsTalking())
         {
             dialogueManager.DisplayNextDialoguePortion();
         }
-        else if (action == "Submit" && player.GetIsTalking())
+        else if (action == Script_KeyCodes.Skip && player.GetIsTalking())
         {
             dialogueManager.SkipTypingSentence();
         }
     }
 
+    public void CreatePlayerReflection(Vector3 axis)
+    {
+        player.CreatePlayerReflection(axis);
+    }
+    
     public void RemovePlayerReflection()
     {
         player.RemoveReflection();
@@ -380,8 +380,19 @@ public class Script_Game : MonoBehaviour
         {
             if (NPCsData[i].isMovingNPC)
             {
+                Script_MovingNPC prefab;
+                
+                if (NPCsData[i].type == "ids")
+                {
+                    prefab = MovingNPCIdsPrefab;
+                }
+                else
+                {
+                    prefab = MovingNPCPrefab;
+                }
+                
                 Script_MovingNPC MovingNPC = Instantiate(
-                    MovingNPCPrefab,
+                    prefab,
                     NPCsData[i].NPCSpawnLocation,
                     Quaternion.identity
                 );
@@ -462,8 +473,19 @@ public class Script_Game : MonoBehaviour
             }
         }
 
+        Script_MovingNPC prefab;
+
+        if (NPCData.type == "ids")
+        {
+            prefab = MovingNPCIdsPrefab;
+        }
+        else
+        {
+            prefab = MovingNPCPrefab;
+        }
+        
         Script_MovingNPC MNPC = Instantiate(
-            MovingNPCPrefab,
+            prefab,
             NPCSpawnLocation,
             Quaternion.identity
         );
@@ -505,6 +527,18 @@ public class Script_Game : MonoBehaviour
         }
     }
 
+    public void DestroyCutSceneNPC(int Id)
+    {
+        for (int i = 0; i < cutSceneNPCs.Count; i++)
+        {
+            if (cutSceneNPCs[i].StaticNPCId == Id)
+            {
+                Destroy(cutSceneNPCs[i].gameObject);
+                cutSceneNPCs.RemoveAt(i);
+            }
+        }
+    }
+
     public Vector3[] GetMovingNPCLocations()
     {
         Vector3[] MovingNPCLocations = new Vector3[movingNPCs.Count];
@@ -524,9 +558,19 @@ public class Script_Game : MonoBehaviour
         movingNPCs[i].Move();
     }
 
+    public void MovingNPCActuallyMove(int i)
+    {
+        movingNPCs[i].ActuallyMove();
+    }
+
     public void SetMovingNPCExit(int i, bool shouldExit)
     {
         movingNPCs[i].shouldExit = shouldExit;
+    }
+
+    public Script_MovingNPC GetMovingNPC(int i)
+    {
+        return movingNPCs[i];
     }
 
     public void ChangeMovingNPCSpeed(int i, float speed)
@@ -536,6 +580,7 @@ public class Script_Game : MonoBehaviour
 
     public void CurrentMovesDoneAction()
     {
+        Levels.levelsData[level].behavior.HandleMovingNPCCurrentMovesDone();
         // if (!bgMusicManager.GetIsPlaying())    UnPauseBgMusic();
         
         // if (eroBgThemePlayer != null)
@@ -546,6 +591,7 @@ public class Script_Game : MonoBehaviour
 
     public void AllMovesDoneAction(int i)
     {
+        Levels.levelsData[level].behavior.HandleMovingNPCAllMovesDone();
         // if ero is not exiting, then continue his theme
         if (movingNPCs[i].shouldExit)
         {
@@ -705,10 +751,19 @@ public class Script_Game : MonoBehaviour
         thoughtManager.CloseThought(thought);
     }
 
+    public void HandleDDRArrowClick(int tier)
+    {
+        DDRHandler.HandleArrowClick(tier, levelBehavior);
+    }
+    
+    /* =========================================================================
+        MUSIC
+    ========================================================================= */
+
     void StartBgMusic()
     {
         // TODO: make this a general theme player, not just for Ero
-        if (eroBgThemePlayer != null && GetNPCThemeMusicIsPlaying())   return;
+        if (npcBgThemePlayer != null && GetNPCThemeMusicIsPlaying())   return;
         
         int i = Levels.levelsData[level].bgMusicAudioClipIndex;
         
@@ -735,56 +790,56 @@ public class Script_Game : MonoBehaviour
         bgMusicManager.UnPause();
     }
 
-    public void PlayEroTheme()
+    public void PlayNPCBgTheme(Script_BgThemePlayer bgThemePlayerPrefab)
     {
-        eroBgThemePlayer = Instantiate(
-            EroBgThemePlayerPrefab,
+        npcBgThemePlayer = Instantiate(
+            bgThemePlayerPrefab,
             player.transform.position,
             Quaternion.identity
         );
     }
 
-    public void PauseEroTheme()
+    public void PauseNPCBgTheme()
     {
-        eroBgThemePlayer.GetComponent<AudioSource>().Pause();
+        npcBgThemePlayer.GetComponent<AudioSource>().Pause();
     }
 
-    public void UnPauseEroTheme()
+    public void UnPauseNPCBgTheme()
     {
-        if (eroBgThemePlayer == null)
+        if (npcBgThemePlayer == null)
         {
-            Debug.Log("No eroBgThemePlayer object exists to UnPause.");
+            Debug.Log("No npcBgThemePlayer object exists to UnPause.");
             return;
         }
-        eroBgThemePlayer.GetComponent<AudioSource>().UnPause();
+        npcBgThemePlayer.GetComponent<AudioSource>().UnPause();
     }
 
     public void StopBgTheme()
     {
-        eroBgThemePlayer.GetComponent<AudioSource>().Stop();
-        Destroy(eroBgThemePlayer.gameObject);
+        npcBgThemePlayer.GetComponent<AudioSource>().Stop();
+        Destroy(npcBgThemePlayer.gameObject);
 
-        eroBgThemePlayer = null;
+        npcBgThemePlayer = null;
     }
 
-    public bool GetEroThemeActive()
+    public bool GetNPCBgThemeActive()
     {
-        return  eroBgThemePlayer != null;
+        return  npcBgThemePlayer != null;
     }
 
     public bool GetNPCThemeMusicIsPlaying()
     {
-        return eroBgThemePlayer.GetComponent<AudioSource>().isPlaying;
+        return npcBgThemePlayer.GetComponent<AudioSource>().isPlaying;
     }
 
     public void StopMovingNPCThemes()
     {
         // TODO: call action in LevelBehavior that will handle
-        print("ero bg theme player is: " + eroBgThemePlayer);
+        print("ero bg theme player is: " + npcBgThemePlayer);
 
-        if (eroBgThemePlayer == null)   return;
+        if (npcBgThemePlayer == null)   return;
 
-        if (Levels.levelsData[level].shouldPersistBgThemes)    PauseEroTheme();
+        if (Levels.levelsData[level].shouldPersistBgThemes)    PauseNPCBgTheme();
         
         StopBgTheme();
     }
@@ -812,6 +867,10 @@ public class Script_Game : MonoBehaviour
         }
     }
 
+    /* =========================================================================
+        CAMERA
+    ========================================================================= */
+
     public void ChangeCameraTargetToNPC(int i)
     {
         camera.SetTarget(NPCs[i].transform);
@@ -828,11 +887,42 @@ public class Script_Game : MonoBehaviour
     public void CameraTargetToPlayer()
     {
         camera.target = player.transform;
+        CameraMoveToTarget();
     }
 
     public void CameraMoveToTarget()
     {
         camera.MoveToTarget();
+    }
+
+    public void SetOrthographicSizeDefault()
+    {
+        camera.SetOrthographicSizeDefault();
+    }
+
+    public void SetOrthographicSize(float size)
+    {
+        camera.SetOrthographicSize(size);
+    }
+
+    public void SetCameraOffset(Vector3 offset)
+    {
+        camera.SetOffset(offset);
+    }
+
+    public void SetCameraOffsetDefault()
+    {
+        camera.SetOffsetToDefault();
+    }
+    
+    public void CameraInstantMoveSpeed()
+    {
+        camera.InstantTrackSpeed();
+    }
+
+    public void CameraDefaultMoveSpeed()
+    {
+        camera.DefaultSpeed();
     }
 
     public Vector3 GetRotationToFaceCamera()

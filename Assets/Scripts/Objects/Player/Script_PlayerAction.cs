@@ -11,20 +11,20 @@ public class Script_PlayerAction : MonoBehaviour
     {   
         // talk and continue
         // Action1: x, space (interact)
-        if (Input.GetButtonDown("Action1"))
+        if (Input.GetButtonDown(Script_KeyCodes.Action1))
         {
             // TODO REFACTOR: refactor split out checking locs?
-            bool isNPC =    DetectNPCProximity(facingDirection, "Action1", location);
-            if (!isNPC)     DetectInteractableObjectProximity(facingDirection, "Action1", location);
+            bool isNPC =    DetectNPCProximity(facingDirection, Script_KeyCodes.Action1, location);
+            if (!isNPC)     DetectInteractableObjectProximity(facingDirection, Script_KeyCodes.Action1, location);
         }
-        else if (Input.GetButtonDown("Submit"))
+        else if (Input.GetButtonDown(Script_KeyCodes.Skip))
         {
-            bool isNPC =    DetectNPCProximity(facingDirection, "Submit", location);
-            if (!isNPC)     DetectInteractableObjectProximity(facingDirection, "Submit", location);
+            bool isNPC =    DetectNPCProximity(facingDirection, Script_KeyCodes.Skip, location);
+            if (!isNPC)     DetectInteractableObjectProximity(facingDirection, Script_KeyCodes.Skip, location);
         }
-        else if (Input.GetButtonDown("Action2"))
+        else if (Input.GetButtonDown(Script_KeyCodes.Action2))
         {
-            DetectDemonProximity(facingDirection, "Action2", location);
+            DetectDemonProximity(facingDirection, Script_KeyCodes.Action2, location);
         }
         else if (Input.GetButtonDown("Inventory"))
         {

@@ -74,6 +74,20 @@ public static class Script_Utils
         }
     }
 
+    public static bool CheckLastNodeActionCutScene(
+        Script_Game g,
+        Script_DialogueManager dm,
+        string s
+    )
+    {
+        return g.state == "cut-scene"
+            && g.GetPlayerIsTalking()
+            && dm.dialogueSections.Count == 0
+            && dm.lines.Count == 0
+            && !dm.isRenderingDialogueSection
+            && dm.currentNode.data.action == s;
+    }
+
     public static void MakeFontsCrispy(Font[] fonts)
     {
         foreach (Font f in fonts)

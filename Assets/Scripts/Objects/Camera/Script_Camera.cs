@@ -6,10 +6,11 @@ public class Script_Camera : MonoBehaviour
 {
     public Transform target;
     
-    
+    public float defaultOrthographicSize;
     public Vector3 offset;
     public float defaultTrackingSpeed;
     public float moveToTargetSpeed;
+    public float moveToTargetInstantlySpeed;
     public float timerMax;
     public float progress;
     public Vector3 endPosition;
@@ -23,6 +24,7 @@ public class Script_Camera : MonoBehaviour
     private float timer;
     private bool isTrackPlayer = true;
     private bool shouldMoveToTarget = false;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -50,6 +52,13 @@ public class Script_Camera : MonoBehaviour
         Move();
     }
 
+    void Move()
+    {
+        if (progress >= 1f) return;
+        progress += speed;
+        transform.position = Vector3.Lerp(startPosition, endPosition, progress);
+    }
+
     void Timer()
     {
         timer -= Time.deltaTime;
@@ -68,12 +77,6 @@ public class Script_Camera : MonoBehaviour
         progress = 0f;
     }
 
-    void Move()
-    {
-        if (progress >= 1f) return;
-        progress += speed;
-        transform.position = Vector3.Lerp(startPosition, endPosition, progress);
-    }
 
     public void MoveToTarget()
     {
@@ -98,6 +101,11 @@ public class Script_Camera : MonoBehaviour
         offset = OffsetDefault;
     }
 
+    public void SetOffset(Vector3 _offset)
+    {
+        offset = _offset;
+    }
+
     public void SetUntrackPlayer()
     {
         isTrackPlayer = false;
@@ -118,6 +126,11 @@ public class Script_Camera : MonoBehaviour
         speed = moveToTargetSpeed;
     }
 
+    public void InstantTrackSpeed()
+    {
+        speed = moveToTargetInstantlySpeed;
+    }
+
     public void DefaultSpeed()
     {
         speed = defaultTrackingSpeed;
@@ -126,5 +139,15 @@ public class Script_Camera : MonoBehaviour
     public Vector3 GetRotationAdjustment()
     {
         return rotationAdjToFaceCamera;
+    }
+
+    public void SetOrthographicSizeDefault()
+    {
+        GetComponent<Camera>().orthographicSize = defaultOrthographicSize;
+    }
+
+    public void SetOrthographicSize(float size)
+    {
+        GetComponent<Camera>().orthographicSize = size;
     }
 }

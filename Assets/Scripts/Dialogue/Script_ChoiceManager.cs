@@ -7,20 +7,23 @@ public class Script_ChoiceManager : MonoBehaviour
 {
     public CanvasGroup choiceCanvas;
     public Script_DialogueChoice[] choices;
+    
+    
+    private Script_DialogueManager dialogueManager;
 
     // TODO, mouseclick doesnt deselect the choices
-    public void StartChoiceMode(Model_DialogueNode node)
+    public void StartChoiceMode(Script_DialogueNode node)
     {
         print("starting choice mode");
 
-        for (int i = 0; i < node.children.Length; i++)
+        for (int i = 0; i < node.data.children.Length; i++)
         {
             choices[i].Id = i;
             Text text = Script_Utils.FindComponentInChildWithTag<Text>(
                 choices[i].gameObject,
                 "tag_dialogue-choice-text"
             );
-            text.text = node.children[i].choiceText;
+            text.text = node.data.children[i].data.choiceText;
         }
 
         choiceCanvas.gameObject.SetActive(true);
@@ -29,9 +32,7 @@ public class Script_ChoiceManager : MonoBehaviour
     public void InputChoice(int Id)
     {
         EndChoiceMode();
-        // call dialogue manager to tell it to go to next node
-        // dm.currentNode = node.children[Id]
-
+        dialogueManager.NextDialogueNode(Id);
         // TODO: need a way for game to react to your choice
         // game.ChoiceEvent()?
     }
@@ -44,5 +45,6 @@ public class Script_ChoiceManager : MonoBehaviour
     public void Setup()
     {
         choiceCanvas.gameObject.SetActive(false);
+        dialogueManager = GetComponent<Script_DialogueManager>();
     }
 }

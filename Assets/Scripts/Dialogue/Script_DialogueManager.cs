@@ -25,6 +25,10 @@ public class Script_DialogueManager : MonoBehaviour
     public Text DefaultCanvasName;
     public Text[] DefaultCanvasDialogueTexts;
 
+    public Canvas CanvasChoice1Row;
+    public Text CanvasChoice1RowName;
+    public Text[] CanvasChoice1RowDialogueTexts;
+
     /*
         LINE
         LINE
@@ -43,7 +47,7 @@ public class Script_DialogueManager : MonoBehaviour
     public float charPauseLength;
     public float typingVolumeScale;
     public float dialogueStartVolumeScale;
-    public Model_DialogueNode currentNode;
+    public Script_DialogueNode currentNode;
 
     
     private Text nameText;
@@ -55,67 +59,87 @@ public class Script_DialogueManager : MonoBehaviour
     private IEnumerator coroutine;
     private Model_DialogueSection dialogueSection;
     private string formattedLine;
-    private bool isInputMode = false;
     private bool shouldPlayTypeSFX = true;
     private bool isSilentTyping = false;
     private bool isDialogueTreeActive = false;
+    private bool isInputMode = false;
 
-    public void StartDialogueNode(Model_DialogueNode node)
+    public void StartDialogueNode(Script_DialogueNode node, bool SFXOn = true)
     {
         // look at node.dialogue
         isDialogueTreeActive = true;
         currentNode = node;
         // startdialogue with node.dialogue
-        StartDialogue(currentNode.dialogue, null);
+        StartDialogue(currentNode.data.dialogue, null, SFXOn);
     }
 
-    bool NextDialogueNode()
+    bool CheckNodeChildren()
     {
-        // check if node has children
-        if (currentNode.children.Length > 1)
-        {
-            print("go to choices");
-            // show choices canvas
-            isInputMode = true;
-            choiceManager.StartChoiceMode(currentNode);
-
-            return true;
-        }
-
-        // check next if null then stop
-        // if node has one branch
-        else if (currentNode.children.Length == 1)
-        {
-            print("go to next node");
-            // currentnode is next
-            currentNode = currentNode.children[0];
-            // start dialogue with new node
-            StartDialogue(currentNode.dialogue, null);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        if (currentNode.data.children.Length > 0)   return true;
+        else                                        return false;
     }
 
-    public void StartDialogue(Model_Dialogue dialogue, string type)
+    bool CheckChoices()
     {
+        if (currentNode.data.children.Length > 1)   return true;
+        else                                        return false;
+    }
+
+    void HandleChoices()
+    {
+        isInputMode = true;
+        choiceManager.StartChoiceMode(currentNode);
+    }
+
+    public void NextDialogueNode(int i)
+    {
+        EndChoiceMode();
+        currentNode = currentNode.data.children[i];
+        EnqueueDialogueSections(currentNode.data.dialogue);
+        
+        nameText.text = FormatString(currentNode.data.dialogue.name) + ":";
+        
+        if (CheckChoices())
+        {
+            SetDialogueCanvasToCanvasChoice1Row();
+            DefaultCanvas.enabled = false;
+            DefaultReadTextCanvas.enabled = false;
+        }
+
+        DisplayNextDialoguePortion();
+    }
+
+    void EnqueueDialogueSections(Model_Dialogue dialogue)
+    {
+        foreach(Model_DialogueSection _dialogueSection in dialogue.sections)
+        {
+            dialogueSections.Enqueue(_dialogueSection);
+        }
+    }
+    
+    public void StartDialogue(Model_Dialogue dialogue, string type, bool SFXOn = true)
+    {
+        DefaultCanvas.enabled = false;
+        DefaultReadTextCanvas.enabled = false;
+        CanvasChoice1Row.enabled = false;
+        
         if (type == "read")
         {
             DefaultReadTextCanvas.enabled = true;
-            DefaultCanvas.enabled = false;
 
             activeCanvasTexts = DefaultReadTextCanvasTexts;
+        }
+        else if (isDialogueTreeActive && CheckChoices())
+        {
+            SetDialogueCanvasToCanvasChoice1Row();
         }
         else
         {
             DefaultCanvas.enabled = true;
-            DefaultReadTextCanvas.enabled = false;
             activeCanvasTexts = DefaultCanvasDialogueTexts;
 
             nameText = DefaultCanvasName;
-            nameText.text = dialogue.name + ":";
+            nameText.text = FormatString(dialogue.name) + ":";
 
             if (Debug.isDebugBuild && (dialogue.name == "" || dialogue.name == null))
             {
@@ -130,12 +154,12 @@ public class Script_DialogueManager : MonoBehaviour
         player.SetIsTalking();
         ShowDialogue();
 
-        audioSource.PlayOneShot(dialogueStartSoundFX, dialogueStartVolumeScale);
-
-        foreach(Model_DialogueSection _dialogueSection in dialogue.sections)
+        if (SFXOn)
         {
-            dialogueSections.Enqueue(_dialogueSection);
+            audioSource.PlayOneShot(dialogueStartSoundFX, dialogueStartVolumeScale);
         }
+
+        EnqueueDialogueSections(dialogue);
 
         DisplayNextDialoguePortion();
     }
@@ -180,7 +204,7 @@ public class Script_DialogueManager : MonoBehaviour
         
         string unformattedLine = lines.Dequeue();
 
-        formattedLine = string.Format(unformattedLine, playerName);
+        formattedLine = FormatString(unformattedLine);
 
         coroutine = TypeLine(formattedLine);
         
@@ -352,13 +376,28 @@ public class Script_DialogueManager : MonoBehaviour
 
         // check next dialoguePortion for custom command if this is last line
         CheckCustomCommand();
+
+        // show choices after finishing typing line or skipped
+        if (isDialogueTreeActive)
+        {
+            if (CheckNodeChildren())
+            {
+                // check for choices first
+                if (CheckChoices())  {
+                    HandleChoices();
+                    return;
+                }
+            }
+        }
     }
 
-    // TODO: check first line
     bool CheckCustomCommand()
     {   
         if (
-            dialogueSections.Count != 0
+            dialogueSections != null
+            && dialogueSections.Count != 0
+            && dialogueSections.Peek().lines != null
+            && dialogueSections.Peek().lines.Length != 0
             && dialogueSections.Peek().lines[0] == "<INPUT>"
         )
         {
@@ -408,13 +447,19 @@ public class Script_DialogueManager : MonoBehaviour
         DisplayNextDialoguePortion();
     }
 
+    public void EndChoiceMode()
+    {
+        isInputMode = false;    
+    }
+
     public void EndDialogue()
     {
         if (isDialogueTreeActive)
         {
-            if (NextDialogueNode())
+            if (CheckNodeChildren() && !CheckChoices())
             {
-                // go to next node or choices and don't end dialogue just yet
+                // we know there is only one next node on continuation
+                NextDialogueNode(0);
                 return;
             }
         }
@@ -436,7 +481,7 @@ public class Script_DialogueManager : MonoBehaviour
             {
                 // interpolate playerName
                 string unformattedLine = dialogueSection.lines[i];
-                string _formattedLine = string.Format(unformattedLine, playerName);
+                string _formattedLine = FormatString(unformattedLine);
                 
                 // remove pause indicators
                 _formattedLine = _formattedLine.Replace("|", string.Empty);
@@ -460,6 +505,28 @@ public class Script_DialogueManager : MonoBehaviour
     {
         canvas.alpha = 1f;
         canvas.blocksRaycasts = true;
+    }
+
+    void SetDialogueCanvasToCanvasChoice1Row()
+    {
+        CanvasChoice1Row.enabled = true;
+        
+        activeCanvasTexts = CanvasChoice1RowDialogueTexts;
+        nameText = CanvasChoice1RowName;
+        nameText.text = FormatString(currentNode.data.dialogue.name) + ":";
+    }
+
+    string FormatString(string unformattedString)
+    {
+        return string.Format(
+            unformattedString,
+            playerName,
+            Script_Names.Melz,
+            Script_Names.MelzTheGreat,
+            Script_Names.Ids,
+            Script_Names.Ero,
+            Script_Names.SBook
+        );
     }
 
     public void Setup()

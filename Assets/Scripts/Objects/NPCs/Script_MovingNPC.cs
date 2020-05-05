@@ -22,17 +22,12 @@ public class Script_MovingNPC : Script_StaticNPC
 
     public Model_MoveSet[] moveSets = new Model_MoveSet[0];
 
-    private Queue<string> currentMoves = new Queue<string>();
+    public Queue<string> currentMoves = new Queue<string>();
     public Queue<string[]> allMoves = new Queue<string[]>();
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {   
         if (game.state == "cut-scene_npc-moving" && localState == "move")
         {
@@ -77,7 +72,7 @@ public class Script_MovingNPC : Script_StaticNPC
         animator.SetBool("NPCMoving", true);
     }
 
-    void ActuallyMove()
+    public void ActuallyMove()
     {
         progress += speed;
         transform.position = Vector3.Lerp(
@@ -92,15 +87,15 @@ public class Script_MovingNPC : Script_StaticNPC
             transform.position = location;
             
             if (currentMoves.Count == 0) {
+                print("current moves done!");
                 localState = "interact";
                 animator.SetBool("NPCMoving", false);
 
-                print("calling game.CurrentMovesDoneAction()");
                 game.CurrentMovesDoneAction();
 
                 if (allMoves.Count == 0)
                 {
-                    print("allmoves done, calling this game.AllMovesDoneAction()");
+                    print("ALL MOVES DONE!");
                     game.AllMovesDoneAction(MovingNPCId);
 
                     game.ChangeStateInteract();

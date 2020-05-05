@@ -12,12 +12,12 @@ public class Script_Exits : MonoBehaviour
     private IEnumerator coroutine;
 
 
+    public bool isFadeIn;
     public float InitiateLevelWaitTime;
     public float fadeSpeed;
 
     private bool exitsDisabled;
     private bool isFadeOut;
-    private bool isFadeIn;
     private bool isHandlingExit;
     private int levelToGo;
     
@@ -42,11 +42,12 @@ public class Script_Exits : MonoBehaviour
         if (!isHandlingExit)    isHandlingExit = true;
 
         int x = (int)playerNextSpawnPosition.x;
+        int y = (int)playerNextSpawnPosition.y;
         int z = (int)playerNextSpawnPosition.z;
 
         game.ChangeStateToInitiateLevel();
         game.SetPlayerState(
-            new Model_PlayerState(null, x, z, playerFacingDirection)
+            new Model_PlayerState(null, x, y, z, playerFacingDirection)
         );
         
         isFadeOut = true;
@@ -102,7 +103,6 @@ public class Script_Exits : MonoBehaviour
         {
             isHandlingExit = false;
             canvas.alpha = 0f;
-            isFadeIn = false;
 
             // TODO: disable movement only until after fade in
             // can put default function in levelbehavior
@@ -111,6 +111,9 @@ public class Script_Exits : MonoBehaviour
             // change from initiate-level state
             print("changing game state to interact from exits");
             game.ChangeStateInteract();
+            
+            // must happen last so handlers can interact with fade in sequence.
+            isFadeIn = false;
         }
     }
 

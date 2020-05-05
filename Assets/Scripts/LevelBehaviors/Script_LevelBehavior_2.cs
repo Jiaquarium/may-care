@@ -16,15 +16,17 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
     
     public Model_Locations[] triggerLocations;
     public Model_Dialogue[] dialogues;
-    
+    public Script_Exits exitsHandler;
+    public Script_BgThemePlayer EroBgThemePlayerPrefab;
 
     private Script_LBSwitchHandler switchHandler;
     
-    protected override void OnDisable() {
-        if (!isDone)
-        {    
-            print("changing state to interact");
-            game.ChangeStateInteract();
+    protected override void HandleOnEntrance() {
+        if (!exitsHandler.isFadeIn && !isActivated)
+        {
+            isActivated = true;
+            game.ChangeStateCutSceneNPCMoving();
+            game.TriggerMovingNPCMove(0);            
         }
     }
 
@@ -41,13 +43,13 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
             {
                 game.PauseBgMusic();
                 
-                if (game.GetEroThemeActive())
+                if (game.GetNPCBgThemeActive())
                 {
-                    game.UnPauseEroTheme();
+                    game.UnPauseNPCBgTheme();
                 }
                 else
                 {
-                    game.PlayEroTheme();
+                    game.PlayNPCBgTheme(EroBgThemePlayerPrefab);
                 }
                 game.ChangeStateCutScene();
                 
@@ -89,6 +91,7 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
         if (isActivated)
         {
             game.ChangeStateInteract();
+            
         }
         isActivated = true;
     }
@@ -115,8 +118,6 @@ public class Script_LevelBehavior_2 : Script_LevelBehavior
                     null,
                     activeTriggerIndex
                 );
-                game.ChangeStateCutSceneNPCMoving();
-                game.TriggerMovingNPCMove(0);
             }
         }
     }

@@ -19,12 +19,12 @@ public class Script_InteractableObjectHandler : MonoBehaviour
             )
             {
                 // space
-                if (action == "Action1")
+                if (action == Script_KeyCodes.Action1)
                 {
                     objects[i].ActionDefault();
                 }
                 // enter
-                else if (action == "Submit")
+                else if (action == Script_KeyCodes.Skip)
                 {
                     objects[i].ActionB();
                 }

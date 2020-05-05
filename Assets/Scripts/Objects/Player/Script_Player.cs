@@ -48,6 +48,12 @@ public class Script_Player : MonoBehaviour
 
         playerMovementHandler.TrackPlayerGhost();
 
+        if (game.state == "ddr")
+        {
+            animator.SetBool("PlayerMoving", false);
+            playerMovementHandler.HandleMoveInput();
+        }
+        
         if (game.state != "interact")
         {
             // playerMovementHandler.FinishMoveAnimation();
@@ -165,6 +171,11 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    public void CreatePlayerReflection(Vector3 axis)
+    {
+        playerMovementHandler.CreatePlayerReflection(axis);
+    }
+
     public void FaceDirection(string direction)
     {
         AnimatorSetDirection(direction);
@@ -178,9 +189,7 @@ public class Script_Player : MonoBehaviour
     public void Setup(
         string direction,
         Model_PlayerState playerState,
-        bool isLightOn,
-        bool isReflectionOn,
-        Vector3 reflectionAxis
+        bool isLightOn
     )
     {   
         game = Object.FindObjectOfType<Script_Game>();
@@ -193,9 +202,7 @@ public class Script_Player : MonoBehaviour
         playerMovementHandler.Setup(
             game,
             Directions,
-            isLightOn,
-            isReflectionOn,
-            reflectionAxis
+            isLightOn
         );
         playerActionHandler.Setup(game, Directions);
         playerThoughtManager.Setup();

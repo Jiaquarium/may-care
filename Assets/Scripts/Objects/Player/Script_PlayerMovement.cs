@@ -103,6 +103,11 @@ public class Script_PlayerMovement : MonoBehaviour
         
         if (CheckCollisions(desiredDirection))  return;
         
+        /*
+            in DDR mode, only changing directions to look like dancing
+        */
+        if (game.state == "ddr")    return;
+        
         progress = 0f;
         timer = repeatDelay;
 
@@ -260,7 +265,7 @@ public class Script_PlayerMovement : MonoBehaviour
         return pg;
     }
 
-    Script_PlayerReflection CreatePlayerReflection()
+    public Script_PlayerReflection CreatePlayerReflection(Vector3 reflectionAxis)
     {
         Script_PlayerReflection pr = Instantiate(
             PlayerReflectionPrefab,
@@ -268,6 +273,13 @@ public class Script_PlayerMovement : MonoBehaviour
             Quaternion.identity
         );
 
+        pr.Setup(
+            playerGhost,
+            player,
+            reflectionAxis
+        );
+
+        playerReflection = pr;
         return pr;
     }
 
@@ -282,9 +294,7 @@ public class Script_PlayerMovement : MonoBehaviour
     public void Setup(
         Script_Game _game,
         Dictionary<string, Vector3> _Directions,
-        bool isLightOn,
-        bool isReflectionOn,
-        Vector3 reflectionAxis
+        bool isLightOn
     )
     {
         player = GetComponent<Script_Player>();
@@ -292,18 +302,6 @@ public class Script_PlayerMovement : MonoBehaviour
         // setup ghost for smooth movement (allows cancellation of mid-animation)
         playerGhost = CreatePlayerGhost(isLightOn);
         playerGhost.Setup(player.transform.position);
-        
-        // setup reflection if exists
-        if (isReflectionOn)
-        {
-            playerReflection = CreatePlayerReflection();
-            playerReflection.Setup(
-                playerGhost,
-                player,
-                reflectionAxis
-            );
-        }
-        
         
         spriteRenderer = GetComponent<SpriteRenderer>();
 

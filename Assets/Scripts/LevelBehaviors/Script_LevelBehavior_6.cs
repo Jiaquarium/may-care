@@ -113,7 +113,6 @@ public class Script_LevelBehavior_6 : Script_LevelBehavior
         // return camera to player and change game state back
         // to interact so player can move again
         game.CameraTargetToPlayer();
-        game.CameraMoveToTarget();
         
         game.ChangeStateInteract();
     }
@@ -130,9 +129,13 @@ public class Script_LevelBehavior_6 : Script_LevelBehavior
         completionGrid.SetActive(isPuzzleCompleted);
         if (isPuzzleCompleted)
         {
-            // remove "mirror"
-            game.RemovePlayerReflection();
+            // game.RemovePlayerReflection();
             game.SetNewTileMapGround(Ground);
+        }
+        else
+        {
+            // create "mirror"
+            game.CreatePlayerReflection(game.Levels.levelsData[6].playerData.reflectionVector);
         }
 
         interactableObjects = game.GetInteractableObjects();

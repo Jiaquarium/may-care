@@ -13,7 +13,7 @@ public class Script_LevelBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         HandleTriggerLocations();
         HandleAction();
@@ -27,20 +27,29 @@ public class Script_LevelBehavior : MonoBehaviour
     protected virtual void HandleOnEntrance() {}
     protected virtual void HandleDialogueAction()
     {
-        if (Input.GetButtonDown("Action1") && game.state == "cut-scene")
+        if (
+            Input.GetButtonDown(Script_KeyCodes.Action1)
+            && game.state == "cut-scene"
+        )
         {
-            game.HandleContinuingDialogueActions("Action1");
+            game.HandleContinuingDialogueActions(Script_KeyCodes.Action1);
         }
 
-        if (Input.GetButtonDown("Submit") && game.state == "cut-scene")
+        if (
+            Input.GetButtonDown(Script_KeyCodes.Skip)
+            && game.state == "cut-scene"
+        )
         {
-            game.HandleContinuingDialogueActions("Submit");
+            game.HandleContinuingDialogueActions(Script_KeyCodes.Skip);
         }
     }
 
     protected virtual void OnDisable() {}
     public virtual void EatDemon(int Id) {}
     public virtual void SetSwitchState(int Id, bool isOn) {}
+    public virtual void HandleMovingNPCCurrentMovesDone() {}
+    public virtual void HandleMovingNPCAllMovesDone() {}
+    public virtual void HandleDDRArrowClick(int t) {}
 
     // called from Script_Exits() to change state after fade in
     public virtual void InitGameState()
@@ -50,7 +59,6 @@ public class Script_LevelBehavior : MonoBehaviour
 
     public virtual void Setup()
     {
-        print("setting up levelBehavior");
         game.EnableExits();
         // game.CreateNPCs();
         // game.CreateInteractableObjects();

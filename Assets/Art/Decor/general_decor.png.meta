@@ -4,6 +4,7 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: chandeleir
     21300002: chandeleir_xlong
+    21300004: chandeleir_xxlong
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -136,13 +137,33 @@ TextureImporter:
         width: 32
         height: 325
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 8eacb6758947d48c183061526890c7f5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chandeleir_xxlong
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 123
+        width: 32
+        height: 870
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e96987e6929b4c429a809d14adcda45
       vertices: []
       indices: 
       edges: []

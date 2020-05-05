@@ -16,6 +16,9 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
     public Model_Dialogue dialogue;
     
 
+    public Script_BgThemePlayer EroBgThemePlayerPrefab;
+    
+
     protected override void HandleTriggerLocations() {
         if (isDone)   return;
 
@@ -27,7 +30,7 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
             )
             {
                 game.PauseBgMusic();
-                game.PlayEroTheme();
+                game.PlayNPCBgTheme(EroBgThemePlayerPrefab);
                 game.ChangeStateCutScene();
                 
                 game.PlayerFaceDirection("down");
@@ -41,6 +44,7 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
     {
         if (game.state == "cut-scene" && !game.GetPlayerIsTalking())
         {
+            print("trigger move");
             isDone = true;
 
             isExitsDisabled = false;
@@ -51,13 +55,13 @@ public class Script_LevelBehavior_1 : Script_LevelBehavior
             // ero then leaves through door
         }
 
-        if (Input.GetButtonDown("Action1") && game.state == "cut-scene" && !isDone)
+        if (Input.GetButtonDown(Script_KeyCodes.Action1) && game.state == "cut-scene" && !isDone)
         {
-            game.HandleContinuingDialogueActions("Action1");
+            game.HandleContinuingDialogueActions(Script_KeyCodes.Action1);
         }
 
-        if (Input.GetButtonDown("Submit") && game.state == "cut-scene" && !isDone)
-            game.HandleContinuingDialogueActions("Submit");
+        if (Input.GetButtonDown(Script_KeyCodes.Skip) && game.state == "cut-scene" && !isDone)
+            game.HandleContinuingDialogueActions(Script_KeyCodes.Skip);
     }
 
     public override void Setup()

@@ -18,7 +18,7 @@ public class Script_DemonHandler : MonoBehaviour
                 && desiredLocation.z == demons[i].transform.position.z
             )
             {
-                if (action == "Action2")
+                if (action == Script_KeyCodes.Action2)
                 {
                     player.EatDemon();
                     demons[i].DefaultAction();

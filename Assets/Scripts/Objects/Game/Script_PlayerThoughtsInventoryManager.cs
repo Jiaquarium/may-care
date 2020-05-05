@@ -15,22 +15,24 @@ public class Script_PlayerThoughtsInventoryManager : MonoBehaviour
     )
     {
         print("OpenInventory in ScriptPlayerThoughtsInvManager: " + thoughtsCanvasGroup);
+        thoughtsCanvasGroup.gameObject.SetActive(true);
         thoughtsCanvasGroup.alpha = 1f;
         thoughtsCanvasGroup.blocksRaycasts = true;
         
         if (hasThoughts)
         {
-            thoughtsCanvas.enabled = true;
+            thoughtsCanvas.gameObject.SetActive(true);;
         } else
         {
-            emptyStateCanvas.enabled = true;
+            emptyStateCanvas.gameObject.SetActive(true);;
         }
     }
 
     public void CloseInventory()
     {
-        thoughtsCanvas.enabled = false;
-        emptyStateCanvas.enabled = false;
+        thoughtsCanvas.gameObject.SetActive(false);
+        emptyStateCanvas.gameObject.SetActive(false);
+        thoughtsCanvasGroup.gameObject.SetActive(false);
         
         thoughtsCanvasGroup.alpha = 0f;
         thoughtsCanvasGroup.blocksRaycasts = false;

@@ -20,6 +20,7 @@ public class Script_PlayerThoughtsInventoryButton : MonoBehaviour
         thisButton = GetComponent<RectTransform>();
         startingY = scrollContainer.anchoredPosition.y;
         verticalLayoutGroup = scrollContainer.GetComponent<VerticalLayoutGroup>();
+        image.enabled = false;
     }
 
     // Update is called once per frame

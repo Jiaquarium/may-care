@@ -111,7 +111,7 @@ public class Script_InputManager : MonoBehaviour
         
         TrimName();
         GetComponent<Script_DialogueManager>().EndInputMode(
-            new Model_PlayerState(inputName, null, null, null)
+            new Model_PlayerState(inputName, null, null, null, null)
         );
     }
 

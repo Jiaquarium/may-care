@@ -6,28 +6,33 @@ using UnityEngine.EventSystems;
 
 public class Script_DialogueChoice : MonoBehaviour
 {
-    public Image outline;
+    public Script_ChoiceManager choiceManager;
+    public Image cursor;
     public bool isSelected;
     public int Id;
 
+    void Start()
+    {
+        cursor.enabled = false;
+    }
+    
     void Update()
     {
         if (EventSystem.current.currentSelectedGameObject == this.gameObject)
         {
-            outline.enabled = true;
+            cursor.enabled = true;
             isSelected = true;
         }
         else
         {
-            outline.enabled = false;
+            cursor.enabled = false;
             isSelected = false;
         }
     }
 
     public void HandleSelect()
     {
-        print("my id is: " + Id);
-
         // call choice manager to input this choice
+        choiceManager.InputChoice(Id);
     }
 }

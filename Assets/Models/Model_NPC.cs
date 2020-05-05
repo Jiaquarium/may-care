@@ -17,4 +17,5 @@ public class Model_NPC
     public Model_MoveSet[] moveSets;
     // needed to tell movingNPC animator where to start idle
     public string direction;
+    public string type;
 }

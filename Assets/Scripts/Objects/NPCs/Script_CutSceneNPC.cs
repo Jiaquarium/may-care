@@ -1,20 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Script_CutSceneNPC : Script_StaticNPC
-{
-    public int CutSceneNPCId;
-
-    public override void Setup
-    (
-        Sprite sprite,
-        Model_Dialogue dialogue,
-        Model_MoveSet[] movesets
-    )
-    {
-        Debug.Log("setup in CutSceneNPC");
-
-        base.Setup(sprite, dialogue, movesets);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:380d5f948cc92be960eaaba009905cbde547902b040838794740b321ed3b66a0
+size 739

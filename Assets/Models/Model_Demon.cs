@@ -1,12 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-public class Model_Demon
-{
-    public Vector3 demonSpawnLocation;
-    public Model_Thought thought;
-    public AudioClip deathCry;
-    public Script_Demon prefab;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:3db5217b188d20a6df43dbb6bf5fe3dcf8a645d252f269e87119d6908b968a43
+size 282

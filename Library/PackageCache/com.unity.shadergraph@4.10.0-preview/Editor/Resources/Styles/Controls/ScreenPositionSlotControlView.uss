@@ -1,7 +1,3 @@
-ScreenPositionSlotControlView > EnumField {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    width: 54;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4231bf81855c9464b4a45c82b024344913519bd50fcbd3f2aecd68b9bd89c983
+size 143

@@ -1,22 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Script_RoomDecor : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        AdjustRotation();    
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        AdjustRotation();    
-    }
-
-    public void AdjustRotation()
-    {
-        transform.forward = Camera.main.transform.forward;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:84d0ce5729d822f68468f091a36eb7427d7c1132e2667c51a7e09b38b8a9fa44
+size 471

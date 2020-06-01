@@ -1,35 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Trigonometry", "Tangent")]
-    public class TangentNode : CodeFunctionNode
-    {
-        public TangentNode()
-        {
-            name = "Tangent";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Tangent-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_Tangent", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_Tangent(
-            [Slot(0, Binding.None)] DynamicDimensionVector In,
-            [Slot(1, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = tan(In);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1f40094ad41a9776f7b87e4ad22df634dc663185e2cdafe946be5de70310f624
+size 855

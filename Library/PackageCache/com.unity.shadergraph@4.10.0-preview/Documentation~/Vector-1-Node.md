@@ -1,20 +1,3 @@
-# Vector 1 Node
-
-## Description
-
-Defines a **Vector 1** value in the shader. If [Port](Port.md) **X** is not connected with an [Edge](Edge.md) this [Node](Node.md) defines a constant **Vector 1**.
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| X      | Input | Vector 1 | None | Input x component value |
-| Out | Output      |    Vector 1 | None | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-float _Vector1_Out = X;
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:7709770214779854c4cbe6257aa1eb5a78a1f2950ca22556654a371ce53e10d2
+size 581

@@ -1,36 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Trigonometry", "Arctangent2")]
-    public class Arctangent2Node : CodeFunctionNode
-    {
-        public Arctangent2Node()
-        {
-            name = "Arctangent2";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Arctangent2-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_Arctangent2", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_Arctangent2(
-            [Slot(0, Binding.None)] DynamicDimensionVector A,
-            [Slot(1, Binding.None)] DynamicDimensionVector B,
-            [Slot(2, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = atan2(A, B);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6f369ed708e77deca94eb600aeed0c987b10d116c97e8ce2c495d6af5c9bdd6c
+size 948

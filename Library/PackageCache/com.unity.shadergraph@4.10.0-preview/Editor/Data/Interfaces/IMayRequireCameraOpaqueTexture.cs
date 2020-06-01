@@ -1,18 +1,3 @@
-using UnityEditor.Graphing;
-
-namespace UnityEditor.ShaderGraph
-{
-    public interface IMayRequireCameraOpaqueTexture
-    {
-        bool RequiresCameraOpaqueTexture(ShaderStageCapability stageCapability = ShaderStageCapability.All);
-    }
-
-    public static class MayRequireCameraOpaqueTextureExtensions
-    {
-        public static bool RequiresCameraOpaqueTexture(this ISlot slot)
-        {
-            var mayRequireCameraOpaqueTexture = slot as IMayRequireCameraOpaqueTexture;
-            return mayRequireCameraOpaqueTexture != null && mayRequireCameraOpaqueTexture.RequiresCameraOpaqueTexture();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7e31c39806c1ed7db2e2f14ef5886492d6869d6198e4b4f3960d2216a683af2a
+size 618

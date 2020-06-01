@@ -1,13 +1,3 @@
-using UnityEditor.Experimental.UIElements;
-using System.Globalization;
-
-namespace UnityEditor.ShaderGraph.Drawing
-{
-    public class FloatField : DoubleField
-    {
-        protected override string ValueToString(double v)
-        {
-            return ((float)v).ToString(CultureInfo.InvariantCulture.NumberFormat);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:438e94f75e75ff3e07da3934fc3301cca083395bb39011a605465ec6c7892eca
+size 333

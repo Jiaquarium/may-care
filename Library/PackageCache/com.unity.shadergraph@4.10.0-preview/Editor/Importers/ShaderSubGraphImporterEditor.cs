@@ -1,21 +1,3 @@
-using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
-using UnityEngine;
-using Debug = System.Diagnostics.Debug;
-
-namespace UnityEditor.ShaderGraph
-{
-    [CustomEditor(typeof(ShaderSubGraphImporter))]
-    public class ShaderSubGraphImporterEditor : ScriptedImporterEditor
-    {
-        public override void OnInspectorGUI()
-        {
-            if (GUILayout.Button("Open Shader Editor"))
-            {
-                AssetImporter importer = target as AssetImporter;
-                Debug.Assert(importer != null, "importer != null");
-                ShaderGraphImporterEditor.ShowGraphEditWindow(importer.assetPath);
-            }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:9398ba094108c3cdc5fb59bb9e27062c97b29bd464c771b027755920b17bcfe3
+size 665

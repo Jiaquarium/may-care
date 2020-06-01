@@ -1,10 +1,3 @@
-ColorRGBASlotControlView {
-    flex-direction: row;
-    align-items: center;
-}
-
-ColorRGBASlotControlView > ColorField {
-    width: 41;
-    margin-left: 0;
-    margin-right: 0;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ac0d26d442c6ce91fbeaee6115c4f0118b18c131d8ac7ed65b3bb2ab1b59dd8d
+size 178

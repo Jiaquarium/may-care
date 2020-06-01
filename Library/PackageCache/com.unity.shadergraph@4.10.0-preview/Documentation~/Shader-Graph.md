@@ -1,13 +1,3 @@
-# Shader Graph
-
-## Description
-
-This section outlines the user interface and interactions of the **Shader Graph** system. For an introduction to **Shader Graph** see [Getting Started](Getting-Started.md).
-
-## Contents
-* [Shader Graph Window](Shader-Graph-Window.md)
-* [Blackboard](Blackboard.md)
-* [Master Preview](Master-Preview.md)
-* [Create Node Menu](Create-Node-Menu.md)
-* [Shader Graph Asset](Shader-Graph-Asset.md)
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:3bdc3eb4b888bb61b604253c2f1bde2e2cf5ebfb4a683c67488bd1b141182519
+size 423

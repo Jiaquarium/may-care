@@ -1,33 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Script_CutSceneNPCCreator : MonoBehaviour
-{
-    public Script_CutSceneNPC CutSceneNPCPrefab;
-    
-    public void CreateCutSceneNPC(
-        Model_NPC NPCsData,
-        List<Script_StaticNPC> NPCs,
-        List<Script_CutSceneNPC> cutSceneNPCs,
-        int staticNPCId
-    )
-    {
-        Script_CutSceneNPC cutSceneNPC = Instantiate(
-            CutSceneNPCPrefab,
-            NPCsData.NPCSpawnLocation,
-            Quaternion.identity
-        );
-
-        NPCs.Add(cutSceneNPC);
-        cutSceneNPCs.Add(cutSceneNPC);
-
-        cutSceneNPC.StaticNPCId = staticNPCId;
-        cutSceneNPC.CutSceneNPCId = cutSceneNPCs.Count - 1;
-        cutSceneNPC.Setup(
-            NPCsData.sprite,
-            NPCsData.dialogue,
-            new Model_MoveSet[0]
-        );
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ddec2501535011baf402c63a66f86b63dcca37f2a71eae329a19e3425e9574a2
+size 1145

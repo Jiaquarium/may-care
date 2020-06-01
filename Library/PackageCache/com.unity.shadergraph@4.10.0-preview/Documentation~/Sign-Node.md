@@ -1,23 +1,3 @@
-# Sign Node
-
-## Description
-
-Per component, returns -1 if the value of input **In** is less than zero, 0 if equal to zero and 1 if greater than zero.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Sign_float4(float4 In, out float4 Out)
-{
-    Out = sign(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:adfed29a801a990e2c6f185484df1a84289b2726a53516ed33a3f1e7ff37c45e
+size 556

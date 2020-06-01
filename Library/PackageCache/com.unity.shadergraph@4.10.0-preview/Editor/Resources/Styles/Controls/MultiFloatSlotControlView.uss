@@ -1,16 +1,3 @@
-MultiFloatSlotControlView {
-    flex-direction: row;
-    align-items: center;
-}
-
-MultiFloatSlotControlView > #dummy > Label {
-    margin-left: 0;
-    margin-right: 0;
-    cursor: slide-arrow;
-}
-
-MultiFloatSlotControlView > FloatField {
-    width: 30;
-    margin-left: 0;
-    margin-right: 0;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:78a77227b78844a7cc95aa4ff138ec43722da5a2d492a7c3ee7432fcfbb9889a
+size 294

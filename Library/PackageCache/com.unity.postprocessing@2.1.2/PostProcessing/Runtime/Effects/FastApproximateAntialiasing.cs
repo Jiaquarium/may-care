@@ -1,27 +1,3 @@
-using System;
-using UnityEngine.Serialization;
-
-namespace UnityEngine.Rendering.PostProcessing
-{
-    /// <summary>
-    /// This class holds settings for the Fast Approximate Anti-aliasing (FXAA) effect.
-    /// </summary>
-    [Serializable]
-    public sealed class FastApproximateAntialiasing
-    {
-        /// <summary>
-        /// If <c>true</c>, it will use a slightly lower quality but faster variant of FXAA. Highly
-        /// recommended on mobile platforms.
-        /// </summary>
-        [FormerlySerializedAs("mobileOptimized")]
-        [Tooltip("Boost performances by lowering the effect quality. This setting is meant to be used on mobile and other low-end platforms but can also provide a nice performance boost on desktops and consoles.")]
-        public bool fastMode = false;
-
-        /// <summary>
-        /// Set this to <c>true</c> if you need to keep the alpha channel untouched. Else it will
-        /// use this channel to store internal data used to speed up and improve visual quality.
-        /// </summary>
-        [Tooltip("Keep alpha channel. This will slightly lower the effect quality but allows rendering against a transparent background.")]
-        public bool keepAlpha = false;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:abd3ea6e004f21338af781860cb5e49f8367a3479e4fc17b4b08a52b2c94f0a5
+size 1220

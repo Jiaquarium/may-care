@@ -1,27 +1,3 @@
-using System;
-using UnityEngine;
-
-namespace UnityEditor.Graphing
-{
-    [Serializable]
-    public struct DrawState
-    {
-        [SerializeField]
-        private bool m_Expanded;
-
-        [SerializeField]
-        private Rect m_Position;
-
-        public bool expanded
-        {
-            get { return m_Expanded; }
-            set { m_Expanded = value; }
-        }
-
-        public Rect position
-        {
-            get { return m_Position; }
-            set { m_Position = value; }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fa648da0843338a1ec54827a66cc38d976106a47643af111df6dd9f458333240
+size 503

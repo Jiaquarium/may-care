@@ -1,23 +1,3 @@
-# Negate Node
-
-## Description
-
-Returns the flipped sign value of input **In**. Positive values become negative and negative values become positive.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Negate_float4(float4 In, out float4 Out)
-{
-    Out = -1 * In;
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:18f7ac1fed33350b1c33d0e38aac8e1a71462134cf42ae6aab8e1eeef346a0f9
+size 555

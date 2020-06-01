@@ -1,23 +1,3 @@
-# Reciprocal Square Root Node
-
-## Description
-
-Returns the result of 1 divided by the square root of the input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_ReciprocalSquareRoot_float4(float4 In, out float4 Out)
-{
-    Out = rsqrt(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:8df42a6c801d9fbaea157b58c0e73b21c91f66e35dc61fcce8aeb4ad4f1fa8f9
+size 542

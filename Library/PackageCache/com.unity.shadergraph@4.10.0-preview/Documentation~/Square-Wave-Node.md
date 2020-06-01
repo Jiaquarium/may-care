@@ -1,23 +1,3 @@
-# Square Wave Node
-
-## Description
-
-Returns a square wave from the value of input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_SquareWave_float4(float4 In, out float4 Out)
-{
-    Out = 1.0 - 2.0 * round(frac(In));
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:f30e83ccdac5db4d720c8b5ad44cd98f7a7d64b441574853a473ae4c478d6bd5
+size 521

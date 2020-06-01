@@ -1,7 +1,3 @@
-UVSlotControlView > EnumField {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    width: 40;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b22b7e527076b3916b78ff2ed17749e437fb47a54b12e9ceee6bd931118284ab
+size 131

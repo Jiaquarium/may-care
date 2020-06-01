@@ -1,35 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Advanced", "Normalize")]
-    class NormalizeNode : CodeFunctionNode
-    {
-        public NormalizeNode()
-        {
-            name = "Normalize";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Normalize-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_Normalize", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_Normalize(
-            [Slot(0, Binding.None)] DynamicDimensionVector In,
-            [Slot(1, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = normalize(In);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c164221a00bc3ac17f051dfa61b874eacc69dae014d1b9098e9e6fb73f9ceebb
+size 864

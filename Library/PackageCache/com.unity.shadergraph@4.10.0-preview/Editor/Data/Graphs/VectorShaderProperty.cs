@@ -1,29 +1,3 @@
-using System;
-using System.Text;
-using UnityEditor.Graphing;
-using UnityEngine;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Serializable]
-    public abstract class VectorShaderProperty : AbstractShaderProperty<Vector4>
-    {
-        public override string GetPropertyBlockString()
-        {
-            var result = new StringBuilder();
-            result.Append(referenceName);
-            result.Append("(\"");
-            result.Append(displayName);
-            result.Append("\", Vector) = (");
-            result.Append(NodeUtils.FloatToShaderValue(value.x));
-            result.Append(",");
-            result.Append(NodeUtils.FloatToShaderValue(value.y));
-            result.Append(",");
-            result.Append(NodeUtils.FloatToShaderValue(value.z));
-            result.Append(",");
-            result.Append(NodeUtils.FloatToShaderValue(value.w));
-            result.Append(")");
-            return result.ToString();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:42ef86e8f5fd1d9c5b5da42f8d320b2dbc2df65a0807d223de3e32352e21939e
+size 945

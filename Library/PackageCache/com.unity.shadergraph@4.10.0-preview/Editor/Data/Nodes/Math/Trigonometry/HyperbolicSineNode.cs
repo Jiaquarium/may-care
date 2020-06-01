@@ -1,35 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Trigonometry", "Hyperbolic Sine")]
-    class HyperbolicSineNode : CodeFunctionNode
-    {
-        public HyperbolicSineNode()
-        {
-            name = "Hyperbolic Sine";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Hyperbolic-Sine-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_HyperbolicSine", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_HyperbolicSine(
-            [Slot(0, Binding.None)] DynamicDimensionVector In,
-            [Slot(1, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = sinh(In);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:30b8aa80a5157663a79fe55c6248a1dca8d975bdc0ce6e5c93e86170f1fbbcf6
+size 901

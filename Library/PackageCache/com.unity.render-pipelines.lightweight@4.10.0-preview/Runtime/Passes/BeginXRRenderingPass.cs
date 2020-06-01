@@ -1,27 +1,3 @@
-using System;
-
-namespace UnityEngine.Experimental.Rendering.LightweightPipeline
-{
-    /// <summary>
-    /// Start rendering that supports XR.
-    ///
-    /// This pass enables XR rendering. You must also configure
-    /// the XR rendering in the global XR Graphics settings.
-    ///
-    /// Pair this pass with the EndXRRenderingPass.  If this
-    /// pass is issued without a matching EndXRRenderingPass
-    /// it will lead to undefined rendering results. 
-    /// </summary>
-    public class BeginXRRenderingPass : ScriptableRenderPass
-    {
-        /// <inheritdoc/>
-        public override void Execute(ScriptableRenderer renderer, ScriptableRenderContext context, ref RenderingData renderingData)
-        {
-            if (renderer == null)
-                throw new ArgumentNullException("renderer");
-            
-            Camera camera = renderingData.cameraData.camera;
-            context.StartMultiEye(camera);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f74d35dfde3c7714a4f824765f3950bd32e142308862ba2f8e92d8d92fe7d10e
+size 943

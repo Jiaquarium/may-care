@@ -1,31 +1,3 @@
-using System;
-using UnityEngine;
-
-namespace UnityEditor.Experimental.Rendering
-{
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class VolumeParameterDrawerAttribute : Attribute
-    {
-        public readonly Type parameterType;
-
-        public VolumeParameterDrawerAttribute(Type parameterType)
-        {
-            this.parameterType = parameterType;
-        }
-    }
-
-    // Default parameter drawer - simply displays the serialized property as Unity would
-    public abstract class VolumeParameterDrawer
-    {
-        // Override this and return false if you want to customize the override checkbox position,
-        // else it'll automatically draw it and put the property content in a horizontal scope.
-        public virtual bool IsAutoProperty()
-        {
-            return true;
-        }
-
-        // Return false is the input parameter is invalid - unity will display the default editor
-        // for this control then
-        public abstract bool OnGUI(SerializedDataParameter parameter, GUIContent title);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:0cbeea6ad0313066b235075ba81ebdade903498d685dfa224a40907cf60accb9
+size 1065

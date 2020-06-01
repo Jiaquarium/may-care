@@ -1,36 +1,3 @@
-using System;
-using UnityEditor.Graphing;
-using UnityEngine;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Serializable]
-    public abstract class SpaceMaterialSlot : Vector3MaterialSlot
-    {
-        [SerializeField]
-        private CoordinateSpace m_Space = CoordinateSpace.World;
-
-        public CoordinateSpace space
-        {
-            get { return m_Space; }
-            set { m_Space = value; }
-        }
-
-        protected SpaceMaterialSlot()
-        {}
-
-        protected SpaceMaterialSlot(int slotId, string displayName, string shaderOutputName, CoordinateSpace space,
-                                    ShaderStageCapability stageCapability = ShaderStageCapability.All, bool hidden = false)
-            : base(slotId, displayName, shaderOutputName, SlotType.Input, Vector3.zero, stageCapability, hidden: hidden)
-        {
-            this.space = space;
-        }
-
-        public override void CopyValuesFrom(MaterialSlot foundSlot)
-        {
-            var slot = foundSlot as SpaceMaterialSlot;
-            if (slot != null)
-                space = slot.space;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:e9472d81198fc86744aab9088cee89a77817dbe0e8b758458917da4a1ae50be3
+size 1092

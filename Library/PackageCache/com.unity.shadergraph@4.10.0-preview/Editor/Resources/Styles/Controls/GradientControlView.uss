@@ -1,22 +1,3 @@
-GradientControlView > #gradientPanel {
-    flex-direction: row;
-}
-
-GradientControlView > #gradientPanel > GradientField {
-    flex: 1;
-    margin-left: 8;
-    margin-right: 8;
-    margin-top: 4;
-    margin-bottom: 4;
-}
-
-GradientControlView > #gradientPanel > Label {
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-left: 8;
-    margin-right: 8;
-    margin-top: 4;
-    margin-bottom: 4;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:98248755efbebc0cad95722075d4b244b7d913224612db796ef89a4574e043e6
+size 437

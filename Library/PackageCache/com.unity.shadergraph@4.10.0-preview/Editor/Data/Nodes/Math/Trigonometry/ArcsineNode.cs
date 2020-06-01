@@ -1,35 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Trigonometry", "Arcsine")]
-    public class ArcsineNode : CodeFunctionNode
-    {
-        public ArcsineNode()
-        {
-            name = "Arcsine";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Arcsine-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_Arcsine", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_Arcsine(
-            [Slot(0, Binding.None)] DynamicDimensionVector In,
-            [Slot(1, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = asin(In);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:bccf8aa7b75ac3a885190ccea425f74c04c628e61a9b5cb531c2e8d14d3090b7
+size 856

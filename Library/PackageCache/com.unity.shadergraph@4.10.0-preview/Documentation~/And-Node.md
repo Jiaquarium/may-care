@@ -1,22 +1,3 @@
-# And Node
-
-## Description
-
-Returns true if both the inputs **A** and **B** are true. This is useful for [Branching](Branch-Node.md).
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| A      | Input | Boolean | None | First input value |
-| B      | Input | Boolean | None | Second input value |
-| Out | Output      |    Boolean | None | Output value |
-
-## Generated Code Example
-
-```
-void Unity_And(float A, float B, out float Out)
-{
-    Out = A && B;
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:ffbcbdfb29e649788faaf3649eb02b0cc47cb360754274c7c3adcbf968ef7ffb
+size 539

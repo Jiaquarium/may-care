@@ -1,23 +1,3 @@
-# Absolute Node
-
-## Description
-
-Returns the absolute value of the input **In**. Components of the input Dynamic Vector that are positive will remain positive and components that are negative will be inverted and become positive.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Absolute_float4(float4 In, out float4 Out)
-{
-    Out = abs(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:81577cd29ff9a0cff122b7bbcdcd3ebc15db556c17d72f42ac320908b2c5bac1
+size 639

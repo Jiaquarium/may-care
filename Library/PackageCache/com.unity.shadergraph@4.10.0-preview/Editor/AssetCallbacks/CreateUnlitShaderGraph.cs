@@ -1,24 +1,3 @@
-using System.IO;
-using UnityEditor.ProjectWindowCallback;
-
-namespace UnityEditor.ShaderGraph
-{
-    public class CreateUnlitShaderGraph : EndNameEditAction
-    {
-        [MenuItem("Assets/Create/Shader/Unlit Graph", false, 208)]
-        public static void CreateMaterialGraph()
-        {
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, CreateInstance<CreateUnlitShaderGraph>(),
-                string.Format("New Shader Graph.{0}", ShaderGraphImporter.Extension), null, null);
-        }
-
-        public override void Action(int instanceId, string pathName, string resourceFile)
-        {
-            var graph = new MaterialGraph();
-            graph.AddNode(new UnlitMasterNode());
-            graph.path = "Shader Graphs";
-            File.WriteAllText(pathName, EditorJsonUtility.ToJson(graph));
-            AssetDatabase.Refresh();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:23393e4ad766d94c919a6136a086ef2df326b4f5059e39e3f803ceacf6fd37dd
+size 876

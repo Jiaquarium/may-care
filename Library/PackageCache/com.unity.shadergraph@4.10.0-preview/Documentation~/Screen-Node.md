@@ -1,21 +1,3 @@
-# Screen Node
-
-## Description
-
-Provides access to parameters of the screen.
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| Width | Output      |    Vector 1 | None | Screen's width in pixels |
-| Height | Output      |    Vector 1 | None | Screen's height in pixels |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-float _Screen_Width = _ScreenParams.x;
-float _Screen_Height = _ScreenParams.y;
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:2c102c32fe62e492e1722a1f93d7250af373ca915dd2af32fcaf9714777dd125
+size 540

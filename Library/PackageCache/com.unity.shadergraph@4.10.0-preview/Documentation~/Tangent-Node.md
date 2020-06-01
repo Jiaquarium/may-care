@@ -1,23 +1,3 @@
-# Tangent Node
-
-## Description
-
-Returns the tangent of the value of input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Tangent_float4(float4 In, out float4 Out)
-{
-    Out = tan(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:ccd656d47d4614778f37a461cbb882af4ab91042e77a4218f20f2ac0cc2d5bbe
+size 490

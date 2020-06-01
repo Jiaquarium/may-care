@@ -1,36 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Round", "Step")]
-    public class StepNode : CodeFunctionNode
-    {
-        public StepNode()
-        {
-            name = "Step";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Step-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_Step", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_Step(
-            [Slot(0, Binding.None, 1, 1, 1, 1)] DynamicDimensionVector Edge,
-            [Slot(1, Binding.None, 0, 0, 0, 0)] DynamicDimensionVector In,
-            [Slot(2, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = step(Edge, In);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:13a33e30efd124a6f34f1d5f3253fd1451eba368453e764ecde2f0011d3bf3e1
+size 923

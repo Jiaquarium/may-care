@@ -1,35 +1,3 @@
-// Small shim for VRSettings/XRSettings on XboxOne, Switch and PS Vita
-#if ((UNITY_XBOXONE || UNITY_SWITCH || UNITY_PSP2) && !UNITY_2018_3_OR_NEWER)  && !UNITY_EDITOR
-using System;
-
-#if UNITY_2017_2_OR_NEWER
-namespace UnityEngine.XR
-#else
-namespace UnityEngine.VR
-#endif
-{
-#if UNITY_2017_2_OR_NEWER
-    public static class XRSettings
-#elif UNITY_5_6_OR_NEWER
-    public static class VRSettings
-#endif
-    {
-        public static bool enabled { get; set; }
-        public static bool isDeviceActive { get; private set; }
-        public static bool showDeviceView { get; set; }
-        [Obsolete("renderScale is deprecated, use XRSettings.eyeTextureResolutionScale instead (UnityUpgradable) -> eyeTextureResolutionScale")]
-        public static float renderScale { get; set; }
-        public static float eyeTextureResolutionScale { get; set; }
-        public static int eyeTextureWidth { get; private set; }
-        public static int eyeTextureHeight { get; private set; }
-        public static RenderTextureDescriptor eyeTextureDesc { get; private set; }
-        public static float renderViewportScale { get; set; }
-        public static float occlusionMaskScale { get; set; }
-        public static bool useOcclusionMesh { get; set; }
-        public static string loadedDeviceName { get; private set; }
-        public static string[] supportedDevices { get; private set; }
-        public static void LoadDeviceByName(string deviceName) { }
-        public static void LoadDeviceByName(string[] prioritizedDeviceNameList) { }
-    }
-}
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:08e2d23151881869f9619a2b85b85f31b3f60cdc18d15d9d2b8b655778df40e3
+size 1540

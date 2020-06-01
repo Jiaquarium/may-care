@@ -1,23 +1,3 @@
-# Round Node
-
-## Description
-
-Returns the value of input **In** rounded to the nearest integer, or whole number. 
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Round_float4(float4 In, out float4 Out)
-{
-    Out = round(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:9ab89717081842dfc9f1dbd6164a90415e0cef2d47353ba73f68b6d7e5967790
+size 522

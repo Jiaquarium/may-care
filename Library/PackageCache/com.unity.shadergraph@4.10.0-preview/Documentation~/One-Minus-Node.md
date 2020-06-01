@@ -1,23 +1,3 @@
-# One Minus Node
-
-## Description
-
-Returns the result of input **In** subtracted from 1.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_OneMinus_float4(float4 In, out float4 Out)
-{
-    Out = 1 - In;
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:676331dd45d6b79b260bdbc914a9b964ceeed7ac9c32ed009f6a4eb7d048118a
+size 496

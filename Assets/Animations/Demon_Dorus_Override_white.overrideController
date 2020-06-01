@@ -1,13 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!221 &22100000
-AnimatorOverrideController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Demon_Dorus_Override_white
-  m_Controller: {fileID: 9100000, guid: 9baef1e56455547bf8cb6ad1de737b09, type: 2}
-  m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 140eeecd3706045f09f23e090cd1db48, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9b7a23fc07a0242fab12cf2b3469b01c, type: 2}
+version https://git-lfs.github.com/spec/v1
+oid sha256:78dd295e574379a15e60b7176923ec451a1748ff68706bcd70bd6ce557971031
+size 522

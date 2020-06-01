@@ -1,13 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine.Rendering;
-
-namespace UnityEngine.Experimental.Rendering
-{
-    public enum MSAASamples
-    {
-        None = 1,
-        MSAA2x = 2,
-        MSAA4x = 4,
-        MSAA8x = 8
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:028ffb3549afefcd87dce6971eaa7577e6dfd55c60829ffa98f769033732b586
+size 230

@@ -1,14 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class Script_KeyCodes
-{
-    public static readonly string Action1 = "Action1";
-    public static readonly string Action2 = "Action2";
-    public static readonly string Skip = "Skip";
-    public static readonly string Up = "Up";
-    public static readonly string Left = "Left";
-    public static readonly string Down = "Down";
-    public static readonly string Right = "Right";
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:af9f140d5564d06b1b26f31c4342c85532551fd19d06db30a960da073b30d775
+size 490

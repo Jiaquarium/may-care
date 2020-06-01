@@ -1,18 +1,3 @@
-using UnityEditor.Graphing;
-
-namespace UnityEditor.ShaderGraph
-{
-    public interface IMayRequireMeshUV
-    {
-        bool RequiresMeshUV(UVChannel channel, ShaderStageCapability stageCapability = ShaderStageCapability.All);
-    }
-
-    public static class MayRequireMeshUVExtensions
-    {
-        public static bool RequiresMeshUV(this ISlot slot, UVChannel channel)
-        {
-            var mayRequireMeshUV = slot as IMayRequireMeshUV;
-            return mayRequireMeshUV != null && mayRequireMeshUV.RequiresMeshUV(channel);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:80e9ab39475c616e459dab22e12d2cc8e486f5357e8a908fc67822411fc931a9
+size 546

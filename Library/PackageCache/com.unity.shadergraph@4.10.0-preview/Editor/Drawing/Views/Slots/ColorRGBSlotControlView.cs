@@ -1,32 +1,3 @@
-using UnityEditor.Experimental.UIElements;
-using UnityEditor.Graphing;
-using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-
-namespace UnityEditor.ShaderGraph.Drawing.Slots
-{
-    public class ColorRGBSlotControlView : VisualElement
-    {
-        ColorRGBMaterialSlot m_Slot;
-
-        public ColorRGBSlotControlView(ColorRGBMaterialSlot slot)
-        {
-            AddStyleSheetPath("Styles/Controls/ColorRGBSlotControlView");
-            m_Slot = slot;
-            var colorField = new ColorField
-            {
-                value = new Color(slot.value.x, slot.value.y, slot.value.z, 0),
-                showEyeDropper = false, showAlpha = false, hdr = (slot.colorMode == ColorMode.HDR)
-            };
-            colorField.OnValueChanged(OnValueChanged);
-            Add(colorField);
-        }
-
-        void OnValueChanged(ChangeEvent<Color> evt)
-        {
-            m_Slot.owner.owner.owner.RegisterCompleteObjectUndo("Color Change");
-            m_Slot.value = new Vector3(evt.newValue.r, evt.newValue.g, evt.newValue.b);
-            m_Slot.owner.Dirty(ModificationScope.Node);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:205c49e7e9900dd9c819eefba6aebe2ad1125156d74092fb25d8eb1204120a9e
+size 1114

@@ -1,25 +1,3 @@
-# Matrix 2x2 Node
-
-## Description
-
-Defines a constant **Matrix 2x2** value in the shader.
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| Out | Output      |    Matrix 2 | None | Output value |
-
-## Controls
-
-| Name        | Type           | Options  | Description |
-|:------------ |:-------------|:-----|:---|
-|  | Matrix 2x2 |  | Sets output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-float2x2 _Matrix2x2 = float2x2(1, 0, 0, 1);
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:07309b01b12cf5a358a77493b00f33834513bc5e39bd8b44e7ac8b85bdfd5008
+size 588

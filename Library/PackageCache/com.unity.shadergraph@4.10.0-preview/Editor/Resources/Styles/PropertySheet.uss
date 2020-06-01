@@ -1,13 +1,3 @@
-PropertySheet {
-    margin-top: 4;
-    margin-bottom: 4;
-}
-PropertySheet > #content > #header{
-    margin-left: 4;
-}
-
-PropertySheet > #content > #header > Label{
-    text-color: #C1C1C1;
-    font-size: 11;
-    font-style: bold;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a2dfb60520822ff31e1c68019562c1f0c778d3a715446cd99ab2e0b56cfd229d
+size 230

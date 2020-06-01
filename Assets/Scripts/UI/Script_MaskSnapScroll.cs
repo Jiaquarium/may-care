@@ -1,21 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class Script_MaskSnapScroll : MonoBehaviour
-{
-    private RectTransform container;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        container = GetComponent<RectTransform>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:428182885923a282483f2958870cb5c84ac9d21eff00f99ea4c28a09db801681
+size 435

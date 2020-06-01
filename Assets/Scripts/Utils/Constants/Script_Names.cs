@@ -1,12 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class Script_Names
-{
-    public static readonly string Melz = "Melz";
-    public static readonly string MelzTheGreat = "Melz the Great";
-    public static readonly string Ids = "Ids";
-    public static readonly string Ero = "Ero";
-    public static readonly string SBook = "S-book";
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c9d270ec403f8baa68e5b4eb3d9611fe69346f00e9207fea4e5ebee8a320bdb0
+size 475

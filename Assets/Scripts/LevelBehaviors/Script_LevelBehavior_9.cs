@@ -1,18 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Script_LevelBehavior_9 : Script_LevelBehavior
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:e77694f6cd9a5d3cfbb43020b7ee5e89c1f2866cf6de806a400c2e0ee1c92e1b
+size 591

@@ -1,24 +1,3 @@
-using System.IO;
-using UnityEditor.ProjectWindowCallback;
-
-namespace UnityEditor.ShaderGraph
-{
-    public class CreateShaderSubGraph : EndNameEditAction
-    {
-        [MenuItem("Assets/Create/Shader/Sub Graph", false, 208)]
-        public static void CreateMaterialSubGraph()
-        {
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, CreateInstance<CreateShaderSubGraph>(),
-                string.Format("New Shader Sub Graph.{0}", ShaderSubGraphImporter.Extension), null, null);
-        }
-
-        public override void Action(int instanceId, string pathName, string resourceFile)
-        {
-            var graph = new SubGraph();
-            graph.AddNode(new SubGraphOutputNode());
-            graph.path = "Sub Graphs";
-            File.WriteAllText(pathName, EditorJsonUtility.ToJson(graph));
-            AssetDatabase.Refresh();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2d32d1839eb0a5691dd1ab71439a760452e541a362af52e97f939d1c7765a018
+size 875

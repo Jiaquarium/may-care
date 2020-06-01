@@ -1,23 +1,3 @@
-# Hyperbolic Cosine Node
-
-## Description
-
-Returns the hyperbolic cosine of input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_HyperbolicCosine_float4(float4 In, out float4 Out)
-{
-    Out = cosh(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:5232fa11e3ffd18a540667fc4997ca8f4df2f2088373e42fb589da7fa7ddde85
+size 507

@@ -1,23 +1,3 @@
-# Is Infinite Node
-
-## Description
-
-Returns true if any of the components of the input **In** is an infinite value. This is useful for [Branching](Branch-Node.md).
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| In      | Input | Dynamic Vector | None | Input value |
-| Out | Output      |    Boolean | None | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_IsInfinite_float4(float4 In, out float Out)
-{
-    Out = isinf(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:6ebe84ca7e379a64cd54e4dacfe8beb9b788409446dea957f1ab90f0f4996edf
+size 598

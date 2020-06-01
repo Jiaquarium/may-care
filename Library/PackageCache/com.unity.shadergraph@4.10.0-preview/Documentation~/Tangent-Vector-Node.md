@@ -1,15 +1,3 @@
-## Description
-
-Provides access to the mesh vertex or fragment's **Tangent Vector**. The coordinate space of the output value can be selected with the **Space** dropdown parameter.
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| Out | Output      |    Vector 3 | None | Mesh's **Tangent Vector**. |
-
-## Parameters
-
-| Name        | Type           | Options  | Description |
-|:------------ |:-------------|:-----|:---|
-| Space | Dropdown | Object, View, World, Tangent | Selects coordinate space of **Tangent Vector** to output. |
+version https://git-lfs.github.com/spec/v1
+oid sha256:33975b17eaadc15c36ceb4c45d8d4b350875ba631381a9709a592cdf53f454d9
+size 612

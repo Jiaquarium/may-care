@@ -1,27 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Graphing;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Serializable]
-    public class MaterialGraph : AbstractMaterialGraph, IShaderGraph
-    {
-        public IMasterNode masterNode
-        {
-            get { return GetNodes<INode>().OfType<IMasterNode>().FirstOrDefault(); }
-        }
-
-        public string GetShader(string name, GenerationMode mode, out List<PropertyCollector.TextureInfo> configuredTextures, List<string> sourceAssetDependencyPaths = null)
-        {
-            return masterNode.GetShader(mode, name, out configuredTextures, sourceAssetDependencyPaths);
-        }
-
-        public void LoadedFromDisk()
-        {
-            OnEnable();
-            ValidateGraph();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7b79ae9458d4deaf8f0a2efac171eb660616df8b54f21f64ed806934b8c1a7d5
+size 788

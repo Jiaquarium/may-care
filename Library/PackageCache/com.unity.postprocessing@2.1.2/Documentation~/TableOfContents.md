@@ -1,21 +1,3 @@
-* [Home](index)
-* [Installation](Installation)
-* [Quick-start](Quick-Start)
-* Effects
-  * [Ambient Occlusion](Ambient-Occlusion)
-  * [Anti-aliasing](Anti-aliasing)
-  * [Auto Exposure](Auto-Exposure)
-  * [Bloom](Bloom)
-  * [Chromatic Aberration](Chromatic-Aberration)
-  * [Color Grading](Color-Grading)
-  * [Deferred Fog](Deferred-Fog)
-  * [Depth of Field](Depth-of-Field)
-  * [Grain](Grain)
-  * [Lens Distortion](Lens-Distortion)
-  * [Motion Blur](Motion-Blur)
-  * [Screen-space Reflections](Screen-space-Reflections)
-  * [Vignette](Vignette)
-* Scripting
-    * [Manipulating the Stack](Manipulating-the-Stack)
-    * [Writing Custom Effects](Writing-Custom-Effects)
-* [Troubleshooting](Troubleshooting)
+version https://git-lfs.github.com/spec/v1
+oid sha256:e81babb8cec39b71a03d64a3821ad40a580785bdc151367c6673f2af18bfb59e
+size 701

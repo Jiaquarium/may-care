@@ -1,24 +1,3 @@
-# Add Node
-
-## Description
-
-Returns the sum of the two input values **A** and **B**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| A      | Input | Dynamic Vector | First input value |
-| B      | Input      |   Dynamic Vector | Second input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Add_float4(float4 A, float4 B, out float4 Out)
-{
-    Out = A + B;
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:aa3f41a7690bbc9bca30d616cce3d16799144ca17b63abcd8f7a5b2a73ce1677
+size 565

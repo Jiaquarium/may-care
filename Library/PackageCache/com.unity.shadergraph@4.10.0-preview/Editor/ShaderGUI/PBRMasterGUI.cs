@@ -1,25 +1,3 @@
-﻿using System;
-using UnityEngine;
-
-namespace UnityEditor.ShaderGraph
-{
-    public class PBRMasterGUI : ShaderGUI
-    {
-        public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
-        {
-			materialEditor.PropertiesDefaultGUI(props);
-
-            foreach (MaterialProperty prop in props)
-            {
-                if (prop.name == "_EmissionColor")
-                {
-                    if (materialEditor.EmissionEnabledProperty())
-                    {
-                        materialEditor.LightmapEmissionFlagsProperty(MaterialEditor.kMiniTextureFieldLabelIndentLevel, true);
-                    }
-                    return;
-                }
-            }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d98b894b1a83e938ca31a332091f1e8ae110ba6dbc07e50c46504756c0bf892b
+size 721

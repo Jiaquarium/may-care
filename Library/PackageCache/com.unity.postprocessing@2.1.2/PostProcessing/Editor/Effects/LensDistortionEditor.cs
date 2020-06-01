@@ -1,16 +1,3 @@
-using UnityEngine.Rendering.PostProcessing;
-
-namespace UnityEditor.Rendering.PostProcessing
-{
-    [PostProcessEditor(typeof(LensDistortion))]
-    internal sealed class LensDistortionEditor : DefaultPostProcessEffectEditor
-    {
-        public override void OnInspectorGUI()
-        {
-            if (RuntimeUtilities.isVREnabled)
-                EditorGUILayout.HelpBox("Lens Distortion is automatically disabled when VR is enabled.", MessageType.Warning);
-
-            base.OnInspectorGUI();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:02600e288da3c9acd05e69c70830c7394961e68ad76927c05943488eb4979d7b
+size 511

@@ -1,34 +1,3 @@
-using System;
-using UnityEditor.Experimental.UIElements;
-using UnityEditor.Graphing;
-using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-using Object = UnityEngine.Object;
-
-namespace UnityEditor.ShaderGraph.Drawing.Slots
-{
-    public class Texture3DSlotControlView : VisualElement
-    {
-        Texture3DInputMaterialSlot m_Slot;
-
-        public Texture3DSlotControlView(Texture3DInputMaterialSlot slot)
-        {
-            m_Slot = slot;
-            AddStyleSheetPath("Styles/Controls/Texture3DSlotControlView");
-            var objectField = new ObjectField { objectType = typeof(Texture3D), value = m_Slot.texture };
-            objectField.OnValueChanged(OnValueChanged);
-            Add(objectField);
-        }
-
-        void OnValueChanged(ChangeEvent<Object> evt)
-        {
-            var texture = evt.newValue as Texture3D;
-            if (texture != m_Slot.texture)
-            {
-                m_Slot.owner.owner.owner.RegisterCompleteObjectUndo("Change Texture");
-                m_Slot.texture = texture;
-                m_Slot.owner.Dirty(ModificationScope.Node);
-            }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:23a7c5e677085f6530e05e6dce7a86bb82ef37c0785ebd0972b796f6bcf64531
+size 1123

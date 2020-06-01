@@ -1,23 +1,3 @@
-# Sine Node
-
-## Description
-
-Returns the sine of the value of input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Sine_float4(float4 In, out float4 Out)
-{
-    Out = sin(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:b51157d6664179d37792e341703d7393be1856c15c937e002fe67fc7cc6e5b97
+size 481

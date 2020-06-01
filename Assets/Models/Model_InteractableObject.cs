@@ -1,17 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-public class Model_InteractableObject
-{
-    public Vector3 objectSpawnLocation;
-    public Sprite onSprite;
-    public Sprite offSprite;
-    public string type;
-    public Light[] lights;
-    public float lightOnIntensity;
-    public float lightOffIntensity;
-    public Model_Dialogue dialogue;
-    public bool isOn;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7b0567baffc9c71ae8b32dc581ca2e9dfa5069cee0b0b88ad0975b1b50d59cb6
+size 468

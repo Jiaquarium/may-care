@@ -1,30 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Script_AudioOneShotSource : MonoBehaviour
-{   
-    private AudioClip clip;
-    private AudioSource src;
-    private bool startedPlaying;
-    
-    void Update()
-    {
-        if (startedPlaying && !src.isPlaying)
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    
-    public void PlayOneShot(float v = 1.0f)
-    {
-        src.PlayOneShot(clip, v);
-        startedPlaying = true;
-    }
-
-    public void Setup(AudioClip _clip)
-    {
-        src = GetComponent<AudioSource>();
-        clip = _clip;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:290ace225d301e7b91a3af56a103b152c9d92c0608fc22ef2e1293fee0e17b84
+size 647

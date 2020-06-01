@@ -1,16 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.TestTools;
-using UnityEditor;
-
-class PostProcessEditorTests
-{
-    [Test]
-    public void DummyTest()
-    {
-        Assert.IsTrue(true);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:9a9e7fd9d407f1e8906d6ee8172077bfdb6a28d7e762894b47295fa7c6151181
+size 311

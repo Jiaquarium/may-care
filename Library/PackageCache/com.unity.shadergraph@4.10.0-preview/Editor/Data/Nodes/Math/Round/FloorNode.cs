@@ -1,35 +1,3 @@
-using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Round", "Floor")]
-    public class FloorNode : CodeFunctionNode
-    {
-        public FloorNode()
-        {
-            name = "Floor";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Floor-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("Unity_Floor", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string Unity_Floor(
-            [Slot(0, Binding.None)] DynamicDimensionVector In,
-            [Slot(1, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = floor(In);
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:bf3943d26b762f55738f7d3a7ba94913dd9978f621d0e7c62ff04b4f1f52df24
+size 836

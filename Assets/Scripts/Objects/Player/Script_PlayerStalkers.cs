@@ -1,25 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Script_PlayerStalkers : MonoBehaviour
-{
-    private Script_Player player;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Setup()
-    {
-        player = GetComponent<Script_Player>();
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:eb8735c76d45d2445e1cbd694d7a745b0a936be7d21a9799eeebe8fe532eb965
+size 457

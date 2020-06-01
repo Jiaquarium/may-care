@@ -1,11 +1,3 @@
-using System;
-
-namespace UnityEditor.ShaderGraph
-{
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Event | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-    public class TitleAttribute : Attribute
-    {
-        public string[] title;
-        public TitleAttribute(params string[] title) { this.title = title; }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2b5211135778373599db5a3e4b02585410c0ddd359d771e9c18bbf15c0a39c52
+size 426

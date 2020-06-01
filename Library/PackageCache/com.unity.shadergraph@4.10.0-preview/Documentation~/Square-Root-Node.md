@@ -1,23 +1,3 @@
-# Square Root Node
-
-## Description
-
-Returns the square root of input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_SquareRoot_float4(float4 In, out float4 Out)
-{
-    Out = sqrt(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:e2a9be79c91ad8b6666b82ecd29f405ad2e536e5ca1d25e7022a6f2410f46a20
+size 489

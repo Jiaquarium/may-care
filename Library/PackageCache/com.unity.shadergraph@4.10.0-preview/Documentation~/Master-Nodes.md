@@ -1,7 +1,3 @@
-# Master Nodes
-
-| [PBR Master](PBR-Master-Node.md) | [Unlit Master](Unlit-Master-Node.md) |
-|:-------------|:------|
-| ![Image](images/PBRMasterNodeThumb.png) | ![Image](images/UnlitMasterNodeThumb.png) |
-| Master Node for physically based rendering. | Master Node for unlit materials. |
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:d8a866ac8899bfc55414f1f7d09a7985b464f137544425410d536f2bfcddb85c
+size 289

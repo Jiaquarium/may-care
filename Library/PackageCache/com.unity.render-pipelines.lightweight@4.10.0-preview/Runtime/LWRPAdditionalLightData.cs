@@ -1,16 +1,3 @@
-namespace UnityEngine.Experimental.Rendering.LightweightPipeline
-{
-    [DisallowMultipleComponent]
-    [RequireComponent(typeof(Light))]
-    public class LWRPAdditionalLightData : MonoBehaviour
-    {
-        [Tooltip("Controls the usage of pipeline settings.")]
-        [SerializeField] bool m_UsePipelineSettings = true;
-
-        public bool usePipelineSettings
-        {
-            get { return m_UsePipelineSettings; }
-            set { m_UsePipelineSettings = value; }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a015476abf45506c9219cf4e63d21eb97d716f4ede413c232f9108fcf9322486
+size 492

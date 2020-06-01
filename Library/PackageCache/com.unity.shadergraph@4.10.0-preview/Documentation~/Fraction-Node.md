@@ -1,23 +1,3 @@
-# Fraction Node
-
-## Description
-
-Returns the fractional (or decimal) part of input **In**; which is greater than or equal to 0 and less than 1.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Fraction_float4(float4 In, out float4 Out)
-{
-    Out = frac(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:23f028050ff27ddfa34c806c29ece56abd5de56482e1dd8ab2bff2f9a8a73f91
+size 554

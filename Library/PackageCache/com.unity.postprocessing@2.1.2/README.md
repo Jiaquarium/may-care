@@ -1,15 +1,3 @@
-# Post-processing Stack v2
-
-This branch is under active development and holds the current version of the post-processing stack. 
-
-Instructions
-------------
-
-Documentation is available [on the wiki](https://github.com/Unity-Technologies/PostProcessing/wiki).
-
-The current version requires Unity 5.6.1+. Some effects and features are only available on newer versions of Unity.
-
-License
--------
-
-Unity Companion License (see [LICENSE](LICENSE.md))
+version https://git-lfs.github.com/spec/v1
+oid sha256:8eae158f6128caeceb157682866e4c4680faa3567a8cc35bddd2facf23eb7c77
+size 445

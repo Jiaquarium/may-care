@@ -1,35 +1,3 @@
-﻿using System.Reflection;
-
-namespace UnityEditor.ShaderGraph
-{
-    [Title("Math", "Wave", "Triangle Wave")]
-    class TriangleWaveNode : CodeFunctionNode
-    {
-        public TriangleWaveNode()
-        {
-            name = "Triangle Wave";
-        }
-
-        public override string documentationURL
-        {
-            get { return "https://github.com/Unity-Technologies/ShaderGraph/wiki/Triangle-Wave-Node"; }
-        }
-
-        protected override MethodInfo GetFunctionToConvert()
-        {
-            return GetType().GetMethod("TriangleWave", BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-        static string TriangleWave(
-            [Slot(0, Binding.None)] DynamicDimensionVector In,
-            [Slot(1, Binding.None)] out DynamicDimensionVector Out)
-        {
-            return
-                @"
-{
-    Out = 2.0 * abs( 2 * (In - floor(0.5 + In)) ) - 1.0;
-}
-";
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:991d3697500a144a799701f4421ddcb24b4946f97c2a8b3234fd2739c5e08fbf
+size 907

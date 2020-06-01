@@ -1,18 +1,3 @@
-using UnityEngine.Rendering;
-
-namespace UnityEngine.Experimental.Rendering
-{
-    public static class XRUtils
-    {
-        public static void DrawOcclusionMesh(CommandBuffer cmd, Camera camera, bool stereoEnabled = true) // Optional stereoEnabled is for SRP-specific stereo logic
-        {   
-#if UNITY_2019_1_OR_NEWER
-            if ((!XRGraphics.enabled) || (!camera.stereoEnabled) || (!stereoEnabled))
-                return;
-            UnityEngine.RectInt normalizedCamViewport = new UnityEngine.RectInt(0, 0, camera.pixelWidth, camera.pixelHeight);
-            cmd.DrawOcclusionMesh(normalizedCamViewport);
-#endif
-        }
-
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c0c01fdf84957aa4dabd3ecab037f7c830ca6c7a7a7dd07eb283695607365971
+size 639

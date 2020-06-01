@@ -1,25 +1,3 @@
-# Degrees To Radians Node
-
-## Description
-
-Returns the value of input **In** converted from degrees to radians. 
-
-One degree is equivalent to approximately 0.0174533 radians and a full rotation of 360 degrees is equal to 2 Pi radians.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_DegreesToRadians_float4(float4 In, out float4 Out)
-{
-    Out = radians(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:89ac45cb3844531250baadb9a4c3bc40322f841fa2d93d26647cf9a24e4b06f8
+size 656

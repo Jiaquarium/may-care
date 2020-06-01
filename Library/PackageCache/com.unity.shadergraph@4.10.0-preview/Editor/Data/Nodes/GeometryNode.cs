@@ -1,36 +1,3 @@
-using UnityEditor.ShaderGraph.Drawing.Controls;
-using UnityEngine;
-using UnityEditor.Graphing;
-
-namespace UnityEditor.ShaderGraph
-{
-    public abstract class GeometryNode : AbstractMaterialNode
-    {
-        [SerializeField]
-        private CoordinateSpace m_Space = CoordinateSpace.World;
-
-        [EnumControl("Space")]
-        public CoordinateSpace space
-        {
-            get { return m_Space; }
-            set
-            {
-                if (m_Space == value)
-                    return;
-
-                m_Space = value;
-                Dirty(ModificationScope.Graph);
-            }
-        }
-
-        public override bool hasPreview
-        {
-            get { return true; }
-        }
-
-        public override PreviewMode previewMode
-        {
-            get { return PreviewMode.Preview3D; }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:955e67d4b909cf039182b348e38b4c369681fc1cf424832e049172303dfd68e1
+size 828

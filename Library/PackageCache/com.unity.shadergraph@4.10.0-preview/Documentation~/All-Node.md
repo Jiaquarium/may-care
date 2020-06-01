@@ -1,23 +1,3 @@
-# All Node
-
-## Description
-
-Returns true if all components of the input **In** are non-zero. This is useful for [Branching](Branch-Node.md).
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| In      | Input | Dynamic Vector | None | Input value |
-| Out | Output      |    Boolean | None | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_All_float4(float4 In, out float Out)
-{
-    Out = all(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:e2c9fbb642082b4920ea0f93f6b04b7febd16bca0c26e8cdcb18d35e40c718ae
+size 566

@@ -1,13 +1,3 @@
-ChannelEnumMaskControlView {
-    flex-direction: row;
-    padding-left: 8;
-    padding-right: 8;
-    padding-top: 4;
-    padding-bottom: 4;
-    width: 200;
-}
-
-ChannelEnumMaskControlView > IMGUIContainer {
-    flex-direction: row;
-    flex: 1;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4084bcb5414ca3d27809b3892208b83ab070259b72cbd271e51d98451b71ed50
+size 245

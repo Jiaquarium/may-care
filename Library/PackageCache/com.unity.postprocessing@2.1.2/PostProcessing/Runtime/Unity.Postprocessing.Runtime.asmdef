@@ -1,7 +1,3 @@
-{
-    "name": "Unity.Postprocessing.Runtime",
-    "references": [],
-    "optionalUnityReferences": [],
-    "includePlatforms": [],
-    "excludePlatforms": []
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a1334889c403f864ca37b337c8ca9c8dc497d190b4e336f3dc29c26a337dcb20
+size 160

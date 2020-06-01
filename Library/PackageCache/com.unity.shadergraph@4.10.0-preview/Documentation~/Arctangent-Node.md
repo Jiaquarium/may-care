@@ -1,23 +1,3 @@
-# Arctangent Node
-
-## Description
-
-Returns the arctangent of the value of input **In**. Each component should be within the range of -Pi/2 to Pi/2.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Arctangent_float4(float4 In, out float4 Out)
-{
-    Out = atan(In);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:dd7389dd66f0053d8b62e4ff7f06ad174061291ccb18ad67aa88f7b5340cf7c9
+size 560

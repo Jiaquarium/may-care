@@ -1,13 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-public class Model_Player
-{
-    public Vector3 playerSpawnLocation;
-    public string direction = "up";
-    public bool isLightOn;
-    public bool isReflectionOn;
-    public Vector3 reflectionVector;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d5a249da682c22a385a99fb226e2609ff00ef0eea806ff765afc90ce8ba619ec
+size 320

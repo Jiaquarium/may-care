@@ -1,15 +1,3 @@
-## Description
-
-Provides access to the mesh vertex or fragment's **Normal Vector**. The coordinate space of the output value can be selected with the **Space** dropdown parameter.
-
-## Ports
-
-| Name        | Direction           | Type  | Binding | Description |
-|:------------ |:-------------|:-----|:---|:---|
-| Out | Output      |    Vector 3 | None | Mesh's **Normal Vector**. |
-
-## Parameters
-
-| Name        | Type           | Options  | Description |
-|:------------ |:-------------|:-----|:---|
-| Space | Dropdown | Object, View, World, Tangent | Selects coordinate space of **Normal Vector** to output. |
+version https://git-lfs.github.com/spec/v1
+oid sha256:2b1fa555f1acc57432ecab9266edf20b80f0712eb3e662545024eecd0fb2cada
+size 609

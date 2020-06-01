@@ -1,13 +1,3 @@
-## Home
-
-**Post-processing** is the process of applying full-screen filters and effects to a camera’s image buffer before it is displayed to screen. It can drastically improve the visuals of your product with little setup time.
-
-You can use post-processing effects to simulate physical camera and film properties.
-
-The images below demonstrate a scene with and without post-processing.
-
-![](images/home-before.png)
-Without post-processing
-
-![](images/home-after.png)
-With post-processing
+version https://git-lfs.github.com/spec/v1
+oid sha256:020f33d6e2724770e50a14de901c262751c52832104af6190badcf2eef9a37b9
+size 490

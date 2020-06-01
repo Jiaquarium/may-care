@@ -1,21 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-public class Model_NPC
-{
-    public Vector3 NPCSpawnLocation;
-    public Sprite sprite;
-    public Model_Dialogue dialogue;
-
-    /*
-        MovingNPCs
-    */
-    public bool isMovingNPC = false;
-    public bool isCutSceneNPC;
-    public Model_MoveSet[] moveSets;
-    // needed to tell movingNPC animator where to start idle
-    public string direction;
-    public string type;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4125029c13d282aea27b33c87bf9a7c0d6a9b1131a2129f775359d5d1165ffe9
+size 554

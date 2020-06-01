@@ -1,25 +1,3 @@
-# Clamp Node
-
-## Description
-
-Returns the input **In** clamped between the minimum and maximum values defined by inputs **Min** and **Max** respectively.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Unclamped input value |
-| Min      | Input | Dynamic Vector | Minimum value |
-| Max      | Input | Dynamic Vector | Maximum value |
-| Out | Output      |    Dynamic Vector | Clamped output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_Clamp_float4(float4 In, float4 Min, float4 Max, out float4 Out)
-{
-    Out = clamp(In, Min, Max);
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:37a91e7d715d03a346224c90690930a53e9e742e0188598f7affcc7b2ba3c5e5
+size 722

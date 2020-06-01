@@ -1,23 +1,3 @@
-# Triangle Wave Node
-
-## Description
-
-Returns a triangle wave from the value of input **In**.
-
-## Ports
-
-| Name        | Direction           | Type  | Description |
-|:------------ |:-------------|:-----|:---|
-| In      | Input | Dynamic Vector | Input value |
-| Out | Output      |    Dynamic Vector | Output value |
-
-## Generated Code Example
-
-The following example code represents one possible outcome of this node.
-
-```
-void Unity_TriangleWave_float4(float4 In, out float4 Out)
-{
-    Out = 2.0 * abs( 2 * (In - floor(0.5 + In)) ) - 1.0;
-}
-```
+version https://git-lfs.github.com/spec/v1
+oid sha256:ffc017af9793a2e0a7d597c5e2b1a1741d382fcbe49af7e5f2ac2c7bcc584d30
+size 545

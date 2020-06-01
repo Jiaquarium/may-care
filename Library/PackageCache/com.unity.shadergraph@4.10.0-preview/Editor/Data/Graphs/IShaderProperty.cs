@@ -1,29 +1,3 @@
-using System;
-using UnityEditor.Graphing;
-using UnityEngine;
-
-namespace UnityEditor.ShaderGraph
-{
-    public interface IShaderProperty
-    {
-        string displayName { get; set; }
-
-        string referenceName { get; }
-
-        PropertyType propertyType { get; }
-        Guid guid { get; }
-        bool generatePropertyBlock { get; set; }
-        Vector4 defaultValue { get; }
-        string overrideReferenceName { get; set; }
-        bool isBatchable { get; }
-
-        string GetPropertyBlockString();
-        string GetPropertyDeclarationString(string delimiter = ";");
-
-        string GetPropertyAsArgumentString();
-
-        PreviewProperty GetPreviewMaterialProperty();
-        INode ToConcreteNode();
-        IShaderProperty Copy();
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:68d469fc08607f56c5afaa8a87edfb5997d4b29a9ea0d949f46528e6c356ec37
+size 749

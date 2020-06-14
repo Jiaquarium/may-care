@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f88a2ebaecc02ecb5dbc7dcec3464d806e3d8629414da10b396b72bdcbd0372d
-size 263
+﻿[System.Serializable]
+public class Model_SavePointData
+{
+    public string headline;
+    public string nameId;
+
+    public Model_SavePointData (string _headline, string _nameId)
+    {
+        headline = _headline;
+        nameId = _nameId;
+    }
+}

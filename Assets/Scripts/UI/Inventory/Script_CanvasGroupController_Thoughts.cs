@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f626cea62e0cf459988dfad566fd3183b0f2cac18ee8f193339091c6829b2b07
-size 907
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_CanvasGroupController_Thoughts : Script_CanvasGroupController
+{
+    public Script_Game game;
+    public GameObject thoughts;
+    public GameObject emptyThoughts;
+    
+    public override void Open()
+    {
+        HandleThoughtsState();
+        base.Open();
+    }
+
+    void HandleThoughtsState()
+    {
+        if (game.GetThoughtsCount() > 0)
+        {
+            thoughts.SetActive(true);
+            emptyThoughts.SetActive(false);
+        }
+        else
+        {
+            thoughts.SetActive(false);
+            emptyThoughts.SetActive(true);
+        }
+    }
+
+    public override void Setup()
+    {
+        // TODO: we can update this in the game when we get a thought
+        // there is still a bit of lag on first open
+        HandleThoughtsState();
+    }
+}

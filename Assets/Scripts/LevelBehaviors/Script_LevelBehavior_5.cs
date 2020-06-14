@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:eb7c4db22de22a8848106fb6c51fee06b04498ea4ef23a2d3c5da8a85c5ee852
-size 640
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_LevelBehavior_5 : Script_LevelBehavior
+{
+    /* =======================================================================
+        STATE DATA
+    ======================================================================= */
+    public bool isInitialized;
+
+    /* ======================================================================= */
+
+    public Transform[] paintings;
+    
+    public override void Setup()
+    {
+        foreach(Transform t in paintings)   game.SetupInteractableObjectsText(t, !isInitialized);
+    }
+}

@@ -1,3 +1,49 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:776bc3b39eeeb895a3a3d71e92a96899ec1e432a72c202d904df34e7b0f2439b
-size 992
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class Script_ButtonHighlighter : MonoBehaviour, ISelectHandler, IDeselectHandler
+{
+    public Image[] outlines;
+    [SerializeField]
+    private bool isHighlighted;
+    
+    void Awake()
+    {
+        InitializeState();
+    }
+
+    void OnDisable() {
+        InitializeState();
+    }
+
+    public void OnSelect(BaseEventData e)
+    {
+        HighlightOutline(true);
+    }
+
+    public void OnDeselect(BaseEventData e)
+    {
+        HighlightOutline(false);
+    }
+
+    void InitializeState()
+    {
+        isHighlighted = true;
+        HighlightOutline(false);
+    }
+
+    void HighlightOutline(bool isOn)
+    {
+        if (isHighlighted == isOn)  return;
+        
+        foreach (Image img in outlines)
+        {
+            img.enabled = isOn;
+        }
+        
+        isHighlighted = isOn;
+    }
+}

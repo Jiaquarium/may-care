@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:78a56828a0ecedd1f7ca5a7dce51ade52705c0c9706e41b3aac7d99937091027
-size 401
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Model_Player
+{
+    public Vector3 playerSpawnLocation;
+    public string direction = "up";
+    public bool isLightOn;
+    public bool isReflectionOn;
+    public Vector3 reflectionVector;
+    public bool isForceSortingLayer;
+    public bool isForceSortingLayerAxisZ;
+}

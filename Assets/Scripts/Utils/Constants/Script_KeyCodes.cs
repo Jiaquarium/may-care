@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d1764fde67c39dd4bf082956b85c3dc816a676e5ba0aa0de9e50fbb23826cf65
-size 717
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class Const_KeyCodes
+{
+    public static readonly string Action1 = "Action1";
+    public static readonly string Action2 = "Action2";
+    public static readonly string Skip = "Skip";
+    public static readonly string Up = "Up";
+    public static readonly string Left = "Left";
+    public static readonly string Down = "Down";
+    public static readonly string Right = "Right";
+    public static readonly string Submit = "Submit";
+    public static readonly string Cancel = "Cancel";
+    public static readonly string Backspace = "Backspace";
+    public static readonly string Inventory = "Inventory";
+}

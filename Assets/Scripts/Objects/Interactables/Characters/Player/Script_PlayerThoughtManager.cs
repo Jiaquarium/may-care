@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b334319e2eb4173570d9ce25a2f26447fb5e1a5fd21b784102806a7c8939807c
-size 497
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_PlayerThoughtManager : MonoBehaviour
+{
+    public void AddThought(Model_PlayerThoughts thoughts, Model_Thought thought)
+    {
+        // TODO: don't hardcode this
+        thoughts.uglyThoughts.Add(thought);
+    }
+
+    public int GetThoughtCount(Model_PlayerThoughts thoughts)
+    {
+        return thoughts.uglyThoughts.Count;
+    }
+
+    public void Setup()
+    {
+
+    }
+}

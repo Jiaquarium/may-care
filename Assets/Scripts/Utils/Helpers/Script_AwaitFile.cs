@@ -1,3 +1,41 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:55dde78a2d8ae4cc0bd54ce981f34d8a3d7346c50a643e28804c95f301fa5668
-size 880
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using System;
+
+public class Script_AwaitFile
+{
+    public static void AwaitFile(string path)
+    {
+        //Your File
+        var file  = new FileInfo(path);
+
+        //While File is not accesable because of writing process
+        while (IsFileLocked(file)) { }
+
+        //File is available here
+    }
+
+    static bool IsFileLocked(FileInfo file)
+    {
+        FileStream stream = null;
+
+        try
+        {
+            stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+        }
+        catch (IOException)
+        {
+            return true;
+        }
+        finally
+        {
+            if (stream != null)
+                stream.Close();
+        }
+
+        //file is not locked
+        return false;
+    }
+}

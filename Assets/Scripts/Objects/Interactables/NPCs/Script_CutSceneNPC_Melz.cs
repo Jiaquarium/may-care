@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ef537248bdca1f7aa2c71fb7676c619f792ae046b84194ed41e2c99f90c34395
-size 836
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class Script_CutSceneNPC_Melz : Script_CutSceneNPC
+{
+    public AudioClip fadeOutSFX;
+
+
+    [SerializeField] private GameObject glimmer;
+    private Coroutine fadeOutCo;
+    private Script_AudioOneShotSource audioOneShotSource;
+
+    public override void FadeOut(Action cb)
+    {        
+        audioOneShotSource = game.CreateAudioOneShotSource(transform.position);
+        audioOneShotSource.Setup(fadeOutSFX);
+        audioOneShotSource.PlayOneShot();
+        
+        fadeOutCo = StartCoroutine(
+            rendererChild.GetComponent<Script_SpriteFadeOut>().FadeOutCo(cb)
+        );
+    }
+
+    public override void Glimmer()
+    {
+        glimmer.GetComponent<Script_Glimmer>().Glimmer();
+    }
+}

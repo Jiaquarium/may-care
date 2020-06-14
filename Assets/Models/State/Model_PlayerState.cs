@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bdaa26c9d68d25dcd6965adf9cb22108ae01d37b8b34cdd4a91b202e1abd7dff
-size 639
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Model_PlayerState
+{
+    public string name;
+    public int? spawnX;
+    public int? spawnY;
+    public int? spawnZ;
+    public string faceDirection;
+    public Model_PlayerStats stats;
+
+    public Model_PlayerState(
+        string _name,
+        int? _spawnX,
+        int? _spawnY,
+        int? _spawnZ,
+        string _faceDirection
+    )
+    {
+        name = _name;
+        spawnX = _spawnX;
+        spawnY = _spawnY;
+        spawnZ = _spawnZ;
+        faceDirection = _faceDirection;
+    }
+}

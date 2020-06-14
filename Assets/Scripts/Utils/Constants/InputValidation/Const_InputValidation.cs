@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:abd32957e773c6ab54d541c9546f6b490a9e158a56ad8026f2ead815d0eabe37
-size 182
+﻿public static class Const_InputValidation
+{
+    public static class Entry
+    {
+        public static int minASCII = 32;
+        public static int maxASCII = 126;
+    }
+}

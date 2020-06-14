@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:65afbc6652976820225a72fd58145d1f652ba9f1c6f16ec7aca4f4bd00fa199b
-size 521
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Model_DialogueNode
+{
+    public Model_Dialogue dialogue;
+    public bool showDialogueOnAction;
+    public bool isDynamicLines;
+    public Script_DialogueNode[] children;
+    public string choiceText;
+    public string action;
+    public string updateAction; // key to be called on update
+    public string locationType; // where canvas should be
+    public string type; // e.g. read,
+}

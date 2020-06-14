@@ -1,3 +1,33 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:26e4da2b79b8fe765ac1b0db56c1aa93eac2e0200fa9e695cae8769fbc9ef7ae
-size 696
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
+public class Script_UIChoice : MonoBehaviour
+{
+    public Image cursor;
+    public bool isSelected;
+    public int Id;
+
+    void Start()
+    {
+        cursor.enabled = false;
+    }
+    
+    void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == this.gameObject)
+        {
+            cursor.enabled = true;
+            isSelected = true;
+        }
+        else
+        {
+            cursor.enabled = false;
+            isSelected = false;
+        }
+    }
+
+    public virtual void HandleSelect() {}
+}

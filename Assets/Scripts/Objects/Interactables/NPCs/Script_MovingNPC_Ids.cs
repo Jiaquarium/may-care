@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:832cef2a592bc5acd812fc5d3145b55ee162cc4254e904d5fa8e43f88928c20b
-size 378
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_MovingNPC_Ids : Script_MovingNPC
+{
+    public float runSpeed;
+    public float walkSpeed;
+    public override void SetMoveSpeedRun()
+    {
+        speed = runSpeed;
+    }
+
+    public override void SetMoveSpeedWalk()
+    {
+        speed = walkSpeed;
+    }
+}

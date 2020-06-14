@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:01bbf9c555e9eac7cb9429ea0ea6aab571cc951f38116c3c26ec068384a52aad
-size 550
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_DemonHandler : MonoBehaviour
+{
+    public void EatDemon(int Id, List<Script_Demon> demons)
+    {
+        for (int i = 0; i < demons.Count; i++)
+        {
+            if (demons[i].Id == Id)
+            {
+                /*
+                    NOTE: the demon gameObject will wait for animation to actually
+                    be destroyed
+                */
+                demons.RemoveAt(i);
+            }
+        }
+    }
+}

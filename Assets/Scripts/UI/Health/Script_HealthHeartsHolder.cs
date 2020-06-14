@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b95d70a8493c14d725fe79559bcd1444c3eff4bc966e445d7fdeb7fb9399f075
-size 330
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_HealthHeartsHolder : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

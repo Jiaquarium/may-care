@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1997ab656c1356a7dfab1c6d106d1db3f24621e0ae2fca8cc48ab2e178343990
-size 699
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_DemonRenderer : MonoBehaviour
+{
+    [SerializeField] private Script_Demon parent;
+
+    /* =============================================================        
+        ANIMATION FUNCS BEGIN: called from animation
+    ============================================================= */
+    // called from: Demon_Default_swallowed-heart-ending
+    private void FinishSwallowed()
+    {
+        parent.FinishSwallowed();
+    }
+    /* =============================================================    
+        END
+    ============================================================= */
+}

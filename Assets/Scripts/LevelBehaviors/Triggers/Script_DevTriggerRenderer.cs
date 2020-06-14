@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d2fa773219abb85b9794b708f8d03a55b15b1257cce715ac23a36c0016849edc
-size 326
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_DevTriggerRenderer : MonoBehaviour
+{
+    void Awake()
+    {
+        this.gameObject.SetActive(false);
+        if (Debug.isDebugBuild && Const_Dev.IsDevMode)
+            this.gameObject.SetActive(true);
+    }
+}

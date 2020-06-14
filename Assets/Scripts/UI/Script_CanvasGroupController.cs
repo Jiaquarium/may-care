@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:562a4a50e09b839151611a91a472a8518ae4846387a5b0c2c46381d62e552d52
-size 573
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(CanvasGroup))]
+public class Script_CanvasGroupController : MonoBehaviour
+{
+    public virtual void Open()
+    {
+        CanvasGroup c = GetComponent<CanvasGroup>();
+        c.alpha = 1f;
+        c.gameObject.SetActive(true);
+    }
+
+    public virtual void Close()
+    {
+        CanvasGroup c = GetComponent<CanvasGroup>();
+        c.alpha = 0f;
+        c.gameObject.SetActive(false);
+    }
+
+    public virtual void Setup()
+    {
+
+    } 
+}

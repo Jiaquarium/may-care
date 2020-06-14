@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c525a611d795481ce94951d8b9953a7ba8b2f777159d732b97a5f931d63efd25
-size 549
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_InventoryInputManager : MonoBehaviour
+{
+    public Script_Game game;
+    public Script_EventSystemLastSelected es;
+    
+    public void HandleExitInput()
+    {
+        if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Cancel"))
+        {
+            game.CloseInventory();
+            es.lastSelected = null;
+        }
+    }
+
+    public void Setup()
+    {
+        game = FindObjectOfType<Script_Game>();
+    }
+}

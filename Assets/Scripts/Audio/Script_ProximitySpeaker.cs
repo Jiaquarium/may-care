@@ -1,3 +1,56 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cbacf8848d0f8438e9f0a82f51dd00c86e78559c0fc1492e142c74195ab978f6
-size 1304
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/*
+    drop this gameObject into the World
+*/
+public class Script_ProximitySpeaker : MonoBehaviour
+{
+    protected Script_Game game;
+    public AudioSource audioSource;
+    public float maxDistance;
+
+    protected virtual void OnDisable()
+    {
+        audioSource.Stop();
+    }
+
+    protected virtual void OnEnable()
+    {
+        AdjustVolume();
+        audioSource.Play();
+    }
+    
+    protected virtual void Update()
+    {
+        AdjustVolume();
+    }
+
+    protected void AdjustVolume()
+    {
+        if (!game.GetPlayerIsSpawned())    return;
+        
+        float distance = Vector3.Distance(game.GetPlayerLocation(), transform.position);
+        if (distance >= maxDistance)
+        {
+            audioSource.volume = 0f;
+        }
+        else
+        {
+            float v = distance / maxDistance;
+            audioSource.volume = 1f - v;
+        }
+    }
+
+    protected virtual void Awake()
+    {
+        game = Object.FindObjectOfType<Script_Game>();
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        if (Debug.isDebugBuild && Const_Dev.IsDevMode)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+    }
+}

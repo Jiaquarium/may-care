@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ed50af624c7ccdb470c1a30b326736330c6ab4ac38f9a0d340266e11e5e603b1
-size 671
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class Script_EventSystemLastSelected : MonoBehaviour {
+    public GameObject currentSelected;
+    // gets set to NULL on inventory close
+    public GameObject lastSelected;
+    
+    void Update () {         
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(currentSelected);
+        }
+        else
+        {
+            lastSelected = currentSelected;
+            currentSelected = EventSystem.current.currentSelectedGameObject;
+        }
+    }
+}

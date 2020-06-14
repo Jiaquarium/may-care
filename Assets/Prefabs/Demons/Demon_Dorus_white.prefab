@@ -1,3 +1,90 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7ddb3576c797a6a1629e720754be4de2eeb0f3f0f2c0c6030e3aac29874ff65d
-size 3426
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3094471871465226696
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1958138773682730870, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300004, guid: 03ea30c898bf940aea32ff1f68dedcea,
+        type: 3}
+    - target: {fileID: 2493626316550656756, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_Name
+      value: Demon_Dorus_white
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093909230837675597, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: b810c323456bf492ab683dea7c6716e2,
+        type: 2}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846484504530977076, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912325339532282727, guid: 1e6ca3349aee3411ebd610282471fa5e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300004, guid: 03ea30c898bf940aea32ff1f68dedcea,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 95426244306469840, guid: 1e6ca3349aee3411ebd610282471fa5e, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 1e6ca3349aee3411ebd610282471fa5e, type: 3}

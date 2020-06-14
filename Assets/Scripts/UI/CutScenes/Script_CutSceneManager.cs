@@ -1,3 +1,33 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9c33eec4a58f6fcdf6000cd8430c0e5590a75b788e30f6f5690afa80c13bfdc0
-size 1025
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_CutSceneManager : MonoBehaviour
+{
+    public Script_Game g;
+    public float melanholicTitleFadeInTime;
+    public Script_CanvasGroupController parentCutSceneCanvasGroup;
+    public Script_CanvasGroupFadeInOut melanholicTitleCutScene;
+    private Script_CanvasGroupController_CutScene melanholicTitleCutSceneController;
+
+    public void MelanholicTitleCutScene()
+    {
+        melanholicTitleCutSceneController.SetActiveForFade();
+
+        StartCoroutine(
+            melanholicTitleCutScene
+                .FadeInCo(melanholicTitleFadeInTime, null)
+        );
+
+        // jammin latin
+        g.SwitchBgMusic(5);
+    }
+
+    public void Setup()
+    {
+        parentCutSceneCanvasGroup.Open();
+        melanholicTitleCutSceneController = melanholicTitleCutScene
+            .GetComponent<Script_CanvasGroupController_CutScene>();
+        melanholicTitleCutSceneController.Setup();
+    }
+}

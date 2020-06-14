@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c4f1b5f3eb76bd8f9ff065bf3fb6a4997c066bf2a59022246e009e01c3a33f9d
-size 410
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_TriggerEnterOnce : MonoBehaviour
+{
+    public Script_Game game;
+    public string Id;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == Const_Tags.Player)
+        {
+            game.ActivateTrigger(Id);
+            this.gameObject.SetActive(false);
+        }
+    }
+}

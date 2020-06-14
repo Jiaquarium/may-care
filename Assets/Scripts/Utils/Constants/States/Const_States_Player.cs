@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3759e1bf7f7f85fb9d61fcb2c16f753d7b62e6cf7dd8c5e22adaf800c3fbc5c7
-size 280
+﻿public static class Const_States_Player
+{
+    public static readonly string Interact = "interact";
+    public static readonly string Dialogue = "dialogue";
+    public static readonly string Attack = "attack";
+    public static readonly string Inventory = "inventory";
+}

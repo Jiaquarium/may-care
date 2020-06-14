@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7ccb76ca3ff1a8a4db99b193322a517dfbf44c83e6d3b84a44a8e23858353e16
-size 570
+fileFormatVersion: 2
+guid: 31bceb8d7c6a9439db4eec0c7ba0332b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 500
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Inconsolata
+  fontNames:
+  - Inconsolata
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7bac3b3d6b671467e9a0e93ee0801ad9, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

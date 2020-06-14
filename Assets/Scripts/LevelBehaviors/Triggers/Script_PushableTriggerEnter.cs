@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:14b38eb19b807a2c0819cd0abaa2c2450a4a6730bd56c5a61815f038d6b446d7
-size 612
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_PushableTriggerEnter : MonoBehaviour
+{
+    public int count;
+    [SerializeField] private Script_Game game;
+    [SerializeField] private string Id;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == Const_Tags.Pushable)
+        {
+            count--;
+            if (count == 0)     this.gameObject.SetActive(false);
+            game.ActivateObjectTrigger(Id, other);
+        }
+    }
+
+    void OnTriggerStay(Collider other) {
+        print(other.tag);    
+    }
+}

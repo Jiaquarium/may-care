@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:80ca84f3904ac5070c0dcc8ae2cc63e59b6acdfa97210fde3cfcbe26db521c22
-size 474
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_PlayerReflectionInteractionBox : Script_InteractionBox
+{
+    public override Script_Pushable GetPushable()
+    {
+        ExposeBox();
+        foreach (Collider col in colliders)
+        {
+            if (col.tag == Const_Tags.Pushable)
+                return col.transform.parent.GetComponent<Script_Pushable>();
+        }
+
+        return null;
+    }
+}

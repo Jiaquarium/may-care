@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ca27835dc12ff9b7fe3bced5f9f3d2ff8f7ef2ee3ffb2547ca499193b6906ceb
-size 298
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_PlayerAttacks : MonoBehaviour
+{
+    [SerializeField] private Script_PlayerAttackEat eatAttack;
+
+    public void Eat(string direction)
+    {
+        eatAttack.Eat(direction);
+    }
+}

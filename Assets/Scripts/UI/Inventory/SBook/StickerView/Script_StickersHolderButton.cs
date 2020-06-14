@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:93338974cb9e031d2abca9779441750e3c274be77f36caf40a85235b331add1b
-size 376
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_StickersHolderButton : MonoBehaviour
+{
+    public Script_SBookOverviewController sBookController;
+
+    /// <summary>
+    /// called from OnClick handler
+    /// </summary>
+    public void OnEnter()
+    {
+        sBookController.EnterStickersView();
+    }
+}

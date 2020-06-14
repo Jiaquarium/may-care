@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:77770e83aef464da45013158f2dc6d40223db2450ac9a39956fdd0a55c664575
-size 154
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_LevelBehavior_14 : Script_LevelBehavior
+{
+}

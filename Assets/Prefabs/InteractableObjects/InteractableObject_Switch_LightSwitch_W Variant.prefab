@@ -1,3 +1,125 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b0f43f75719b25f66743e23cbe6f9535ade8ac13bde1d8e54ef415d1af267646
-size 4728
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2429019591019954621
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 83363037556745694, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300008, guid: 0a0bb62c2b7a546539cd6cc3c596313a,
+        type: 3}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: lights.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: lights.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: lights.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: lights.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: onIntensity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: isOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: onSprite
+      value: 
+      objectReference: {fileID: 21300008, guid: 0a0bb62c2b7a546539cd6cc3c596313a,
+        type: 3}
+    - target: {fileID: 114346536711168794, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: offSprite
+      value: 
+      objectReference: {fileID: 21300010, guid: 0a0bb62c2b7a546539cd6cc3c596313a,
+        type: 3}
+    - target: {fileID: 3738163217326154839, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_Name
+      value: InteractableObject_Switch_LightSwitch_W Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214110464392486089, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300010, guid: 0a0bb62c2b7a546539cd6cc3c596313a,
+        type: 3}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894331108716054364, guid: 871c310ad68954866bc9f7dcf04d11bd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 871c310ad68954866bc9f7dcf04d11bd, type: 3}

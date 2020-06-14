@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7d25738a41007963e9adb23657406df141c64176cc4d38f2ebcc0b1910e01fcf
-size 662
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
+[RequireComponent(typeof(Button))]
+public class Script_ClickSound_EnterSubmenu : MonoBehaviour, ISubmitHandler
+{
+    public Script_InventoryAudioSettings settings;
+    [SerializeField]
+    protected AudioSource source;
+    
+
+    void Awake()
+    {
+        source = settings.clickEnterSubmenuAudioSource;
+    }
+
+    public void OnSubmit(BaseEventData e)
+    {
+        source.PlayOneShot(
+            settings.clickEnterSubmenuSFX,
+            settings.clickEnterSubemenuSFXVolume
+        );
+    }
+}

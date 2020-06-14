@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1b8c30c675a2bc50375788ee468b71ed2a9a61aa1259ebb5d1f3ff45534c75bd
-size 245
+﻿public static class Const_Directions
+{
+    public static readonly string Up = "up";
+    public static readonly string Down = "down";
+    public static readonly string Left = "left";
+    public static readonly string Right = "right";
+}

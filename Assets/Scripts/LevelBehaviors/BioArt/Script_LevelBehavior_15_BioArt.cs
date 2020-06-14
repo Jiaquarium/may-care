@@ -1,3 +1,56 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5761ea23011be7d2f1c3b19d29dcc2a5525e8f0bd8363bee05a8a8d78078d5a3
-size 1493
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_LevelBehavior_15_BioArt : Script_LevelBehavior
+{
+    public bool isComplete;
+    public GameObject target;
+    public Script_DialogueNode StartNode;
+    public Script_DialogueManager dm;
+    public Model_Locations triggerLocs;
+
+    private bool isTriggerActivated;
+    private bool isFinishDialogue;
+    
+    protected override void HandleTriggerLocations()
+    {
+        foreach (Vector3 loc in triggerLocs.locations)
+        {
+            if (
+                game.GetPlayerLocation() == loc
+                && game.state == "interact"
+                && !isTriggerActivated
+            )
+            {
+                isTriggerActivated = true;
+                game.ChangeStateCutScene();
+                game.ChangeCameraTargetToGameObject(target);
+
+                dm.StartDialogueNode(StartNode);
+            }
+        }
+
+        if (
+            game.state == "cut-scene"
+            && !game.GetPlayerIsTalking()
+            && !isFinishDialogue
+        )
+        {
+            isFinishDialogue = true;
+            isComplete = true;
+            game.CameraTargetToPlayer();
+            game.ChangeStateInteract();
+        }
+    }
+
+    protected override void HandleAction()
+    {
+        base.HandleDialogueAction();
+    }
+    
+    public override void Setup()
+    {
+        game.CreateDemons(new bool[1]{true});
+    }    
+}

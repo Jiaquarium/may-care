@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:15a338eae25ec03a41f33c22889560d7a4749fc04e39fbb33d1e0ca13318b7ce
-size 575
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(BoxCollider))]
+public class Script_InteractableBox : MonoBehaviour
+{
+    [SerializeField] Vector3 boxSize; // half extants
+    [SerializeField] Color color;
+
+    private void OnDrawGizmos() {
+        Gizmos.color = color;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.localScale);
+        Gizmos.DrawCube(Vector3.zero, new Vector3(boxSize.x * 2, boxSize.y * 2, boxSize.z * 2)); // size is halfExtents
+    }
+}

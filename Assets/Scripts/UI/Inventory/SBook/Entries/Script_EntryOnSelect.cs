@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5e8e41f9644adbbb52741d45103f2f40bdfe751426ce24b8d5a1476e7b85ccf8
-size 731
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(Script_Entry))]
+public class Script_EntryOnSelect : MonoBehaviour, ISelectHandler
+{
+    public Script_EntriesViewController controller;
+    
+    /// <summary>
+    /// called automatically when entry is selected
+    /// </summary>
+    public void OnSelect(BaseEventData e)
+    {
+        // call controller with appropriate data
+        string text = GetComponent<Script_Entry>().text;
+        controller.OnEntrySelect(text);
+    }
+
+    public void Setup(Script_EntriesViewController _controller)
+    {
+        controller = _controller;
+    }
+}

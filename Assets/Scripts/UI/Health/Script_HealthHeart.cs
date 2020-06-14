@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d42d96a5fd5a2a2d6dd3ff29c9c178dfffdaab4f5ef55885ef2b869a069fc579
-size 623
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Script_HealthHeart : MonoBehaviour
+{
+    public Sprite filledSprite;
+    public Sprite emptySprite;
+    
+    // add in coroutine for animation
+    // TODO: throttle fills and empties
+    public void Fill()
+    {
+        GetComponent<Image>().sprite = filledSprite;
+    }
+
+    public void Empty()
+    {
+        GetComponent<Image>().sprite = emptySprite;
+    }
+
+    public void Setup(bool isFilled)
+    {
+        if (isFilled)   Fill();
+        else            Empty();
+    }
+}

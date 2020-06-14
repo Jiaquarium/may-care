@@ -1,3 +1,31 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:20cbaad238a16747e79d41b27e43f2269168cfa53120f57c663e19a728454e4e
-size 785
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+public class Script_DemonStats : Script_CharacterStats
+{
+    protected override void Die()
+    {
+        Debug.Log($"{transform.name} DEMON OVERRIDE Die() called");
+        GetComponent<Script_Demon>().Die();
+    }
+}
+
+[CustomEditor(typeof(Script_DemonStats)), CanEditMultipleObjects]
+public class Script_DemonStatsTester : Editor
+{
+    public override void OnInspectorGUI() {
+        DrawDefaultInspector();
+
+        Script_DemonStats stats = (Script_DemonStats)target;
+        if (GUILayout.Button("Setup()"))
+        {
+            stats.Setup();
+        }
+        if (GUILayout.Button("Hurt(1)"))
+        {
+            stats.Hurt(1);
+        }
+    }
+}

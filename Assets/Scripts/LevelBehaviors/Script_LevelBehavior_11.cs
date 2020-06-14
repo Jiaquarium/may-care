@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5ba0450cf41082bacd3d700278dd44950813d901042cdfb4a07bd5540b82a703
-size 354
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_LevelBehavior_11 : Script_LevelBehavior
+{
+    public Script_SavePoint sp;
+    public bool isInitialize = true;
+
+    public override void Setup()
+    {
+        game.SetupSavePoint(sp, isInitialize);
+        isInitialize = false;
+    }
+}

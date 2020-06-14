@@ -1,3 +1,43 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:baba85bfa173c7b690ec1d007706a559d4d3231464bca65b0f69f4d9837191eb
-size 795
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_TierComment : MonoBehaviour
+{
+    public IEnumerator co;    
+    
+
+    private float activateTimeLength;
+
+    public void Activate()
+    {
+        this.gameObject.SetActive(true);
+        
+        if (co != null)
+        {
+            StopCoroutine(co);
+        }
+
+        co = WaitToDeactivate();
+        StartCoroutine(co);
+    }
+
+    public void Deactivate()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    IEnumerator WaitToDeactivate()
+    {
+        yield return new WaitForSeconds(activateTimeLength);
+
+        Deactivate();
+    }
+
+    public void Setup(float t)
+    {
+        activateTimeLength = t;
+
+        Deactivate();
+    }
+}

@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9227812a33288bd1c797f7a3ffb6989873ab3e59df0f70a39238f667a96e526c
-size 430
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_SaveLoadGame : MonoBehaviour
+{
+    [SerializeField]
+    private Script_Game game;
+
+    public void SaveGameData(Model_SaveData data)
+    {
+        data.gameData = new Model_GameData(game.level);
+    }
+
+    public void LoadGameData(Model_SaveData data)
+    {
+        game.level = data.gameData.level;
+    }
+}

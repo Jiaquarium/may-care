@@ -1,3 +1,76 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e985d13c27823a60114940134d76210e9f26a50b73cf20edce73ae4d591bde09
-size 2860
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8209759565469889851
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1222473497997935073, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f4b58801f9bc467e86238c2cc09407b, type: 3}
+    - target: {fileID: 2558382215217170741, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_Name
+      value: IdsBgThemePlayer Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039317822838717657, guid: 32909fd9b2d1847bdaa2243a441e89a0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 32909fd9b2d1847bdaa2243a441e89a0, type: 3}

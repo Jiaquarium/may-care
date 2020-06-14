@@ -1,3 +1,47 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a49d1c0815c5927318eeecceaa32ee194fc7e674e45b9e8e64cd4e6cb62eb420
-size 1031
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+
+[RequireComponent(typeof(CanvasGroup))]
+public class Script_CanvasGroupFadeInOut : MonoBehaviour
+{
+    public IEnumerator FadeInCo(float t, Action cb)
+    {
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+
+        float alpha = cg.alpha;
+
+        while (alpha < 1f)
+        {
+            alpha += Time.deltaTime / t;
+            if (alpha > 1f)   alpha = 1f;
+
+            cg.alpha = alpha;
+
+            yield return null;
+        }
+
+        if (cb != null)    cb();
+    }
+    
+    public IEnumerator FadeOutCo(float t, Action cb)
+    {
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+
+        float alpha = cg.alpha;
+
+        while (alpha < 1f)
+        {
+            alpha += Time.deltaTime / t;
+            if (alpha > 1f)   alpha = 1f;
+
+            cg.alpha = alpha;
+
+            yield return null;
+        }
+
+        if (cb != null)    cb();
+    }
+}

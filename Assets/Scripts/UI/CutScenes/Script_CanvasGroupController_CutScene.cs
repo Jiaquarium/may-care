@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2af49506542e1b1636d1929fe01661b1f1e9e8a4decef947850c0892a8235c14
-size 478
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_CanvasGroupController_CutScene : Script_CanvasGroupController
+{
+    // don't set alpha
+    public void SetActiveForFade()
+    {
+        CanvasGroup c = GetComponent<CanvasGroup>();
+        c.gameObject.SetActive(true);
+    }
+
+    public void InitializeState()
+    {
+        Close();
+    }
+
+    public override void Setup()
+    {
+        Close();
+    }
+}

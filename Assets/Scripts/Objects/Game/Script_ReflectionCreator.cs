@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b5e82abf6248ac6fb6fa9cd7fed827fd9f91030b5479eb1b63396dbfecdce080
-size 710
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Script_ReflectionCreator : MonoBehaviour
+{
+    [SerializeField] private Script_Game game;
+    private Script_Player player;
+
+    public void SetupPlayerReflection(Transform reflection)
+    {
+        player = game.GetPlayer();
+        Script_PlayerReflection pr = reflection.GetComponent<Script_PlayerReflection>();
+        pr.Setup(
+            player.GetPlayerGhost(),
+            player,
+            pr.axis // TODO: remove once we don't have to use CreateReflection
+        );
+        // pr.transform.SetParent(game.playerContainer, false);
+        player.SetPlayerReflection(pr);
+    }
+}

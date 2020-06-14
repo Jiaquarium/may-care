@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f2668ffef288d69411466671778a0f5e7750b805b02a3fc402bf74975d8ecd78
-size 181
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Model_Levels
+{
+    public Model_Level[] levelsData;
+}
